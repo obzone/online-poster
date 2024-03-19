@@ -1,0 +1,22 @@
+@import 'bulma/sass/utilities/mixins.sass';
+@import '@/app/variable.scss';
+
+.text {
+  text-align: right;
+
+  &.withMobileHidden {
+    @include from (calc($minCalendarItemWidth * 7)) {
+      margin: unset;
+      padding: unset;
+      display: none;
+    }
+  }
+
+  &.withTabletHidden {
+    @include until (calc($minCalendarItemWidth * 7)) {
+      margin: unset;
+      padding: unset;
+      display: none;
+    }
+  }
+}

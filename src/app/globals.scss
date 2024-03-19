@@ -1,5 +1,8 @@
 :root {
   --max-width: 1100px;
+  --min-calendar-tiem-width: 150px;
+  // --min-calendar-week-width: calc(var(--min-calendar-tiem-width) * 7);
+  --min-calendar-week-width: 700px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
@@ -105,3 +108,5 @@ a {
     color-scheme: dark;
   }
 }
+
+@import "../../node_modules/bulma/bulma.sass"

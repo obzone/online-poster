@@ -1,0 +1,13 @@
+@import 'bulma/sass/utilities/derived-variables.sass';
+@import 'bulma/sass/utilities/functions.sass';
+@import '@/app/variable.scss';
+
+.container {
+    min-height: $minCalendarItemHeight;
+    text-align: center;
+    border-bottom: 1px solid $dark;
+    padding: $size-small;
+    @media (prefers-color-scheme: dark) {
+        border-bottom: 1px solid findColorInvert($dark);
+    }
+}
