@@ -33,7 +33,7 @@ export default function Decoration(props: {date: Date}) {
         {
           weeksStartDates.map((startDate) => (
             <div key={`${startDate}`} >
-              <ActivityWeekItem data={data} startDate={startDate} />
+              <ActivityWeekItem data={data} startDate={startDate} currentMonth={props.date || new Date()} />
             </div>
           ))
         }

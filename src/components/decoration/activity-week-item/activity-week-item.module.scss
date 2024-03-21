@@ -8,6 +8,10 @@
     border-left: 1px solid $dark;
     border-top: 1px solid $dark;
 
+    & .day.dayNotInCurrentMonth {
+        display: none;
+    }
+
     @media (prefers-color-scheme: dark) {
         border-right: 1px solid findColorInvert($dark);
         border-left: 1px solid findColorInvert($dark);
@@ -24,6 +28,9 @@
             @media (prefers-color-scheme: dark) {
                 border-right: 1px solid findColorInvert($dark);
             }
+        }
+        & .day.dayNotInCurrentMonth {
+            display: unset;
         }
     }
 
