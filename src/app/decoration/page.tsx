@@ -1,31 +1,45 @@
-import ActivityDayItem from "@/components/activity-day-item/activity-day-item";
-import styles from './page.module.scss'
+'use client'
 
-export default function Decoration() {
+import ActivityWeekItem from "@/components/decoration/activity-week-item/activity-week-item";
+import styles from './page.module.scss'
+import { Activity, getAll } from "../actions/calendars";
+import { useEffect, useMemo, useState } from "react";
+import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
+
+export default function Decoration(props: {date: Date}) {
+  const [data, setData] = useState<Array<Activity>>()
+
+  useEffect(() => {
+    (async () => {
+      const data = await getAll()
+      setData(data)
+      props
+    })()
+  }, [])
+
+  const weeksStartDates = useMemo(() => {
+    const calendarStartDate = _calendarStartDate(props.date)
+    const neededWeeks = weeksNumberIncludedInMonth(props.date)
+    return new Array(neededWeeks).fill(0).map((_, index) => {
+      const date = new Date(calendarStartDate.valueOf())
+      date.setDate(date.getDate() + 7 * index)
+      return date
+    })
+  }, [props.date])
+
   return (
-    <div>
-      <div className={styles.week}>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
-        <div className={styles.day} >
-          <ActivityDayItem />
-        </div>
+    <div className={styles.container} >
+      <div className={styles.month} >
+        {
+          weeksStartDates.map((startDate) => (
+            <div key={`${startDate}`} >
+              <ActivityWeekItem data={data} startDate={startDate} />
+            </div>
+          ))
+        }
+      </div>
+      <div className={styles.decorationPanel} >
+
       </div>
     </div>
   )

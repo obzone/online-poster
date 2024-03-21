@@ -1,35 +1,15 @@
 @import 'bulma/sass/utilities/mixins.sass';
 @import '@/app/variable.scss';
 
-@debug $minCalendarItemWidth;
+.month {
+    flex: 1;
+}
 
-.week {
-    max-width: calc($minCalendarItemWidth * 2);
-    margin: auto;
-    border-right: 1px solid $dark;
-    border-left: 1px solid $dark;
-    border-top: 1px solid $dark;
+.container {
+    display: flex;
+    flex-direction: row;
+}
 
-    @media (prefers-color-scheme: dark) {
-        border-right: 1px solid findColorInvert($dark);
-        border-left: 1px solid findColorInvert($dark);
-        border-top: 1px solid findColorInvert($dark);
-    }
-
-    @include from (calc($minCalendarItemWidth * 7)) {
-        max-width: calc($minCalendarItemWidth * 8);
-        margin: auto;
-        flex-direction: row;
-        display: flex;
-        & .day:not(:last-child) {
-            border-right: 1px solid $dark;
-            @media (prefers-color-scheme: dark) {
-                border-right: 1px solid findColorInvert($dark);
-            }
-        }
-    }
-
-    @include mobile {
-        max-width: 100%;
-    }
+.decorationPanel {
+    min-width: 400px;
 }
