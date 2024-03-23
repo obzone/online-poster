@@ -13,7 +13,6 @@ export default function Decoration(props: {date: Date}) {
     (async () => {
       const data = await getAll()
       setData(data)
-      props
     })()
   }, [])
 

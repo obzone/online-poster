@@ -1,5 +1,6 @@
 @import 'bulma/sass/utilities/derived-variables.sass';
 @import 'bulma/sass/utilities/functions.sass';
+@import 'bulma/sass/utilities/mixins.sass';
 @import '@/app/variable.scss';
 
 .container {
@@ -9,5 +10,8 @@
     border-bottom: 1px solid $dark;
     @media (prefers-color-scheme: dark) {
         border-bottom: 1px solid findColorInvert($dark);
+    }
+    @include from(calc($minCalendarItemWidth * 7)) {
+        width: $minCalendarItemWidth;
     }
 }
