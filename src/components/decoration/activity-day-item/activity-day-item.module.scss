@@ -4,14 +4,26 @@
 @import '@/app/variable.scss';
 
 .container {
-    min-height: $minCalendarItemHeight;
-    text-align: center;
-    padding: $size-small;
-    border-bottom: 1px solid $dark;
+  min-height: $minCalendarItemHeight;
+  text-align: center;
+  padding: 6px;
+  border-bottom: 1px solid $dark;
+
+  @media (prefers-color-scheme: dark) {
+    border-bottom: 1px solid findColorInvert($dark);
+  }
+
+  @include from(calc($minCalendarItemWidth * 7)) {
+    width: $minCalendarItemWidth;
+    box-sizing: border-box;
+  }
+}
+
+.nodeItem {
+  &.isSelected {
+    border: 1px dashed $dark;
     @media (prefers-color-scheme: dark) {
-        border-bottom: 1px solid findColorInvert($dark);
+      border: 1px dashed findColorInvert($dark);
     }
-    @include from(calc($minCalendarItemWidth * 7)) {
-        width: $minCalendarItemWidth;
-    }
+  }
 }

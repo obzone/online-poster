@@ -2,7 +2,7 @@
 @import '@/app/variable.scss';
 
 .week {
-    max-width: calc($minCalendarItemWidth * 2);
+    max-width: calc($minCalendarItemWidth * 1.5);
     margin: auto;
     border-right: 1px solid $dark;
     border-left: 1px solid $dark;
@@ -19,11 +19,12 @@
     }
 
     @include from (calc($minCalendarItemWidth * 7)) {
-        max-width: calc($minCalendarItemWidth * 8);
+        max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
         margin: auto;
         flex-direction: row;
         display: flex;
         & .day:not(:last-child) {
+            max-width: $minCalendarItemWidth; // box-sizing: border-box; only works under fixed width
             border-right: 1px solid $dark;
             @media (prefers-color-scheme: dark) {
                 border-right: 1px solid findColorInvert($dark);

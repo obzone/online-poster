@@ -1,0 +1,23 @@
+@import '@/app/variable.scss';
+
+.container {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: $decorationPannleWidh;
+  background-color: ghostwhite;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.operatorContainer {
+  flex: 1;
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 24px 24px 24px;
+}

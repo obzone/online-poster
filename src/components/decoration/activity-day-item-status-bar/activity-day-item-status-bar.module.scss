@@ -1,18 +1,35 @@
 @import 'bulma/sass/utilities/mixins.sass';
 @import '@/app/variable.scss';
 
+.statusBarContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.tagContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  & > * {
+    margin-right: 6px;
+    border: 1px solid black;
+    border-radius: 2px;
+  }
+}
+
 .text {
   text-align: right;
 
-  &.withMobileHidden {
+  &.onMobileHidden {
     @include from (calc($minCalendarItemWidth * 7)) {
       margin: unset;
       padding: unset;
       display: none;
     }
   }
-
-  &.withTabletHidden {
+  
+  &.onTabletHidden {
     @include until (calc($minCalendarItemWidth * 7)) {
       margin: unset;
       padding: unset;

@@ -1,0 +1,29 @@
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    min-height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+
+    & > p {
+      min-width: 140px;
+      text-align: left;
+    }
+  }
+}
+
+.iconGroupContainer {
+  display: flex;
+  flex-direction: row;
+  min-width: 100px;
+  justify-content: space-between;
+
+  & > *:not(:last-child) {
+    margin-right: 6px;
+  }
+}
