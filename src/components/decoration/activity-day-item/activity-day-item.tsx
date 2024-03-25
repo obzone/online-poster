@@ -2,25 +2,25 @@ import { Activity, DecorationComponent } from '@/app/actions/calendars'
 import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-day-item-status-bar'
 import styles from './activity-day-item.module.scss'
 import ControlPannel from '../control-pannel/control-pannel'
-import { useCallback, useState } from 'react'
-import ActivityText from '../activity-text/activity-text'
+import { CSSProperties, useCallback, useState } from 'react'
+import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
   const [isControlPannelVisible, setControlPannelVisible] = useState(false)
-  const [selectedNode, setSelectedNode] = useState<DecorationComponent>()
+  const [selectedFieldLayout, setSelectedFieldLayout] = useState<DecorationComponent>()
   const [selectedActivity, setSelectedActivity] = useState<Activity>()
-
+  const [changedFieldLayout, setChangedFieldLayout] = useState<DecorationComponent>()
 
   const onNodeClick = useCallback((activity: Activity, node?: DecorationComponent) => {
     setSelectedActivity(activity)
-    setSelectedNode(node)
+    setSelectedFieldLayout(node)
     setControlPannelVisible(true)
   }, [])
 
   const onDecorateNodeCancelClick = useCallback(() => {
     setControlPannelVisible(false)
     setSelectedActivity(undefined)
-    setSelectedNode(undefined)
+    setSelectedFieldLayout(undefined)
   }, [])
   const onDecorateNodeConfirmClick = useCallback(() => {
     setControlPannelVisible(false)
@@ -31,15 +31,15 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       <>
       {
         activity.layout?.map(nodeLayout => {
-          const isCurrentNodeSelected = selectedNode?.keyExtractor == nodeLayout.keyExtractor && selectedNode?.type == nodeLayout.type
+          const isCurrentNodeSelected = selectedFieldLayout?.keyExtractor == nodeLayout.keyExtractor && selectedFieldLayout?.type == nodeLayout.type
           switch (nodeLayout.type) {
-            case 'activity-text':
+            case DECORATION_COMPONENT_TYPE_TEXT:
               return (
                 <div key={`${nodeLayout.keyExtractor}`} className={`${styles.nodeItem} ${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
                   e.stopPropagation()
                   onNodeClick(activity, nodeLayout)
                 }} >
-                  <ActivityText value={activity[nodeLayout.keyExtractor]} />
+                  <ActivityText style={isCurrentNodeSelected ? changedFieldLayout?.style : nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
                 </div>
               )
             default:
@@ -49,7 +49,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       }
       </>
     )
-  }, [selectedNode, selectedActivity])
+  }, [selectedFieldLayout, selectedActivity, changedFieldLayout])
 
   return (
     <div className={`${styles.container}`} >
@@ -69,7 +69,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
               }
               {
                 isControlPannelVisible && (
-                  <ControlPannel activity={selectedActivity} node={selectedNode} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
+                  <ControlPannel selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
                 )
               }
             </div>

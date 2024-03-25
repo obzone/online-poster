@@ -12,7 +12,7 @@ export interface Activity {
   spot: string
   target?: string
   tags?: Array<string>
-  layout?: Array<DecorationComponent>
+  layout: Array<DecorationComponent>
 }
 
 export interface DecorationComponent {
