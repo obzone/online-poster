@@ -2,6 +2,43 @@
 
 import { CSSProperties } from "react"
 
+const defaultActivityLayout: Decoration[] = [{
+  type: 'activity-text',
+  keyExtractor: 'title',
+  style: {
+    marginTop: '6px',
+    textAlign: 'center',
+  }
+}, {
+  type: 'activity-text',
+  keyExtractor: 'subject',
+  style: {
+    marginTop: '6px',
+    textAlign: 'center',
+  }
+}, {
+  type: 'activity-date',
+  keyExtractor: 'title',
+  style: {
+    marginTop: '6px',
+    textAlign: 'center',
+  }
+}, {
+  type: 'activity-text',
+  keyExtractor: 'spot',
+  style: {
+    marginTop: '6px',
+    textAlign: 'center',
+  }
+}, {
+  type: 'activity-text',
+  keyExtractor: 'target',
+  style: {
+    marginTop: '6px',
+    textAlign: 'center',
+  }
+}]
+
 export interface Activity {
   id: string
   favicon?: string
@@ -12,10 +49,10 @@ export interface Activity {
   spot: string
   target?: string
   tags?: Array<string>
-  layout: Array<DecorationComponent>
+  layout: Array<Decoration>
 }
 
-export interface DecorationComponent {
+export interface Decoration {
   type: string
   keyExtractor: keyof Activity
   style?: CSSProperties
@@ -35,23 +72,7 @@ export async function getAll(): Promise<Array<Activity>> {
       spot: 'can be a text to describe the spot',
       target: 'maybe empty sometimes',
       tags: ['food', '$4/per'],
-      layout: [{
-        type: 'activity-text',
-        keyExtractor: 'title',
-        style: {backgroundColor: 'red'}
-      }, {
-        type: 'activity-text',
-        keyExtractor: 'subject'
-      }, {
-        type: 'activity-date',
-        keyExtractor: 'title'
-      }, {
-        type: 'activity-text',
-        keyExtractor: 'spot'
-      }, {
-        type: 'activity-text',
-        keyExtractor: 'target'
-      }]
+      layout: defaultActivityLayout
     }
   })
 }

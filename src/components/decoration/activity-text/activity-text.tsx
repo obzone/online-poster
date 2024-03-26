@@ -5,6 +5,8 @@ import { faAlignLeft, faAlignRight, faAlignCenter } from '@fortawesome/free-soli
 import DropDown from "@/components/drop-down/drop-down";
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
 import {Property} from 'csstype'
+import FileUpload from "@/components/file-upload/file-upload";
+import { upload } from "@/app/actions/file";
 
 export const DECORATION_COMPONENT_TYPE_TEXT = 'activity-text'
 
@@ -37,9 +39,16 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
     setFontsizeDropdownActive(false)
   }, [])
 
+  const onBackgroundImageSelect = useCallback(async (files: FileList | null) => {
+    if (!files) return
+    console.debug(files)
+    const formData = new FormData()
+    formData.append('file', files[0])
+    // TODO append more userinfo
+    await upload(formData)
+  }, [])
+
   useEffect(() => {
-    console.debug(state)
-    
     props.onChange && props.onChange({
       ...props.fieldLayout,
       style: state
@@ -88,6 +97,10 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
       <div>
         <p>BorderRadius</p>
         <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
+      </div>
+      <div>
+        <p>BackgroundImage</p>
+        <FileUpload onChange={e => onBackgroundImageSelect(e.target.files)} />
       </div>
     </div>
   )

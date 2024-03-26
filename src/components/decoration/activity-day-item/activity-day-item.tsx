@@ -1,17 +1,17 @@
-import { Activity, DecorationComponent } from '@/app/actions/calendars'
+import { Activity, Decoration } from '@/app/actions/calendars'
 import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-day-item-status-bar'
 import styles from './activity-day-item.module.scss'
 import ControlPannel from '../control-pannel/control-pannel'
-import { CSSProperties, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
   const [isControlPannelVisible, setControlPannelVisible] = useState(false)
-  const [selectedFieldLayout, setSelectedFieldLayout] = useState<DecorationComponent>()
+  const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
   const [selectedActivity, setSelectedActivity] = useState<Activity>()
-  const [changedFieldLayout, setChangedFieldLayout] = useState<DecorationComponent>()
+  const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
 
-  const onNodeClick = useCallback((activity: Activity, node?: DecorationComponent) => {
+  const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
     setSelectedFieldLayout(node)
     setControlPannelVisible(true)

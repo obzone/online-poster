@@ -4,7 +4,8 @@
 @import '@/app/variable.scss';
 
 .container {
-  min-height: $minCalendarItemHeight;
+  height: $minCalendarItemHeight;
+  overflow: hidden;
   text-align: center;
   padding: 6px;
   border-bottom: 1px solid $dark;
@@ -21,9 +22,8 @@
 
 .nodeItem {
   &.isSelected {
-    border: 1px dashed $dark;
+    background-color: lightgray;
     @media (prefers-color-scheme: dark) {
-      border: 1px dashed findColorInvert($dark);
     }
   }
 }
