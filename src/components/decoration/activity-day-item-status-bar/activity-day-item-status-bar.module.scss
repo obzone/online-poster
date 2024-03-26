@@ -1,4 +1,4 @@
-@import 'bulma/sass/utilities/mixins.sass';
+@import 'bulma/sass/utilities/mixins.scss';
 @import '@/app/variable.scss';
 
 .statusBarContainer {
@@ -13,7 +13,7 @@
 
   & > * {
     margin-right: 6px;
-    border: 1px solid black;
+    border: 1px solid var(--bulma-dark);
     border-radius: 2px;
   }
 }

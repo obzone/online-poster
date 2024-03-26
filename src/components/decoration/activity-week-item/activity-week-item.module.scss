@@ -1,21 +1,15 @@
-@import 'bulma/sass/utilities/mixins.sass';
+@import 'bulma/sass/utilities/mixins.scss';
 @import '@/app/variable.scss';
 
 .week {
     max-width: calc($minCalendarItemWidth * 1.5);
     margin: auto;
-    border-right: 1px solid $dark;
-    border-left: 1px solid $dark;
-    border-top: 1px solid $dark;
+    border-right: 1px solid var(--bulma-dark);
+    border-left: 1px solid var(--bulma-dark);
+    border-top: 1px solid var(--bulma-dark);
 
     & .day.dayNotInCurrentMonth {
         display: none;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        border-right: 1px solid findColorInvert($dark);
-        border-left: 1px solid findColorInvert($dark);
-        border-top: 1px solid findColorInvert($dark);
     }
 
     @include from (calc($minCalendarItemWidth * 7)) {
@@ -25,10 +19,7 @@
         display: flex;
         & .day:not(:last-child) {
             max-width: $minCalendarItemWidth; // box-sizing: border-box; only works under fixed width
-            border-right: 1px solid $dark;
-            @media (prefers-color-scheme: dark) {
-                border-right: 1px solid findColorInvert($dark);
-            }
+            border-right: 1px solid var(--bulma-dark);
         }
         & .day.dayNotInCurrentMonth {
             display: unset;

@@ -5,7 +5,8 @@
   top: 0px;
   right: 0px;
   width: $decorationPannleWidh;
-  background-color: ghostwhite;
+  background-color: var(--bulma-body-background-color);
+  border-left: 1px solid var(--bulma-dark);
   height: 100vh;
   display: flex;
   flex-direction: column;
