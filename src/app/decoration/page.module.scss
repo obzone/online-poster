@@ -9,6 +9,19 @@
 
 .month {
     flex: 1;
+    background-image: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA3L2pvYjE0NDgtYmFja2dyb3VuZC0wNGEteF8xLmpwZw.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    // padding-top: calc($headerHeight + $headerDayHeight);
+
+    // @include until (calc($minCalendarItemWidth * 7)) {
+    //     padding-top: $headerHeight;
+    // }
+
+    @media (prefers-color-scheme: dark) {
+        background-image: url('https://i.pinimg.com/originals/6f/00/9b/6f009b5860b8047bedc05330e5bfc5c3.jpg')
+    }
 }
 
 .decorationPanel {

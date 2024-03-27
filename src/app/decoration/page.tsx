@@ -5,6 +5,8 @@ import styles from './page.module.scss'
 import { Activity, getAll } from "../actions/calendars";
 import { useEffect, useMemo, useState } from "react";
 import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
+import ActivityDateHeader from "@/components/decoration/activity-date-header/activity-date-header";
+import ActivityHeader from "@/components/decoration/activity-header/activity-header";
 
 export default function Decoration(props: {date: Date}) {
   const [data, setData] = useState<Array<Activity>>()
@@ -29,6 +31,8 @@ export default function Decoration(props: {date: Date}) {
   return (
     <div className={styles.container} >
       <div className={styles.month} >
+        <ActivityHeader month={new Date()} />
+        <ActivityDateHeader />
         {
           weeksStartDates.map((startDate) => (
             <div key={`${startDate}`} >
@@ -38,7 +42,6 @@ export default function Decoration(props: {date: Date}) {
         }
       </div>
       <div className={styles.decorationPanel} >
-
       </div>
     </div>
   )

@@ -12,7 +12,6 @@
 
   @include from(calc($minCalendarItemWidth * 7)) {
     width: $minCalendarItemWidth;
-    box-sizing: border-box;
   }
 }
 

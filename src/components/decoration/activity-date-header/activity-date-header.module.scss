@@ -1,0 +1,26 @@
+@import '@/app/variable.scss';
+
+.container {
+  @include onTabletHidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid var(--bulma-dark);
+  // height: $headerDayHeight;
+  // margin-top: $headerHeight;
+
+  // position: fixed;
+  // top: 0;
+  // width: 100%;
+
+  & > div {
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-align: center;
+    width: calc($minCalendarItemWidth);
+  }
+
+  & > div:not(:last-child) {
+    border-right: 1px solid var(--bulma-dark);
+  }
+}
