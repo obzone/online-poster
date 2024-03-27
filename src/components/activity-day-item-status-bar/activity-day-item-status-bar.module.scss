@@ -4,19 +4,11 @@
 .text {
   text-align: right;
 
-  &.withMobileHidden {
-    @include from (calc($minCalendarItemWidth * 7)) {
-      margin: unset;
-      padding: unset;
-      display: none;
-    }
+  &.withPCHidden {
+    @include onPCHidden;
   }
 
   &.withTabletHidden {
-    @include until (calc($minCalendarItemWidth * 7)) {
-      margin: unset;
-      padding: unset;
-      display: none;
-    }
+    @include onTabletHidden;
   }
 }

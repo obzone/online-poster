@@ -8,7 +8,17 @@
     border-left: 1px solid var(--bulma-dark);
     border-top: 1px solid var(--bulma-dark);
 
-    @include from (calc($minCalendarItemWidth * 7)) {
+    // @include from (calc($minCalendarItemWidth * 7)) {
+    //     max-width: calc($minCalendarItemWidth * 8);
+    //     margin: auto;
+    //     flex-direction: row;
+    //     display: flex;
+    //     & .day:not(:last-child) {
+    //         border-right: 1px solid var(--bulma-dark);
+    //     }
+    // }
+
+    @include onPC {
         max-width: calc($minCalendarItemWidth * 8);
         margin: auto;
         flex-direction: row;

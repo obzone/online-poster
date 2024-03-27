@@ -6,8 +6,14 @@ $decorationPannleWidh: 400px;
 $headerHeight: 60px;
 $headerDayHeight: 30px;
 
-@mixin onMobileHidden {
-  @include from (calc($minCalendarItemWidth * 7)) {
+.hidden {
+  margin: unset;
+  padding: unset;
+  display: none;
+}
+
+@mixin onPCHidden {
+  @include onPC {
     margin: unset;
     padding: unset;
     display: none;
@@ -15,9 +21,27 @@ $headerDayHeight: 30px;
 }
 
 @mixin onTabletHidden {
-  @include until (calc($minCalendarItemWidth * 7)) {
+  @include onTablet() {
     margin: unset;
     padding: unset;
     display: none;
+  }
+}
+
+@mixin onMobile {
+  @include mobile {
+    @content;
+  }
+}
+
+@mixin onPC {
+  @include from (calc($minCalendarItemWidth * 7)) {
+    @content;
+  }
+}
+
+@mixin onTablet {
+  @include until (calc($minCalendarItemWidth * 7)) {
+    @content;
   }
 }

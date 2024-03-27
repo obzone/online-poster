@@ -10,9 +10,11 @@
 
     & .day.dayNotInCurrentMonth {
         display: none;
+        padding: unset;
+        margin: unset;
     }
-
-    @include from (calc($minCalendarItemWidth * 7)) {
+    
+    @include onPC {
         max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
         margin: auto;
         flex-direction: row;

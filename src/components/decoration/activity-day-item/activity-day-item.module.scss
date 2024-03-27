@@ -9,8 +9,8 @@
   text-align: center;
   padding: 6px;
   border-bottom: 1px solid var(--bulma-dark);
-
-  @include from(calc($minCalendarItemWidth * 7)) {
+  
+  @include onPC {
     width: $minCalendarItemWidth;
   }
 }

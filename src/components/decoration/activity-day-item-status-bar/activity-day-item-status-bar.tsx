@@ -11,7 +11,7 @@ export default function ActivityDayItemStatusBar({ date, tags }: { date: Date, t
           ))
         }
       </div>
-      <p className={`${styles.text} ${styles.onMobileHidden}`} >{`${date.getDate()}/${WEEKS[date.getDay()]}`}</p>
+      <p className={`${styles.text} ${styles.onPCHidden}`} >{`${date.getDate()}/${WEEKS[date.getDay()]}`}</p>
       <p className={`${styles.text} ${styles.onTabletHidden}`} >{date.getDate()}</p>
     </div>
   )
