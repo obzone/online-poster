@@ -7,7 +7,7 @@ export default function ActivityDateHeader() {
     <div className={styles.container} >
       {
         WEEKS.map(date => (
-          <div>{date}</div>
+          <div key={`${date}`} >{date}</div>
         ))
       }
     </div>
