@@ -1,7 +1,7 @@
 import { Activity, Decoration } from '@/app/actions/calendars'
 import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-day-item-status-bar'
 import styles from './activity-day-item.module.scss'
-import ControlPannel from '../control-pannel/control-pannel'
+import DecorationControlPannel from '../control-pannel/control-pannel'
 import { useCallback, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 
@@ -24,6 +24,10 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   }, [])
   const onDecorateNodeConfirmClick = useCallback(() => {
     setControlPannelVisible(false)
+    setSelectedActivity(undefined)
+    setSelectedFieldLayout(undefined)
+    // TODO save to server with activityid and keyextra
+
   }, [])
 
   const renderActivitiyContent = useCallback((activity: Activity) => {
@@ -35,7 +39,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
           switch (nodeLayout.type) {
             case DECORATION_COMPONENT_TYPE_TEXT:
               return (
-                <div key={`${nodeLayout.keyExtractor}`} className={`${styles.nodeItem} ${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
+                <div key={`${nodeLayout.keyExtractor}`} className={`${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
                   e.stopPropagation()
                   onNodeClick(activity, nodeLayout)
                 }} >
@@ -69,7 +73,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
               }
               {
                 isControlPannelVisible && (
-                  <ControlPannel selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
+                  <DecorationControlPannel selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
                 )
               }
             </div>

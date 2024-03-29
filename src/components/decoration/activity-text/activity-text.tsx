@@ -1,12 +1,11 @@
-import { CSSProperties, ChangeEvent, ReducerAction, ReducerState, useCallback, useEffect, useReducer, useState } from "react";
-import styles from './activity-text.module.scss'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAlignLeft, faAlignRight, faAlignCenter } from '@fortawesome/free-solid-svg-icons'
-import DropDown from "@/components/drop-down/drop-down";
-import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
-import {Property} from 'csstype'
-import FileUpload from "@/components/file-upload/file-upload";
 import { upload } from "@/app/actions/file";
+import DropDown from "@/components/drop-down/drop-down";
+import FileUpload from "@/components/file-upload/file-upload";
+import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react";
+import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
+import styles from './activity-text.module.scss';
 
 export const DECORATION_COMPONENT_TYPE_TEXT = 'activity-text'
 

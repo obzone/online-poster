@@ -2,7 +2,7 @@
 
 import ActivityWeekItem from "@/components/decoration/activity-week-item/activity-week-item";
 import styles from './page.module.scss'
-import { Activity, getAll } from "../actions/calendars";
+import { Activity, getAllActivities } from "../actions/calendars";
 import { useEffect, useMemo, useState } from "react";
 import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
 import ActivityDateHeader from "@/components/decoration/activity-date-header/activity-date-header";
@@ -13,7 +13,7 @@ export default function Decoration(props: {date: Date}) {
 
   useEffect(() => {
     (async () => {
-      const data = await getAll()
+      const data = await getAllActivities()
       setData(data)
     })()
   }, [])

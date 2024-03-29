@@ -54,11 +54,11 @@ export interface Activity {
 
 export interface Decoration {
   type: string
-  keyExtractor: keyof Activity
+  keyExtractor: keyof Activity | 'calendarHeader'
   style?: CSSProperties
 }
 
-export async function getAll(): Promise<Array<Activity>> {
+export async function getAllActivities(): Promise<Array<Activity>> {
   const date = new Date()
   return new Array(10).fill(0).map((_, index) => {
     const _date = new Date(date.valueOf())
@@ -76,6 +76,11 @@ export async function getAll(): Promise<Array<Activity>> {
     }
   })
 }
-export async function getById(id: string) {
 
+export async function getActivityById(id: string) {
+
+}
+
+export async function getHeaderStyle(): Promise<Decoration> {
+  return {type: 'calendar-header', keyExtractor: 'calendarHeader'}
 }

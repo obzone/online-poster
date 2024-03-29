@@ -1,23 +1,25 @@
-import { Activity, DecorationComponent } from '@/app/actions/calendars'
+import { Activity, Decoration } from '@/app/actions/calendars'
 import styles from './control-pannel.module.scss'
 import { ActivityTextDecorationComponent, DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 import { JSXElementConstructor } from 'react'
+import { ActivityHeaderDecorationComponent, DECORATION_COMPONENT_TYPE_HEADER } from '../activity-header/activity-header'
 
 export interface DecorationComponentCommonProps {
-  fieldLayout: DecorationComponent
-  onChange?: (layout: DecorationComponent) => void
+  fieldLayout: Decoration
+  onChange?: (layout: Decoration) => void
 }
 
 export const COMPONENTS_MAP: {[key: string]: JSXElementConstructor<DecorationComponentCommonProps>} = {
-  [DECORATION_COMPONENT_TYPE_TEXT]: ActivityTextDecorationComponent
+  [DECORATION_COMPONENT_TYPE_TEXT]: ActivityTextDecorationComponent,
+  [DECORATION_COMPONENT_TYPE_HEADER]: ActivityHeaderDecorationComponent,
 }
 
 interface ControlPannelProps {
   onCancelClick: ()=>void
   onConfirmClick: ()=>void
-  onChange?: (layout: DecorationComponent)=>void
+  onChange?: (layout: Decoration)=>void
   selectedActivity?: Activity
-  selectedFieldLayout: DecorationComponent
+  selectedFieldLayout: Decoration
 }
 
 export default function DecorationControlPannel(props: ControlPannelProps) {

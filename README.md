@@ -38,7 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## TODO
 
 set CSSProperties back to data
-upload favicon of day
+upload favicon of activity
 upload and setting background image
 display: visible property
 padding property
