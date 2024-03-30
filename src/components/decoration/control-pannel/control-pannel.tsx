@@ -2,7 +2,8 @@ import { Activity, Decoration } from '@/app/actions/calendars'
 import styles from './control-pannel.module.scss'
 import { ActivityTextDecorationComponent, DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 import { JSXElementConstructor } from 'react'
-import { ActivityHeaderDecorationComponent, DECORATION_COMPONENT_TYPE_HEADER } from '../activity-header/activity-header'
+import { ActivityHeaderDecorationComponent, DECORATION_COMPONENT_TYPE_HEADER } from '../month-header/month-header'
+import { DECORATION_COMPONENT_TYPE_MONTH_GLOBAL, MonthGlobalSetting } from '../calendar/calendar'
 
 export interface DecorationComponentCommonProps {
   fieldLayout: Decoration
@@ -12,6 +13,7 @@ export interface DecorationComponentCommonProps {
 export const COMPONENTS_MAP: {[key: string]: JSXElementConstructor<DecorationComponentCommonProps>} = {
   [DECORATION_COMPONENT_TYPE_TEXT]: ActivityTextDecorationComponent,
   [DECORATION_COMPONENT_TYPE_HEADER]: ActivityHeaderDecorationComponent,
+  [DECORATION_COMPONENT_TYPE_MONTH_GLOBAL]: MonthGlobalSetting,
 }
 
 interface ControlPannelProps {
@@ -20,6 +22,7 @@ interface ControlPannelProps {
   onChange?: (layout: Decoration)=>void
   selectedActivity?: Activity
   selectedFieldLayout: Decoration
+  isCancelButtonHidden?: boolean
 }
 
 export default function DecorationControlPannel(props: ControlPannelProps) {
@@ -32,7 +35,11 @@ export default function DecorationControlPannel(props: ControlPannelProps) {
         }
       </div>
       <div className={styles.actionContainer} >
-        <button className='button is-text' onClick={props.onCancelClick} >Cancel</button>
+        {
+          !props.isCancelButtonHidden ? (
+            <button className='button is-text' onClick={props.onCancelClick} >Cancel</button>
+          ) : <div></div>
+        }
         <button className='button is-primary' onClick={props.onConfirmClick} >Confirm</button>
       </div>
     </div>

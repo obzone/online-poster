@@ -1,8 +1,8 @@
-import styles from './activity-date-header.module.scss'
+import styles from './week-day-header.module.scss'
 
 export const WEEKS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-export default function ActivityDateHeader() {
+export default function WeekDayHeader() {
   return (
     <div className={styles.container} >
       {

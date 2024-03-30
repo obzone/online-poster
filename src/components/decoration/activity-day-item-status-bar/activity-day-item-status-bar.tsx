@@ -1,4 +1,4 @@
-import { WEEKS } from '../activity-date-header/activity-date-header'
+import { WEEKS } from '../week-day-header/week-day-header'
 import styles from './activity-day-item-status-bar.module.scss'
 
 export default function ActivityDayItemStatusBar({ date, tags }: { date: Date, tags?: Array<string> }) {

@@ -50,11 +50,12 @@ export interface Activity {
   target?: string
   tags?: Array<string>
   layout: Array<Decoration>
+  [key: string]: any
 }
 
 export interface Decoration {
   type: string
-  keyExtractor: keyof Activity | 'calendarHeader'
+  keyExtractor: (keyof Activity) | 'calendarHeader' | 'monthGlobal'
   style?: CSSProperties
 }
 
@@ -83,4 +84,8 @@ export async function getActivityById(id: string) {
 
 export async function getHeaderStyle(): Promise<Decoration> {
   return {type: 'calendar-header', keyExtractor: 'calendarHeader'}
+}
+
+export async function getMonthGlobalStyle(): Promise<Decoration> {
+  return {type: 'month-global', keyExtractor: 'monthGlobal'}
 }

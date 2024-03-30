@@ -2,20 +2,27 @@
 
 import ActivityWeekItem from "@/components/decoration/activity-week-item/activity-week-item";
 import styles from './page.module.scss'
-import { Activity, getAllActivities } from "../actions/calendars";
-import { useEffect, useMemo, useState } from "react";
+import { Activity, Decoration, getAllActivities, getMonthGlobalStyle } from "../actions/calendars";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
-import ActivityDateHeader from "@/components/decoration/activity-date-header/activity-date-header";
-import ActivityHeader from "@/components/decoration/activity-header/activity-header";
+import { MonthGlobalSetting } from "@/components/decoration/calendar/calendar";
+import WeekDayHeader from "@/components/decoration/week-day-header/week-day-header";
+import MonthHeader from "@/components/decoration/month-header/month-header";
+import DecorationControlPannel from "@/components/decoration/control-pannel/control-pannel";
 
 export default function Decoration(props: {date: Date}) {
-  const [data, setData] = useState<Array<Activity>>()
+  const [data, setData] = useState<Activity[]>()
+  const [decoration, setDecoration] = useState<Decoration>()
+  const [changedDecoration, setChangedDecoration] = useState<Decoration>()
 
   useEffect(() => {
-    (async () => {
-      const data = await getAllActivities()
-      setData(data)
-    })()
+    getMonthGlobalStyle().then(decoration => setDecoration(decoration))
+    getAllActivities().then(data => setData(data))
+  }, [props.date])
+
+  const onDecorateNodeCancelClick = useCallback(() => {
+  }, [])
+  const onDecorateNodeConfirmClick = useCallback(() => {
   }, [])
 
   const weeksStartDates = useMemo(() => {
@@ -29,20 +36,33 @@ export default function Decoration(props: {date: Date}) {
   }, [props.date])
 
   return (
-    <div className={styles.container} >
-      <div className={styles.month} >
-        <ActivityHeader month={new Date()} />
-        <ActivityDateHeader />
-        {
-          weeksStartDates.map((startDate) => (
-            <div key={`${startDate}`} >
-              <ActivityWeekItem data={data} startDate={startDate} currentMonth={props.date || new Date()} />
-            </div>
-          ))
-        }
+    <>
+      <div className={styles.container} style={{...decoration?.style, ...changedDecoration?.style}} >
+        <div className={styles.month} >
+          <MonthHeader month={new Date()} />
+          <WeekDayHeader />
+          {
+            weeksStartDates.map((startDate) => (
+              <div key={`${startDate}`} >
+                <ActivityWeekItem data={data} startDate={startDate} currentMonth={props.date || new Date()} />
+              </div>
+            ))
+          }
+        </div>
+        <div className={styles.decorationPanel} >
+        </div>
       </div>
-      <div className={styles.decorationPanel} >
-      </div>
-    </div>
+      {
+        decoration && (
+          <DecorationControlPannel
+            isCancelButtonHidden
+            selectedFieldLayout={decoration} 
+            onChange={(layout) => setChangedDecoration(layout)} 
+            onConfirmClick={onDecorateNodeConfirmClick} 
+            onCancelClick={onDecorateNodeCancelClick} 
+          />
+        )
+      }
+    </>
   )
 }
