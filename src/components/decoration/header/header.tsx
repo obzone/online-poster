@@ -1,5 +1,5 @@
 import { CSSProperties, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
-import styles from './month-header.module.scss'
+import styles from './header.module.scss'
 import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
 import DropDown from '@/components/drop-down/drop-down'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,7 @@ import { Decoration, getHeaderStyle } from '@/app/actions/calendars'
 export const MONTH_TEXT = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
 export const DECORATION_COMPONENT_TYPE_HEADER = 'calendar-header'
 
-export default function MonthHeader(props: {month: Date}) {
+export default function Header(props: {month: Date}) {
   const [isControlPannelVisible, setControlPannelVisible] = useState(false)
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
   const [decoration, setDecoration] = useState<Decoration>()

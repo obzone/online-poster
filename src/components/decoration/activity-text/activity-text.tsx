@@ -56,6 +56,7 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
 
   return (
     <div className={styles.itemContainer} >
+      <h1 style={{fontWeight: 'bold', fontSize: '20px'}} >Font setting</h1>
       <div>
         <p>Font Size</p>
         <DropDown title={`${state.fontSize || 'Font size'}`} onClick={() => setFontsizeDropdownActive(true)} isActive={isFontsizeDropdownActive} >

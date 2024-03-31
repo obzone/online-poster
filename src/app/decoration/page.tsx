@@ -1,14 +1,13 @@
 'use client'
 
 import ActivityWeekItem from "@/components/decoration/activity-week-item/activity-week-item";
-import styles from './page.module.scss'
-import { Activity, Decoration, getAllActivities, getMonthGlobalStyle } from "../actions/calendars";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
-import { MonthGlobalSetting } from "@/components/decoration/calendar/calendar";
-import WeekDayHeader from "@/components/decoration/week-day-header/week-day-header";
-import MonthHeader from "@/components/decoration/month-header/month-header";
 import DecorationControlPannel from "@/components/decoration/control-pannel/control-pannel";
+import CalendarHeader from "@/components/decoration/header/header";
+import WeekDayHeader from "@/components/decoration/week-day-header/week-day-header";
+import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Activity, Decoration, getAllActivities, getMonthGlobalStyle } from "../actions/calendars";
+import styles from './page.module.scss';
 
 export default function Decoration(props: {date: Date}) {
   const [data, setData] = useState<Activity[]>()
@@ -37,9 +36,20 @@ export default function Decoration(props: {date: Date}) {
 
   return (
     <>
+      {
+        decoration && (
+          <DecorationControlPannel
+            isCancelButtonHidden
+            selectedFieldLayout={decoration} 
+            onChange={(layout) => setChangedDecoration(layout)} 
+            onConfirmClick={onDecorateNodeConfirmClick} 
+            onCancelClick={onDecorateNodeCancelClick} 
+          />
+        )
+      }
       <div className={styles.container} style={{...decoration?.style, ...changedDecoration?.style}} >
         <div className={styles.month} >
-          <MonthHeader month={new Date()} />
+          <CalendarHeader month={new Date()} />
           <WeekDayHeader />
           {
             weeksStartDates.map((startDate) => (
@@ -52,17 +62,7 @@ export default function Decoration(props: {date: Date}) {
         <div className={styles.decorationPanel} >
         </div>
       </div>
-      {
-        decoration && (
-          <DecorationControlPannel
-            isCancelButtonHidden
-            selectedFieldLayout={decoration} 
-            onChange={(layout) => setChangedDecoration(layout)} 
-            onConfirmClick={onDecorateNodeConfirmClick} 
-            onCancelClick={onDecorateNodeCancelClick} 
-          />
-        )
-      }
+      
     </>
   )
 }

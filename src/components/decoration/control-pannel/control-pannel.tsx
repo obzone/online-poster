@@ -1,8 +1,8 @@
 import { Activity, Decoration } from '@/app/actions/calendars'
 import styles from './control-pannel.module.scss'
 import { ActivityTextDecorationComponent, DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
-import { JSXElementConstructor } from 'react'
-import { ActivityHeaderDecorationComponent, DECORATION_COMPONENT_TYPE_HEADER } from '../month-header/month-header'
+import { JSXElementConstructor, useEffect } from 'react'
+import { ActivityHeaderDecorationComponent, DECORATION_COMPONENT_TYPE_HEADER } from '../header/header'
 import { DECORATION_COMPONENT_TYPE_MONTH_GLOBAL, MonthGlobalSetting } from '../calendar/calendar'
 
 export interface DecorationComponentCommonProps {
@@ -25,8 +25,17 @@ interface ControlPannelProps {
   isCancelButtonHidden?: boolean
 }
 
+const decorationComponentStack: Function[] = []
+
 export default function DecorationControlPannel(props: ControlPannelProps) {
   const DecorationComponent = COMPONENTS_MAP[props.selectedFieldLayout.type]
+
+  useEffect(() => {
+    const index = decorationComponentStack.length
+    if (index > 1) decorationComponentStack.pop()!()
+    decorationComponentStack.push(props.onCancelClick)
+  }, [])
+
   return (
     <div className={styles.container} >
       <div className={styles.operatorContainer} >

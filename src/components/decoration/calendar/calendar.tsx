@@ -42,6 +42,7 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
 
   return (
     <div className={styles.itemContainer} >
+      <h1 style={{fontWeight: 'bold', fontSize: '20px', textAlign: 'center'}} >Global setting</h1>
       <div>
         <p>Margin</p>
         <div className={styles.iconGroupContainer} >

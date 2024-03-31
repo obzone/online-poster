@@ -63,7 +63,7 @@ export async function getAllActivities(): Promise<Array<Activity>> {
   const date = new Date()
   return new Array(10).fill(0).map((_, index) => {
     const _date = new Date(date.valueOf())
-    _date.setDate(_date.getDate() + index)
+    _date.setDate(_date.getDate() - index)
     return {
       id: `${Date.now()}`,
       title: 'TITLE CAN BE VERY LONG',
