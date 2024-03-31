@@ -12,10 +12,6 @@ const client = new S3Client({
   } 
 });
 
-export async function upload(formData: FormData) {
-  console.debug(formData)
-}
-
 export async function signedUploadUrl({key}: {key: string}) {
   const command = new PutObjectCommand({ Bucket: env.S3_BUCKET, Key: key });
   return getSignedUrl(client, command, { expiresIn: 60 });

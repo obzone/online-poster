@@ -1,6 +1,4 @@
-import { upload } from "@/app/actions/file";
 import DropDown from "@/components/drop-down/drop-down";
-import FileUpload from "@/components/file-upload/file-upload";
 import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react";
@@ -38,15 +36,6 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
     setFontsizeDropdownActive(false)
   }, [])
 
-  const onBackgroundImageSelect = useCallback(async (files: FileList | null) => {
-    if (!files) return
-    console.debug(files)
-    const formData = new FormData()
-    formData.append('file', files[0])
-    // TODO append more userinfo
-    await upload(formData)
-  }, [])
-
   useEffect(() => {
     props.onChange && props.onChange({
       ...props.fieldLayout,
@@ -56,7 +45,7 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
 
   return (
     <div className={styles.itemContainer} >
-      <h1 style={{fontWeight: 'bold', fontSize: '20px'}} >Font setting</h1>
+      <h1 >Font setting</h1>
       <div>
         <p>Font Size</p>
         <DropDown title={`${state.fontSize || 'Font size'}`} onClick={() => setFontsizeDropdownActive(true)} isActive={isFontsizeDropdownActive} >
@@ -97,10 +86,6 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
       <div>
         <p>BorderRadius</p>
         <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
-      </div>
-      <div>
-        <p>BackgroundImage</p>
-        <FileUpload onChange={e => onBackgroundImageSelect(e.target.files)} />
       </div>
     </div>
   )

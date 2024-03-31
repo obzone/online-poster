@@ -34,8 +34,6 @@ export default function Decoration(props: {date: Date}) {
     })
   }, [props.date])
 
-  console.debug(changedDecoration)
-
   return (
     <>
       {

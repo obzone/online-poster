@@ -1,13 +1,12 @@
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react"
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel"
-import { signedUploadUrl, upload } from "@/app/actions/file"
+import { signedUploadUrl } from "@/app/actions/file"
 import styles from './calendar.module.scss'
 import FileUpload from "@/components/file-upload/file-upload"
 
 export const DECORATION_COMPONENT_TYPE_MONTH_GLOBAL = 'month-global'
 
 function reducer(state: CSSProperties, action: {type?: string, payload: CSSProperties}): CSSProperties {
-  console.debug(action.payload)
   switch (action.type) {
     case 'delete':
       // TODO delete keys
@@ -25,7 +24,6 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
     if (!files) return
     const file = files[0]
     const resignedUrl = await signedUploadUrl({key: file.name})
-    console.debug()
     const {origin, pathname} = new URL(resignedUrl)
     const uploadResult = await fetch(resignedUrl, {
       headers: {'Content-Type': file.type},
@@ -44,7 +42,7 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
 
   return (
     <div className={styles.itemContainer} >
-      <h1 style={{fontWeight: 'bold', fontSize: '20px', textAlign: 'center'}} >Global setting</h1>
+      <h1>Global setting</h1>
       <div>
         <p>Margin</p>
         <div className={styles.iconGroupContainer} >

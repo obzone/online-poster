@@ -1,12 +1,10 @@
-import { CSSProperties, MouseEvent, MouseEventHandler, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
-import styles from './header.module.scss'
-import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
-import DropDown from '@/components/drop-down/drop-down'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import FileUpload from '@/components/file-upload/file-upload'
-import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons'
-import { upload } from '@/app/actions/file'
 import { Decoration, getHeaderStyle } from '@/app/actions/calendars'
+import DropDown from '@/components/drop-down/drop-down'
+import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { CSSProperties, MouseEvent, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
+import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
+import styles from './header.module.scss'
 
 export const MONTH_TEXT = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
 export const DECORATION_COMPONENT_TYPE_HEADER = 'calendar-header'
@@ -80,15 +78,6 @@ export function ActivityHeaderDecorationComponent(props: DecorationComponentComm
     setFontsizeDropdownActive(false)
   }, [])
 
-  const onBackgroundImageSelect = useCallback(async (files: FileList | null) => {
-    if (!files) return
-    console.debug(files)
-    const formData = new FormData()
-    formData.append('file', files[0])
-    // TODO append more userinfo
-    await upload(formData)
-  }, [])
-
   useEffect(() => {
     props.onChange && props.onChange({
       ...props.fieldLayout,
@@ -138,10 +127,6 @@ export function ActivityHeaderDecorationComponent(props: DecorationComponentComm
       <div>
         <p>BorderRadius</p>
         <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
-      </div>
-      <div>
-        <p>BackgroundImage</p>
-        <FileUpload onChange={e => onBackgroundImageSelect(e.target.files)} />
       </div>
     </div>
   )
