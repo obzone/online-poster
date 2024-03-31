@@ -34,6 +34,8 @@ export default function Decoration(props: {date: Date}) {
     })
   }, [props.date])
 
+  console.debug(changedDecoration)
+
   return (
     <>
       {
@@ -47,8 +49,8 @@ export default function Decoration(props: {date: Date}) {
           />
         )
       }
-      <div className={styles.container} style={{...decoration?.style, ...changedDecoration?.style}} >
-        <div className={styles.month} >
+      <div className={styles.container}  >
+        <div className={styles.month} style={{...decoration?.style, ...changedDecoration?.style }} >
           <CalendarHeader month={new Date()} />
           <WeekDayHeader />
           {
