@@ -1,12 +1,13 @@
-import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react"
-import { DecorationComponentCommonProps } from "../control-pannel/control-pannel"
+import { MediaCSSProperties } from "@/app/actions/calendars"
 import { signedUploadUrl } from "@/app/actions/file"
-import styles from './calendar.module.scss'
 import FileUpload from "@/components/file-upload/file-upload"
+import { useCallback, useEffect, useReducer } from "react"
+import { DecorationComponentCommonProps } from "../control-pannel/control-pannel"
+import styles from './calendar.module.scss'
 
 export const DECORATION_COMPONENT_TYPE_MONTH_GLOBAL = 'month-global'
 
-function reducer(state: CSSProperties, action: {type?: string, payload: CSSProperties}): CSSProperties {
+function reducer(state: MediaCSSProperties, action: {type?: string, payload: MediaCSSProperties}): MediaCSSProperties {
   switch (action.type) {
     case 'delete':
       // TODO delete keys
@@ -20,19 +21,32 @@ function reducer(state: CSSProperties, action: {type?: string, payload: CSSPrope
 export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
   const [state, dispatch] = useReducer<typeof reducer>(reducer, props.fieldLayout.style || {})
 
-  const onBackgroundImageSelect = useCallback(async (files: FileList | null) => {
+  const onBackgroundImageLightSelect = useCallback(async (files: FileList | null) => {
     if (!files) return
     const file = files[0]
     const resignedUrl = await signedUploadUrl({key: file.name})
     const {origin, pathname} = new URL(resignedUrl)
-    const uploadResult = await fetch(resignedUrl, {
+    await fetch(resignedUrl, {
       headers: {'Content-Type': file.type},
       body: files[0],
       method: 'PUT'
     })
-    dispatch({payload: {backgroundImage: `url('${origin}${pathname}')`}})
+    dispatch({payload: {backgroundImageLight: `${origin}${pathname}`}})
   }, [])
 
+  const onBackgroundImageDarkSelect = useCallback(async (files: FileList | null) => {
+    if (!files) return
+    const file = files[0]
+    const resignedUrl = await signedUploadUrl({key: file.name})
+    const {origin, pathname} = new URL(resignedUrl)
+    await fetch(resignedUrl, {
+      headers: {'Content-Type': file.type},
+      body: files[0],
+      method: 'PUT'
+    })
+    dispatch({payload: {backgroundImageDark: `${origin}${pathname}`}})
+  }, [])
+  
   useEffect(() => {
     props.onChange && props.onChange({
       ...props.fieldLayout,
@@ -57,8 +71,12 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
         <input onChange={e => dispatch({payload: {backgroundColor: `${e.target.value}`}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
       </div>
       <div>
-        <p>BackgroundImage</p>
-        <FileUpload onChange={e => onBackgroundImageSelect(e.target.files)} />
+        <p>BackgroundImage Light</p>
+        <FileUpload onChange={e => onBackgroundImageLightSelect(e.target.files)} />
+      </div>
+      <div>
+        <p>BackgroundImage Dark</p>
+        <FileUpload onChange={e => onBackgroundImageDarkSelect(e.target.files)} />
       </div>
     </div>
   )

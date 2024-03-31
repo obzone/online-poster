@@ -53,10 +53,15 @@ export interface Activity {
   [key: string]: any
 }
 
+export interface MediaCSSProperties extends CSSProperties {
+  backgroundImageDark?: string
+  backgroundImageLight?: string
+}
+
 export interface Decoration {
   type: string
   keyExtractor: (keyof Activity) | 'calendarHeader' | 'monthGlobal'
-  style?: CSSProperties
+  style?: MediaCSSProperties
 }
 
 export async function getAllActivities(): Promise<Array<Activity>> {

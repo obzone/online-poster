@@ -48,7 +48,20 @@ export default function Decoration(props: {date: Date}) {
         )
       }
       <div className={styles.container}  >
-        <div className={styles.month} style={{...decoration?.style, ...changedDecoration?.style }} >
+        <style>
+          {
+            (changedDecoration?.style?.backgroundImageDark || changedDecoration?.style?.backgroundImageLight) ?
+            `
+            .custmizeBg {
+              background-image: url(${changedDecoration?.style?.backgroundImageLight});
+              @media (prefers-color-scheme: dark) {
+                background-image: url(${changedDecoration?.style?.backgroundImageDark})
+              }
+            }
+            ` : ''
+          }
+        </style>
+        <div className={`${styles.month} custmizeBg`} style={{...decoration?.style, ...changedDecoration?.style }} >
           <CalendarHeader month={new Date()} />
           <WeekDayHeader />
           {

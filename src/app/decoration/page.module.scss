@@ -9,13 +9,8 @@
 
 .month {
     flex: 1;
-    background-image: url('https://succi-posts.s3.us-east-1.amazonaws.com/IMG_5190.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    
-    @media (prefers-color-scheme: dark) {
-        background-image: url('https://succi-posts.s3.us-east-1.amazonaws.com/IMG_5190.jpg')
-    }
     
     @include onTablet {
         background-attachment: fixed;
