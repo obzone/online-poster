@@ -1,29 +1,31 @@
 import { Activity, Decoration } from '@/app/actions/calendars'
 import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-day-item-status-bar'
 import styles from './activity-day-item.module.scss'
-import DecorationControlPannel from '../control-pannel/control-pannel'
-import { useCallback, useState } from 'react'
+import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
+import { CSSProperties, useCallback, useEffect, useReducer, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
-  const [isControlPannelVisible, setControlPannelVisible] = useState(false)
+  const [isFieldLayoutControlPannelVisible, setFieldLayoutControlPannelVisible] = useState(false)
+  const [isDayItemLayoutControlPannelVisible, seDayItemLayoutControlPannelVisible] = useState(false)
   const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
+  const [selectedDayItemLayout, setSelectedDayItemLayout] = useState<Decoration>()
   const [selectedActivity, setSelectedActivity] = useState<Activity>()
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
     setSelectedFieldLayout(node)
-    setControlPannelVisible(true)
+    setFieldLayoutControlPannelVisible(true)
   }, [])
 
   const onDecorateNodeCancelClick = useCallback(() => {
-    setControlPannelVisible(false)
+    setFieldLayoutControlPannelVisible(false)
     setSelectedActivity(undefined)
     setSelectedFieldLayout(undefined)
   }, [])
   const onDecorateNodeConfirmClick = useCallback(() => {
-    setControlPannelVisible(false)
+    setFieldLayoutControlPannelVisible(false)
     setSelectedActivity(undefined)
     setSelectedFieldLayout(undefined)
     // TODO save to server with activityid and keyextra
@@ -72,7 +74,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
                 renderActivitiyContent(activity)
               }
               {
-                isControlPannelVisible && (
+                isFieldLayoutControlPannelVisible && (
                   <DecorationControlPannel selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
                 )
               }
@@ -80,6 +82,64 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
           )
         })
       }
+    </div>
+  )
+}
+
+function reducer(state: CSSProperties, action: {type?: string, payload: CSSProperties}): CSSProperties {
+  switch (action.type) {
+    case 'delete':
+      // TODO delete keys
+      return state
+  
+    default:
+      return {...state, ...action.payload}
+  }
+}
+
+// provide field order and operation functions
+export function DayItemDecorationComponent(props: DecorationComponentCommonProps) {
+
+  const [state, dispatch] = useReducer<typeof reducer>(reducer, props.fieldLayout.style || {})
+
+  useEffect(() => {
+    props.onChange && props.onChange({
+      ...props.fieldLayout,
+      style: state
+    })
+  }, [state])
+
+  return (
+    <div className={styles.itemContainer} >
+      <h1 >Font setting</h1>
+      <div>
+        <p>Font Color</p>
+        <input onChange={e => dispatch({payload: {color: e.target.value}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
+      </div>
+      <div>
+        <p>Margin</p>
+        <div className={styles.iconGroupContainer} >
+          <input className="input" onChange={e => dispatch({payload: {marginTop: `${e.target.value}px`}})} type="text" defaultValue={state.marginTop} placeholder="Top" />
+          <input className="input" onChange={e => dispatch({payload: {marginLeft: `${e.target.value}px`}})} type="text" defaultValue={state.marginLeft} placeholder="Left" />
+          <input className="input" onChange={e => dispatch({payload: {marginBottom: `${e.target.value}px`}})} type="text" defaultValue={state.marginBottom} placeholder="Bottom" />
+          <input className="input" onChange={e => dispatch({payload: {marginRight: `${e.target.value}px`}})} type="text" defaultValue={state.marginRight} placeholder="Right" />
+        </div>
+      </div>
+      <div>
+        <p>BackgroundColor</p>
+        <input onChange={e => dispatch({payload: {backgroundColor: `${e.target.value}`}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
+      </div>
+      <div>
+        <p>BorderRadius</p>
+        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
+      </div>
+      <div>
+        <p>Display</p>
+        <span className="checkbox">
+          <input type="checkbox" value={'none'} onChange={e => dispatch({payload: {display: e.target.checked ? 'none' : 'unset'}})} />
+          Hidden
+        </span>
+      </div>
     </div>
   )
 }

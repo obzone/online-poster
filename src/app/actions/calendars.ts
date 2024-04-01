@@ -42,10 +42,14 @@ const defaultActivityLayout: Decoration[] = [{
 export interface Activity {
   id: string
   favicon?: string
+  thumbnail?: string
+  post?: string
   title: string
   subject?: string
   startTime: Date
   endTime?: Date
+  createdAt?: Date
+  updatedAt?: Date
   spot: string
   target?: string
   tags?: Array<string>

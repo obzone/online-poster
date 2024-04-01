@@ -87,6 +87,13 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
         <p>BorderRadius</p>
         <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
       </div>
+      <div>
+        <p>Display</p>
+        <span className="checkbox">
+          <input type="checkbox" value={'none'} onChange={e => dispatch({payload: {display: e.target.checked ? 'none' : 'unset'}})} />
+          Hidden
+        </span>
+      </div>
     </div>
   )
 }
