@@ -1,43 +1,7 @@
 'use server'
 
 import { CSSProperties } from "react"
-
-const defaultActivityLayout: Decoration[] = [{
-  type: 'activity-text',
-  keyExtractor: 'title',
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'subject',
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-date',
-  keyExtractor: 'title',
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'spot',
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'target',
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}]
+import { budibaseFetchMonthActivitiesWithLayout, defaultActivityLayout } from "../services/calendar"
 
 export interface Activity {
   id: string
@@ -63,13 +27,18 @@ export interface MediaCSSProperties extends CSSProperties {
 }
 
 export interface Decoration {
+  id?: string
   type: string
   keyExtractor: (keyof Activity) | 'calendarHeader' | 'monthGlobal'
   style?: MediaCSSProperties
+  displayOrder: number
 }
 
-export async function getAllActivities(): Promise<Array<Activity>> {
-  const date = new Date()
+export async function getAllActivities(date: Date): Promise<Array<Activity>> {
+  const activities = await budibaseFetchMonthActivitiesWithLayout(date)
+  console.debug(activities)
+  return activities
+
   return new Array(10).fill(0).map((_, index) => {
     const _date = new Date(date.valueOf())
     _date.setDate(_date.getDate() - index)
@@ -92,9 +61,9 @@ export async function getActivityById(id: string) {
 }
 
 export async function getHeaderStyle(): Promise<Decoration> {
-  return {type: 'calendar-header', keyExtractor: 'calendarHeader'}
+  return {type: 'calendar-header', keyExtractor: 'calendarHeader', displayOrder: 1}
 }
 
 export async function getMonthGlobalStyle(): Promise<Decoration> {
-  return {type: 'month-global', keyExtractor: 'monthGlobal'}
+  return {type: 'month-global', keyExtractor: 'monthGlobal', displayOrder: 1}
 }

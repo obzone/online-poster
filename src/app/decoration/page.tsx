@@ -16,7 +16,7 @@ export default function Decoration(props: {date: Date}) {
 
   useEffect(() => {
     getMonthGlobalStyle().then(decoration => setDecoration(decoration))
-    getAllActivities().then(data => setData(data))
+    getAllActivities(new Date()).then(data => setData(data))
   }, [props.date])
 
   const onDecorateNodeCancelClick = useCallback(() => {
