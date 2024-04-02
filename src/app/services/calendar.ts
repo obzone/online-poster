@@ -49,8 +49,10 @@ export async function budibaseFetch(url: string, init: RequestInit) {
   return fetch(`${env.X_BUDIBASE_BASE_URL!}${url}`, {
     ...otherFields,
     headers: {
-      'x-budibase-api-key': env.X_BUDIBASE_API_KEY!,
-      'x-budibase-app-id': env.X_BUDIBASE_APP_ID!,
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "x-budibase-api-key": env.X_BUDIBASE_API_KEY!,
+      "x-budibase-app-id": env.X_BUDIBASE_APP_ID!,
       ...headers,
     },
     body
@@ -90,8 +92,7 @@ export async function budibaseFetchMonthActivities(date: Date) {
   }
   return budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/search`, {
     method: 'POST',
-    body: queryBody,
-    cache: 'no-cache'
+    body: queryBody
   })
 }
 
@@ -99,12 +100,14 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
   const startTime = monthStartDate(date)
   const endTime = monthEndDate(date)
   const queryBody: any = {
-    startTime,
-    endTime
+    parameters: {
+      startTime,
+      endTime
+    }
   }
   const response = await budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`, {
     method: 'POST',
-    body: queryBody
+    body: JSON.stringify(queryBody)
   })
   if (response.status != 200) throw new Error(response.statusText)
   const {data} = await response.json()
@@ -119,7 +122,7 @@ export async function upsertLayout(activity: Activity, layout: Decoration) {
   }
   return budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_UPSERT_LAYOUT}`, {
     method: 'POST',
-    body: queryBody
+    body: JSON.stringify(queryBody)
   })
 }
 
