@@ -2,10 +2,12 @@ import { monthEndDate, monthStartDate } from "@/utilities/time";
 import { env } from "process";
 import { Activity, Decoration } from "../actions/calendars";
 import { sortActivityLayout } from "@/utilities/calendar";
+import { DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from "@/components/decoration/calendar/calendar";
+import { DECORATION_COMPONENT_TYPE_HEADER } from "@/components/decoration/header/header";
 
 export async function budibaseFetch(url: string, init: RequestInit) {
   const {body, headers, ...otherFields} = init
-  return fetch(`${env.X_BUDIBASE_BASE_URL!}${url}`, {
+  const response = await fetch(`${env.X_BUDIBASE_BASE_URL!}${url}`, {
     ...otherFields,
     headers: {
       "Content-Type": "application/json",
@@ -16,6 +18,8 @@ export async function budibaseFetch(url: string, init: RequestInit) {
     },
     body
   })
+  if (response.status != 200) throw new Error(response.statusText)
+  return response
 }
 
 export async function budibaseFetchMonthActivities(date: Date) {
@@ -68,7 +72,6 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
     method: 'POST',
     body: JSON.stringify(queryBody)
   })
-  if (response.status != 200) throw new Error(response.statusText)
   const {data} = await response.json()
   data.forEach((activity: Activity) => sortActivityLayout(activity));
   return data
@@ -85,4 +88,72 @@ export async function budibaseUpsertLayout(layout: Decoration) {
     method: 'POST',
     body: queryBody
   })
+}
+
+export async function budibaseFetchMonthGlobalLayout(date=new Date()) {
+  const keyExtractor = `${date.getFullYear()}_${date.getMonth()}`
+  const requetBody: any = JSON.stringify({
+    "query": {
+      "string": {
+          "type": DECORATION_COMPONENT_TYPE_MONTH_GLOBAL,
+          "keyExtractor": keyExtractor
+      },
+      "fuzzy": {},
+      "range": {},
+      "equal": {},
+      "notEqual": {},
+      "empty": {},
+      "notEmpty": {},
+      "oneOf": {}
+    },
+    "paginate": false,
+    "bookmark": null,
+    "limit": 100,
+    "sort": {
+      "order": "descending",
+      "column": "createdAt",
+      "type": "string"
+    }
+  })
+  const response = await budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_LAYOUT}/rows/search`, {
+    method: 'POST',
+    body: requetBody
+  })
+  const {data} = await response.json()
+  if (data && data.length) return data[0]
+  return {type: DECORATION_COMPONENT_TYPE_MONTH_GLOBAL, keyExtractor: keyExtractor}
+}
+
+export async function budibaseFetchMonthHeaderLayout(date=new Date()) {
+  const keyExtractor = `${date.getFullYear()}_${date.getMonth()}`
+  const requetBody: any = JSON.stringify({
+    "query": {
+      "string": {
+          "type": DECORATION_COMPONENT_TYPE_HEADER,
+          "keyExtractor": keyExtractor
+      },
+      "fuzzy": {},
+      "range": {},
+      "equal": {},
+      "notEqual": {},
+      "empty": {},
+      "notEmpty": {},
+      "oneOf": {}
+    },
+    "paginate": false,
+    "bookmark": null,
+    "limit": 100,
+    "sort": {
+      "order": "descending",
+      "column": "createdAt",
+      "type": "string"
+    }
+  })
+  const response = await budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_LAYOUT}/rows/search`, {
+    method: 'POST',
+    body: requetBody
+  })
+  const {data} = await response.json()
+  if (data && data.length) return data[0]
+  return {type: DECORATION_COMPONENT_TYPE_HEADER, keyExtractor: keyExtractor}
 }

@@ -6,7 +6,7 @@ import CalendarHeader from "@/components/decoration/header/header";
 import WeekDayHeader from "@/components/decoration/week-day-header/week-day-header";
 import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } from "@/utilities/time";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Activity, Decoration, getAllActivities, getMonthGlobalStyle } from "../actions/calendars";
+import { Activity, Decoration, getAllActivities, getMonthGlobalStyle, upsertLayout } from "../actions/calendars";
 import styles from './page.module.scss';
 
 export default function Decoration(props: {date: Date}) {
@@ -15,13 +15,18 @@ export default function Decoration(props: {date: Date}) {
   const [changedDecoration, setChangedDecoration] = useState<Decoration>()
 
   useEffect(() => {
-    getMonthGlobalStyle().then(decoration => setDecoration(decoration))
+    getMonthGlobalStyle(new Date()).then(decoration => setDecoration(decoration))
     getAllActivities(new Date()).then(data => setData(data))
   }, [props.date])
 
-  const onDecorateNodeCancelClick = useCallback(() => {
-  }, [])
-  const onDecorateNodeConfirmClick = useCallback(() => {
+  const onDecorateControlCancelClick = useCallback(() => {}, [])
+  const onDecorateControlConfirmClick = useCallback(() => {
+    if (!decoration) return
+    const newStyle = {
+      ...decoration?.style,
+      ...changedDecoration?.style
+    }
+    upsertLayout({...decoration, style: newStyle})
   }, [])
 
   const weeksStartDates = useMemo(() => {
@@ -42,8 +47,8 @@ export default function Decoration(props: {date: Date}) {
             isCancelButtonHidden
             selectedFieldLayout={decoration} 
             onChange={(layout) => setChangedDecoration(layout)} 
-            onConfirmClick={onDecorateNodeConfirmClick} 
-            onCancelClick={onDecorateNodeCancelClick} 
+            onConfirmClick={onDecorateControlConfirmClick} 
+            onCancelClick={onDecorateControlCancelClick} 
           />
         )
       }

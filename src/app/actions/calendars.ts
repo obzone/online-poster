@@ -1,7 +1,8 @@
 'use server'
 
 import { CSSProperties } from "react"
-import { budibaseFetchMonthActivitiesWithLayout, budibaseUpsertLayout } from "../services/calendar"
+import { budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
+import { DECORATION_COMPONENT_TYPE_HEADER } from "@/components/decoration/header/header"
 
 export interface Activity {
   id: string
@@ -29,7 +30,7 @@ export interface MediaCSSProperties extends CSSProperties {
 export interface Decoration {
   id?: string
   type: string
-  keyExtractor: (keyof Activity) | 'calendarHeader' | 'monthGlobal'
+  keyExtractor: (keyof Activity)
   style?: MediaCSSProperties
   displayOrder: number
   activityId?: string
@@ -48,10 +49,10 @@ export async function getActivityById(id: string) {
 
 }
 
-export async function getHeaderStyle(): Promise<Decoration> {
-  return {type: 'calendar-header', keyExtractor: 'calendarHeader', displayOrder: 1}
+export async function getHeaderStyle(date: Date): Promise<Decoration> {
+  return budibaseFetchMonthHeaderLayout(date)
 }
 
-export async function getMonthGlobalStyle(): Promise<Decoration> {
-  return {type: 'month-global', keyExtractor: 'monthGlobal', displayOrder: 1}
+export async function getMonthGlobalStyle(date: Date): Promise<Decoration> {
+  return budibaseFetchMonthGlobalLayout(date)
 }

@@ -18,7 +18,7 @@ export default function Header(props: {month: Date}) {
 
   useEffect(() => {
     (async () => {
-      const data = await getHeaderStyle()
+      const data = await getHeaderStyle(props.month)
       setDecoration(data)
     })()
   }, [props.month])
