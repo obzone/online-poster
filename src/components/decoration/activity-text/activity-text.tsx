@@ -1,5 +1,5 @@
 import DropDown from "@/components/drop-down/drop-down";
-import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
+import { faAlignCenter, faAlignLeft, faAlignRight, faBold, faItalic, faUnderline } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react";
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
@@ -61,6 +61,15 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
       <div>
         <p>Font Color</p>
         <input onChange={e => dispatch({payload: {color: e.target.value}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
+      </div>
+      <div>
+        <p>Font Style</p>
+        <div>
+          <div className={styles.iconGroupContainer} >
+            <FontAwesomeIcon onClick={() => dispatch({payload: {fontWeight: state.fontWeight == 'bold' ? 'normal' : 'bold'}})} className={state.fontWeight == 'bold' ? "has-text-primary" : undefined} icon={faBold} />
+            <FontAwesomeIcon onClick={() => dispatch({payload: {fontStyle: state.fontStyle == 'italic' ? 'normal' : 'italic'}})} className={state.fontStyle == 'italic' ? "has-text-primary" : undefined} icon={faItalic} />
+          </div>
+        </div>
       </div>
       <div>
         <p>Alignment</p>
