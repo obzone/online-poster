@@ -2,7 +2,6 @@
 
 import { CSSProperties } from "react"
 import { budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
-import { DECORATION_COMPONENT_TYPE_HEADER } from "@/components/decoration/header/header"
 
 export interface Activity {
   id: string
@@ -22,16 +21,17 @@ export interface Activity {
   [key: string]: any
 }
 
-export interface MediaCSSProperties extends CSSProperties {
+export interface CustomCSSProperties extends CSSProperties {
   backgroundImageDark?: string
   backgroundImageLight?: string
+  dateFormate?: any
 }
 
 export interface Decoration {
   id?: string
   type: string
   keyExtractor: (keyof Activity)
-  style?: MediaCSSProperties
+  style?: CustomCSSProperties
   displayOrder: number
   activityId?: string
 }

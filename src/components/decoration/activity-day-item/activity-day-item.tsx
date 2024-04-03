@@ -1,9 +1,18 @@
-import { Activity, Decoration, upsertLayout } from '@/app/actions/calendars'
+import { Activity, Decoration, CustomCSSProperties, upsertLayout } from '@/app/actions/calendars'
 import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-day-item-status-bar'
 import styles from './activity-day-item.module.scss'
 import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
-import { CSSProperties, useCallback, useEffect, useReducer, useState } from 'react'
+import { CSSProperties, JSXElementConstructor, useCallback, useEffect, useReducer, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
+
+interface PureComponentProps {
+  style?: CustomCSSProperties
+  value: any
+}
+
+const ACTIVITY_ITEMS: {[key: string]: JSXElementConstructor<PureComponentProps>} = {
+  [DECORATION_COMPONENT_TYPE_TEXT]: ActivityText
+}
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
   const [isFieldLayoutControlPannelVisible, setFieldLayoutControlPannelVisible] = useState(false)
@@ -46,20 +55,17 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       <>
       {
         activity.layout?.map(nodeLayout => {
+          const Comp = ACTIVITY_ITEMS[nodeLayout.type]
+          if (!Comp) return null
           const isCurrentNodeSelected = selectedFieldLayout?.keyExtractor == nodeLayout.keyExtractor && selectedFieldLayout?.type == nodeLayout.type
-          switch (nodeLayout.type) {
-            case DECORATION_COMPONENT_TYPE_TEXT:
-              return (
-                <div key={`${nodeLayout.keyExtractor}`} className={`${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
-                  e.stopPropagation()
-                  onNodeClick(activity, nodeLayout)
-                }} >
-                  <ActivityText style={isCurrentNodeSelected ? {...nodeLayout.style, ...changedFieldLayout?.style} : nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
-                </div>
-              )
-            default:
-              break;
-          }
+          return (
+            <div key={`${nodeLayout.keyExtractor}`} className={`${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
+              e.stopPropagation()
+              onNodeClick(activity, nodeLayout)
+            }} >
+              <Comp style={isCurrentNodeSelected ? {...nodeLayout.style, ...changedFieldLayout?.style} : nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
+            </div>
+          )
         })
       }
       </>

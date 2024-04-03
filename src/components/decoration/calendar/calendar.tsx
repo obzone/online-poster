@@ -1,13 +1,13 @@
-import { MediaCSSProperties } from "@/app/actions/calendars"
+'use client'
+
+import { CustomCSSProperties } from "@/app/actions/calendars"
 import { signedUploadUrl } from "@/app/actions/file"
 import FileUpload from "@/components/file-upload/file-upload"
 import { useCallback, useEffect, useReducer } from "react"
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel"
 import styles from './calendar.module.scss'
 
-export const DECORATION_COMPONENT_TYPE_MONTH_GLOBAL = 'month-global'
-
-function reducer(state: MediaCSSProperties, action: {type?: string, payload: MediaCSSProperties}): MediaCSSProperties {
+function reducer(state: CustomCSSProperties, action: {type?: string, payload: CustomCSSProperties}): CustomCSSProperties {
   switch (action.type) {
     case 'delete':
       // TODO delete keys

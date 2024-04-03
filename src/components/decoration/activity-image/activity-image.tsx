@@ -3,11 +3,11 @@ import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react";
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
-import styles from './activity-text.module.scss';
+import styles from './activity-image.module.scss';
 
-export const DECORATION_COMPONENT_TYPE_TEXT = 'activity-text'
+export const DECORATION_COMPONENT_TYPE_IMAGE = 'activity-image'
 
-export default function ActivityText(props: {style?: CSSProperties, value: any}) {
+export default function ActivityImage(props: {style?: CSSProperties, value: any}) {
   return (
     <div style={props.style} >
       <p>{props.value}</p>
@@ -26,15 +26,9 @@ function reducer(state: CSSProperties, action: {type?: string, payload: CSSPrope
   }
 }
 
-export function ActivityTextDecorationComponent(props: DecorationComponentCommonProps) {
-  const [isFontsizeDropdownActive, setFontsizeDropdownActive] = useState(false)
+export function ActivityImageDecorationComponent(props: DecorationComponentCommonProps) {
 
   const [state, dispatch] = useReducer<typeof reducer>(reducer, props.fieldLayout.style || {})
-
-  const onFontsizeChange = useCallback((size: string) => {
-    dispatch({payload: {fontSize: size}})
-    setFontsizeDropdownActive(false)
-  }, [])
 
   useEffect(() => {
     props.onChange && props.onChange({
@@ -46,22 +40,6 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
   return (
     <div className={styles.itemContainer} >
       <h1 >Font setting</h1>
-      <div>
-        <p>Font Size</p>
-        <DropDown title={`${state.fontSize || 'Font size'}`} onClick={() => setFontsizeDropdownActive(true)} isActive={isFontsizeDropdownActive} >
-          {
-            new Array(15).fill(0).map((_, index) => {
-              return (
-                <div onClick={() => onFontsizeChange(`${index + 10}px`)} key={index} className="dropdown-item" >{index + 10}</div>
-              )
-            })
-          }
-        </DropDown>
-      </div>
-      <div>
-        <p>Font Color</p>
-        <input onChange={e => dispatch({payload: {color: e.target.value}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
-      </div>
       <div>
         <p>Alignment</p>
         <div className={styles.iconGroupContainer} >

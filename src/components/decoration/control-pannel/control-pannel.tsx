@@ -2,8 +2,9 @@ import { Activity, Decoration } from '@/app/actions/calendars'
 import styles from './control-pannel.module.scss'
 import { ActivityTextDecorationComponent, DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
 import { JSXElementConstructor, useEffect } from 'react'
-import { ActivityHeaderDecorationComponent, DECORATION_COMPONENT_TYPE_HEADER } from '../header/header'
-import { DECORATION_COMPONENT_TYPE_MONTH_GLOBAL, MonthGlobalSetting } from '../calendar/calendar'
+import { ActivityHeaderDecorationComponent } from '../header/header'
+import { MonthGlobalSetting } from '../calendar/calendar'
+import { DECORATION_COMPONENT_TYPE_HEADER, DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from '@/app/variable'
 
 export interface DecorationComponentCommonProps {
   fieldLayout: Decoration

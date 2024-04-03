@@ -2,8 +2,7 @@ import { monthEndDate, monthStartDate } from "@/utilities/time";
 import { env } from "process";
 import { Activity, Decoration } from "../actions/calendars";
 import { sortActivityLayout } from "@/utilities/calendar";
-import { DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from "@/components/decoration/calendar/calendar";
-import { DECORATION_COMPONENT_TYPE_HEADER } from "@/components/decoration/header/header";
+import { DECORATION_COMPONENT_TYPE_HEADER, DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from "../variable";
 
 export async function budibaseFetch(url: string, init: RequestInit) {
   const {body, headers, ...otherFields} = init

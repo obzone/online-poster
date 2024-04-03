@@ -3,14 +3,19 @@ import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react";
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
-import styles from './activity-text.module.scss';
+import styles from './activity-date.module.scss';
+import { CustomCSSProperties } from "@/app/actions/calendars";
 
-export const DECORATION_COMPONENT_TYPE_TEXT = 'activity-text'
+export const DECORATION_COMPONENT_TYPE_DATE = 'activity-Date'
 
-export default function ActivityText(props: {style?: CSSProperties, value: any}) {
+export default function ActivityDate(props: {style?: CustomCSSProperties, value: any}) {
+  const defaultDateFormate: any = {
+    hour: "numeric",
+    minute: "numeric",
+  }
   return (
-    <div style={props.style} >
-      <p>{props.value}</p>
+    <div style={props.style} className="activity-Date" >
+      <p>{new Intl.DateTimeFormat("en-US", props.style?.dateFormate || defaultDateFormate).format(new Date(props.value)) }</p>
     </div>
   )
 }
@@ -26,7 +31,7 @@ function reducer(state: CSSProperties, action: {type?: string, payload: CSSPrope
   }
 }
 
-export function ActivityTextDecorationComponent(props: DecorationComponentCommonProps) {
+export function ActivityDateDecorationComponent(props: DecorationComponentCommonProps) {
   const [isFontsizeDropdownActive, setFontsizeDropdownActive] = useState(false)
 
   const [state, dispatch] = useReducer<typeof reducer>(reducer, props.fieldLayout.style || {})
