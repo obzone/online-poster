@@ -43,10 +43,9 @@ export const defaultActivityLayout: Decoration[] = [{
 }]
 
 export function sortActivityLayout(activity: Activity) {
-  if (!activity.layout || activity.layout.length == 0) {
-    activity.layout = defaultActivityLayout
-    return activity
-  }
+  activity.layout = defaultActivityLayout.map((defaultLayout) => {
+    return activity.layout.find((activityLayout) => activityLayout.keyExtractor == defaultLayout.keyExtractor) || defaultLayout
+  })
   activity.layout
   .sort((previous, current) => previous.displayOrder! - current.displayOrder!)
   return activity

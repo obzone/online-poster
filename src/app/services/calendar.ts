@@ -1,5 +1,3 @@
-'use server'
-
 import { monthEndDate, monthStartDate } from "@/utilities/time";
 import { env } from "process";
 import { Activity, Decoration } from "../actions/calendars";
@@ -76,17 +74,15 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
   return data
 }
 
-export async function upsertLayout(layout: Decoration) {
+export async function budibaseUpsertLayout(layout: Decoration) {
   const queryBody: any = JSON.stringify({
     parameters: {
       activityId: layout.activityId,
       ...layout,
     }
   })
-  const response = await budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_UPSERT_LAYOUT}`, {
+  return budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_UPSERT_LAYOUT}`, {
     method: 'POST',
     body: queryBody
   })
-  response.status
-  return {'status': response.status}
 }

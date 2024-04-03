@@ -1,10 +1,9 @@
-import { Activity, Decoration } from '@/app/actions/calendars'
+import { Activity, Decoration, upsertLayout } from '@/app/actions/calendars'
 import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-day-item-status-bar'
 import styles from './activity-day-item.module.scss'
 import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
-import { upsertLayout } from '@/app/services/calendar'
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
   const [isFieldLayoutControlPannelVisible, setFieldLayoutControlPannelVisible] = useState(false)

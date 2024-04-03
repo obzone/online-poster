@@ -1,7 +1,7 @@
 'use server'
 
 import { CSSProperties } from "react"
-import { budibaseFetchMonthActivitiesWithLayout } from "../services/calendar"
+import { budibaseFetchMonthActivitiesWithLayout, budibaseUpsertLayout } from "../services/calendar"
 
 export interface Activity {
   id: string
@@ -38,6 +38,10 @@ export interface Decoration {
 export async function getAllActivities(date: Date): Promise<Array<Activity>> {
   const activities = await budibaseFetchMonthActivitiesWithLayout(date)
   return activities
+}
+
+export async function upsertLayout(layout: Decoration) {
+  await budibaseUpsertLayout(layout)
 }
 
 export async function getActivityById(id: string) {
