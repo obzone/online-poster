@@ -48,6 +48,7 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
   }, [])
   
   useEffect(() => {
+    console.debug(state)
     props.onChange && props.onChange({
       ...props.fieldLayout,
       style: state

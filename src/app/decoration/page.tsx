@@ -20,14 +20,14 @@ export default function Decoration(props: {date: Date}) {
   }, [props.date])
 
   const onDecorateControlCancelClick = useCallback(() => {}, [])
-  const onDecorateControlConfirmClick = useCallback(() => {
+  const onDecorateControlConfirmClick = useCallback(async () => {
     if (!decoration) return
     const newStyle = {
       ...decoration?.style,
       ...changedDecoration?.style
     }
-    upsertLayout({...decoration, style: newStyle})
-  }, [])
+    await upsertLayout({...decoration, style: newStyle})
+  }, [changedDecoration, decoration])
 
   const weeksStartDates = useMemo(() => {
     const calendarStartDate = _calendarStartDate(props.date)
