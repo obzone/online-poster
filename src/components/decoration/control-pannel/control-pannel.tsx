@@ -31,9 +31,12 @@ export default function DecorationControlPannel(props: ControlPannelProps) {
   const DecorationComponent = COMPONENTS_MAP[props.selectedFieldLayout.type]
 
   useEffect(() => {
-    const index = decorationComponentStack.length
-    if (index > 1) decorationComponentStack.pop()!()
+    if (decorationComponentStack.length > 1) decorationComponentStack.pop()!()
     decorationComponentStack.push(props.onCancelClick)
+
+    return () => {
+      if (decorationComponentStack.length > 1) decorationComponentStack.pop()!()
+    }
   }, [])
 
   return (

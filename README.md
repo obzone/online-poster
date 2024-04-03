@@ -49,3 +49,4 @@ detail page
 ica file
 subscribe path
 attach tag to activities
+management field ajust

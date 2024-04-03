@@ -1,48 +1,9 @@
+'use server'
+
 import { monthEndDate, monthStartDate } from "@/utilities/time";
 import { env } from "process";
 import { Activity, Decoration } from "../actions/calendars";
-
-export const defaultActivityLayout: Decoration[] = [{
-  type: 'activity-text',
-  keyExtractor: 'title',
-  displayOrder: 1,
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'subject',
-  displayOrder: 2,
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-date',
-  keyExtractor: 'startTime',
-  displayOrder: 3,
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'spot',
-  displayOrder: 4,
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'target',
-  displayOrder: 5,
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}]
+import { sortActivityLayout } from "@/utilities/calendar";
 
 export async function budibaseFetch(url: string, init: RequestInit) {
   const {body, headers, ...otherFields} = init
@@ -115,23 +76,17 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
   return data
 }
 
-export async function upsertLayout(activity: Activity, layout: Decoration) {
-  const queryBody: any = {
-    activityId: activity.id,
-    ...layout,
-  }
-  return budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_UPSERT_LAYOUT}`, {
-    method: 'POST',
-    body: JSON.stringify(queryBody)
+export async function upsertLayout(layout: Decoration) {
+  const queryBody: any = JSON.stringify({
+    parameters: {
+      activityId: layout.activityId,
+      ...layout,
+    }
   })
-}
-
-export function sortActivityLayout(activity: Activity) {
-  if (!activity.layout || activity.layout.length == 0) {
-    activity.layout = defaultActivityLayout
-    return activity
-  }
-  activity.layout
-  .sort((previous, current) => previous.displayOrder! - current.displayOrder!)
-  return activity
+  const response = await budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_UPSERT_LAYOUT}`, {
+    method: 'POST',
+    body: queryBody
+  })
+  response.status
+  return {'status': response.status}
 }

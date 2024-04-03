@@ -1,7 +1,7 @@
 'use server'
 
 import { CSSProperties } from "react"
-import { budibaseFetchMonthActivitiesWithLayout, defaultActivityLayout } from "../services/calendar"
+import { budibaseFetchMonthActivitiesWithLayout } from "../services/calendar"
 
 export interface Activity {
   id: string
@@ -32,27 +32,12 @@ export interface Decoration {
   keyExtractor: (keyof Activity) | 'calendarHeader' | 'monthGlobal'
   style?: MediaCSSProperties
   displayOrder: number
+  activityId?: string
 }
 
 export async function getAllActivities(date: Date): Promise<Array<Activity>> {
   const activities = await budibaseFetchMonthActivitiesWithLayout(date)
   return activities
-
-  return new Array(10).fill(0).map((_, index) => {
-    const _date = new Date(date.valueOf())
-    _date.setDate(_date.getDate() - index)
-    return {
-      id: `${Date.now()}`,
-      title: 'TITLE CAN BE VERY LONG',
-      subject: `introduct the activty${_date}`,
-      startTime: _date,
-      endTime: _date,
-      spot: 'can be a text to describe the spot',
-      target: 'maybe empty sometimes',
-      tags: ['food', '$4/per'],
-      layout: defaultActivityLayout
-    }
-  })
 }
 
 export async function getActivityById(id: string) {

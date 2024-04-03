@@ -4,13 +4,12 @@ import styles from './activity-day-item.module.scss'
 import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
 import { CSSProperties, useCallback, useEffect, useReducer, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
+import { upsertLayout } from '@/app/services/calendar'
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
   const [isFieldLayoutControlPannelVisible, setFieldLayoutControlPannelVisible] = useState(false)
-  const [isDayItemLayoutControlPannelVisible, seDayItemLayoutControlPannelVisible] = useState(false)
-  const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
-  const [selectedDayItemLayout, setSelectedDayItemLayout] = useState<Decoration>()
   const [selectedActivity, setSelectedActivity] = useState<Activity>()
+  const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
@@ -24,13 +23,24 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
     setSelectedActivity(undefined)
     setSelectedFieldLayout(undefined)
   }, [])
-  const onDecorateNodeConfirmClick = useCallback(() => {
-    setFieldLayoutControlPannelVisible(false)
-    setSelectedActivity(undefined)
-    setSelectedFieldLayout(undefined)
-    // TODO save to server with activityid and keyextra
 
-  }, [])
+  const onDecorateNodeConfirmClick = useCallback(async () => {
+    try {
+      if (!changedFieldLayout || !selectedFieldLayout) throw new Error('cant found selected item layout')
+      const {style: changedFieldStyle} = changedFieldLayout
+      const newStyle = {
+        ...selectedFieldLayout?.style,
+        ...changedFieldStyle,
+      }
+      await upsertLayout({...selectedFieldLayout, style: newStyle, activityId: selectedActivity?.id})
+      selectedFieldLayout.style = newStyle
+      setFieldLayoutControlPannelVisible(false)
+      setSelectedActivity(undefined)
+      setSelectedFieldLayout(undefined)
+    } catch (error) {
+      console.error('UPDATE LAYOUT ERROR', error)
+    }
+  }, [changedFieldLayout, selectedFieldLayout, selectedActivity])
 
   const renderActivitiyContent = useCallback((activity: Activity) => {
     return (
@@ -45,7 +55,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
                   e.stopPropagation()
                   onNodeClick(activity, nodeLayout)
                 }} >
-                  <ActivityText style={isCurrentNodeSelected ? changedFieldLayout?.style : nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
+                  <ActivityText style={isCurrentNodeSelected ? {...nodeLayout.style, ...changedFieldLayout?.style} : nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
                 </div>
               )
             default:
