@@ -18,7 +18,7 @@ export const defaultActivityLayout: Decoration[] = [{
   }
 }, {
   type: 'activity-date',
-  keyExtractor: 'startTime',
+  keyExtractor: 'dateRange',
   displayOrder: 3,
   style: {
     marginTop: '6px',

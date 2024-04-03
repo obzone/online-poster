@@ -4,7 +4,8 @@ import { ActivityTextDecorationComponent, DECORATION_COMPONENT_TYPE_TEXT } from 
 import { JSXElementConstructor, useEffect } from 'react'
 import { ActivityHeaderDecorationComponent } from '../header/header'
 import { MonthGlobalSetting } from '../calendar/calendar'
-import { DECORATION_COMPONENT_TYPE_HEADER, DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from '@/app/variable'
+import { DECORATION_COMPONENT_TYPE_DATE, DECORATION_COMPONENT_TYPE_HEADER, DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from '@/app/variable'
+import { ActivityDateDecorationComponent } from '../activity-date/activity-date'
 
 export interface DecorationComponentCommonProps {
   fieldLayout: Decoration
@@ -15,6 +16,7 @@ export const COMPONENTS_MAP: {[key: string]: JSXElementConstructor<DecorationCom
   [DECORATION_COMPONENT_TYPE_TEXT]: ActivityTextDecorationComponent,
   [DECORATION_COMPONENT_TYPE_HEADER]: ActivityHeaderDecorationComponent,
   [DECORATION_COMPONENT_TYPE_MONTH_GLOBAL]: MonthGlobalSetting,
+  [DECORATION_COMPONENT_TYPE_DATE]: ActivityDateDecorationComponent,
 }
 
 interface ControlPannelProps {

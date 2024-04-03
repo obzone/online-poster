@@ -6,16 +6,15 @@ import { DecorationComponentCommonProps } from "../control-pannel/control-pannel
 import styles from './activity-date.module.scss';
 import { CustomCSSProperties } from "@/app/actions/calendars";
 
-export const DECORATION_COMPONENT_TYPE_DATE = 'activity-Date'
-
-export default function ActivityDate(props: {style?: CustomCSSProperties, value: any}) {
+export default function ActivityDate(props: {style?: CustomCSSProperties, value: [Date]}) {
   const defaultDateFormate: any = {
     hour: "numeric",
     minute: "numeric",
   }
+  const valueArray = props.value.map((date)=> new Intl.DateTimeFormat("en-US", props.style?.dateFormate || defaultDateFormate).format(new Date(date)) )
   return (
-    <div style={props.style} className="activity-Date" >
-      <p>{new Intl.DateTimeFormat("en-US", props.style?.dateFormate || defaultDateFormate).format(new Date(props.value)) }</p>
+    <div style={props.style} className="activity-date" >
+      <p>{valueArray.join('~')}</p>
     </div>
   )
 }
@@ -50,7 +49,7 @@ export function ActivityDateDecorationComponent(props: DecorationComponentCommon
 
   return (
     <div className={styles.itemContainer} >
-      <h1 >Font setting</h1>
+      <h1 >Date setting</h1>
       <div>
         <p>Font Size</p>
         <DropDown title={`${state.fontSize || 'Font size'}`} onClick={() => setFontsizeDropdownActive(true)} isActive={isFontsizeDropdownActive} >
