@@ -4,8 +4,9 @@ import styles from './activity-day-item.module.scss'
 import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
 import { CSSProperties, JSXElementConstructor, useCallback, useEffect, useReducer, useState } from 'react'
 import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/activity-text'
-import { DECORATION_COMPONENT_TYPE_DATE } from '@/app/variable'
+import { DECORATION_COMPONENT_TYPE_DATE, DECORATION_COMPONENT_TYPE_IMAGE } from '@/app/variable'
 import ActivityDate from '../activity-date/activity-date'
+import ActivityImage from '../activity-image/activity-image'
 
 interface PureComponentProps {
   style?: CustomCSSProperties
@@ -15,6 +16,7 @@ interface PureComponentProps {
 const ACTIVITY_ITEMS: {[key: string]: JSXElementConstructor<PureComponentProps>} = {
   [DECORATION_COMPONENT_TYPE_TEXT]: ActivityText,
   [DECORATION_COMPONENT_TYPE_DATE]: ActivityDate,
+  [DECORATION_COMPONENT_TYPE_IMAGE]: ActivityImage,
 }
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {

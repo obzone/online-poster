@@ -1,16 +1,13 @@
-import DropDown from "@/components/drop-down/drop-down";
 import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CSSProperties, useCallback, useEffect, useReducer, useState } from "react";
+import { CSSProperties, useEffect, useReducer } from "react";
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
 import styles from './activity-image.module.scss';
-
-export const DECORATION_COMPONENT_TYPE_IMAGE = 'activity-image'
 
 export default function ActivityImage(props: {style?: CSSProperties, value: any}) {
   return (
     <div style={props.style} >
-      <p>{props.value}</p>
+      <img src={props.value} />
     </div>
   )
 }
@@ -39,7 +36,7 @@ export function ActivityImageDecorationComponent(props: DecorationComponentCommo
 
   return (
     <div className={styles.itemContainer} >
-      <h1 >Font setting</h1>
+      <h1 >Image setting</h1>
       <div>
         <p>Alignment</p>
         <div className={styles.iconGroupContainer} >

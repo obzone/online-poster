@@ -1,9 +1,17 @@
 import { Activity, Decoration } from "@/app/actions/calendars"
 
 export const defaultActivityLayout: Decoration[] = [{
+  type: 'activity-image',
+  keyExtractor: 'favicon',
+  displayOrder: 1,
+  style: {
+    marginTop: '6px',
+    height: '100px'
+  }
+}, {
   type: 'activity-text',
   keyExtractor: 'title',
-  displayOrder: 1,
+  displayOrder: 2,
   style: {
     marginTop: '6px',
     textAlign: 'center',
@@ -11,7 +19,7 @@ export const defaultActivityLayout: Decoration[] = [{
 }, {
   type: 'activity-text',
   keyExtractor: 'subject',
-  displayOrder: 2,
+  displayOrder: 3,
   style: {
     marginTop: '6px',
     textAlign: 'center',
@@ -19,14 +27,6 @@ export const defaultActivityLayout: Decoration[] = [{
 }, {
   type: 'activity-date',
   keyExtractor: 'dateRange',
-  displayOrder: 3,
-  style: {
-    marginTop: '6px',
-    textAlign: 'center',
-  }
-}, {
-  type: 'activity-text',
-  keyExtractor: 'spot',
   displayOrder: 4,
   style: {
     marginTop: '6px',
@@ -34,8 +34,16 @@ export const defaultActivityLayout: Decoration[] = [{
   }
 }, {
   type: 'activity-text',
-  keyExtractor: 'target',
+  keyExtractor: 'spot',
   displayOrder: 5,
+  style: {
+    marginTop: '6px',
+    textAlign: 'center',
+  }
+}, {
+  type: 'activity-text',
+  keyExtractor: 'target',
+  displayOrder: 6,
   style: {
     marginTop: '6px',
     textAlign: 'center',
