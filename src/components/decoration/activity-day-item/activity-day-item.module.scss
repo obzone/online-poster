@@ -4,13 +4,18 @@
 @import 'bulma/sass/utilities/mixins.scss';
 @import '@/app/variable.scss';
 
-
 .container {
   height: $minCalendarItemHeight;
-  overflow: scroll;
   text-align: center;
-  padding: 6px;
+  overflow-x: hidden;
   border-bottom: 1px solid var(--bulma-dark);
+  
+  & > .embla__container {
+    display: flex;
+    & > .embla__slide {
+      flex: 0 0 100%;
+    }
+  }
   
   @include onPC {
     width: $minCalendarItemWidth;

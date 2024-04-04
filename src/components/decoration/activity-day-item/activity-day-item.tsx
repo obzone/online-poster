@@ -7,6 +7,7 @@ import ActivityText, { DECORATION_COMPONENT_TYPE_TEXT } from '../activity-text/a
 import { DECORATION_COMPONENT_TYPE_DATE, DECORATION_COMPONENT_TYPE_IMAGE } from '@/app/variable'
 import ActivityDate from '../activity-date/activity-date'
 import ActivityImage from '../activity-image/activity-image'
+import useEmblaCarousel from 'embla-carousel-react'
 
 interface PureComponentProps {
   style?: CustomCSSProperties
@@ -24,6 +25,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   const [selectedActivity, setSelectedActivity] = useState<Activity>()
   const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
+  const [emblaRef] = useEmblaCarousel()
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
@@ -79,29 +81,31 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   }, [selectedFieldLayout, selectedActivity, changedFieldLayout])
 
   return (
-    <div className={`${styles.container}`} >
+    <div className={`${styles.container}`} ref={emblaRef} >
       {
         (!props.activities || !props.activities.length) && (
           <ActivityDayItemStatusBar date={props.date} />
         )
       }
+      <div className={`${styles.embla__container}`} >
+        {
+          props.activities?.map(activity => {
+            const {id, tags} = activity
+            return (
+              <div key={id} className={`${styles.embla__slide}`} >
+                <ActivityDayItemStatusBar tags={tags} date={props.date} />
+                {
+                  renderActivitiyContent(activity)
+                }
+              </div>
+            )
+          })
+        }
+      </div>
       {
-        props.activities?.map(activity => {
-          const {id, tags} = activity
-          return (
-            <div key={id} >
-              <ActivityDayItemStatusBar tags={tags} date={props.date} />
-              {
-                renderActivitiyContent(activity)
-              }
-              {
-                isFieldLayoutControlPannelVisible && (
-                  <DecorationControlPannel key={selectedFieldLayout?.keyExtractor} selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
-                )
-              }
-            </div>
-          )
-        })
+        isFieldLayoutControlPannelVisible && (
+          <DecorationControlPannel key={selectedFieldLayout?.keyExtractor} selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
+        )
       }
     </div>
   )
