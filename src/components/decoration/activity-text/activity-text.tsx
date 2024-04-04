@@ -94,7 +94,7 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
       </div>
       <div>
         <p>BorderRadius</p>
-        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
+        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value.replace('px', '')}px`}})} className="input" type="text" placeholder="e.g. 9" />
       </div>
     </div>
   )
