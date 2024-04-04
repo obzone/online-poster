@@ -37,12 +37,16 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-padding property
-multi activities in oneday
-dayitem components control
-display: visible property
-image optimize
-detail page
+calendar home page
+multi activities in oneday (carousel)
+activity  starttime endtime 
 subscribe path
-attach tag to activities
+detail page
 administator login
+
+padding property
+dayitem components control & display: visible property
+image optimize
+attach tag to activities
+backgroundimage optimize with nextjs->Image
+dateitemstatusbar status indicator (processing, finished)
