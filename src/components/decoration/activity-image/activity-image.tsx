@@ -38,14 +38,6 @@ export function ActivityImageDecorationComponent(props: DecorationComponentCommo
     <div className={styles.itemContainer} >
       <h1 >Image setting</h1>
       <div>
-        <p>Alignment</p>
-        <div className={styles.iconGroupContainer} >
-          <FontAwesomeIcon onClick={() => dispatch({payload: {textAlign: 'left'}})} className={state.textAlign == 'left' ? "has-text-primary" : undefined} icon={faAlignLeft} />
-          <FontAwesomeIcon onClick={() => dispatch({payload: {textAlign: 'center'}})} className={state.textAlign == 'center' ? "has-text-primary" : undefined} icon={faAlignCenter} />
-          <FontAwesomeIcon onClick={() => dispatch({payload: {textAlign: 'right'}})} className={state.textAlign == 'right' ? "has-text-primary" : undefined} icon={faAlignRight} />
-        </div>
-      </div>
-      <div>
         <p>Margin</p>
         <div className={styles.iconGroupContainer} >
           <input className="input" onChange={e => dispatch({payload: {marginTop: `${e.target.value}px`}})} type="text" defaultValue={state.marginTop} placeholder="Top" />
@@ -55,12 +47,12 @@ export function ActivityImageDecorationComponent(props: DecorationComponentCommo
         </div>
       </div>
       <div>
-        <p>BackgroundColor</p>
-        <input onChange={e => dispatch({payload: {backgroundColor: `${e.target.value}`}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
+        <p>Height</p>
+        <input onChange={e => dispatch({payload: {height: `${e.target.value}px`}})} className="input" type="text" defaultValue={state.height} placeholder="e.g. 100" />
       </div>
       <div>
         <p>BorderRadius</p>
-        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
+        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" defaultValue={state.borderRadius} placeholder="e.g. 9" />
       </div>
     </div>
   )

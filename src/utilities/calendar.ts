@@ -6,7 +6,8 @@ export const defaultActivityLayout: Decoration[] = [{
   displayOrder: 1,
   style: {
     marginTop: '6px',
-    height: '100px'
+    height: '100px',
+    overflow: 'hidden'
   }
 }, {
   type: 'activity-text',
