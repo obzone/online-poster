@@ -7,7 +7,7 @@
 
 .container {
   height: $minCalendarItemHeight;
-  overflow: hidden;
+  overflow: scroll;
   text-align: center;
   padding: 6px;
   border-bottom: 1px solid var(--bulma-dark);
