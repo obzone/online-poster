@@ -45,3 +45,4 @@ image optimize
 detail page
 subscribe path
 attach tag to activities
+administator login

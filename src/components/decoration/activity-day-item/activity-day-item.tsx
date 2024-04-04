@@ -140,10 +140,10 @@ export function DayItemDecorationComponent(props: DecorationComponentCommonProps
       <div>
         <p>Margin</p>
         <div className={styles.iconGroupContainer} >
-          <input className="input" onChange={e => dispatch({payload: {marginTop: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginTop} placeholder="Top" />
-          <input className="input" onChange={e => dispatch({payload: {marginLeft: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginLeft} placeholder="Left" />
-          <input className="input" onChange={e => dispatch({payload: {marginBottom: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginBottom} placeholder="Bottom" />
-          <input className="input" onChange={e => dispatch({payload: {marginRight: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginRight} placeholder="Right" />
+          <input className="input" onChange={e => dispatch({payload: {marginTop: e.target.value.length ? `${e.target.value.replace('px', '')}px` : undefined}})} type="text" defaultValue={state.marginTop} placeholder="Top" />
+          <input className="input" onChange={e => dispatch({payload: {marginLeft: e.target.value.length ? `${e.target.value.replace('px', '')}px` : undefined}})} type="text" defaultValue={state.marginLeft} placeholder="Left" />
+          <input className="input" onChange={e => dispatch({payload: {marginBottom: e.target.value.length ? `${e.target.value.replace('px', '')}px` : undefined}})} type="text" defaultValue={state.marginBottom} placeholder="Bottom" />
+          <input className="input" onChange={e => dispatch({payload: {marginRight: e.target.value.length ? `${e.target.value.replace('px', '')}px` : undefined}})} type="text" defaultValue={state.marginRight} placeholder="Right" />
         </div>
       </div>
       <div>
