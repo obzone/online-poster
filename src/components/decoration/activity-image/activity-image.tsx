@@ -6,9 +6,7 @@ import styles from './activity-image.module.scss';
 
 export default function ActivityImage(props: {style?: CSSProperties, value: any}) {
   return (
-    <div style={props.style} >
-      <img src={props.value} />
-    </div>
+    <img style={props.style} src={props.value} />
   )
 }
 
@@ -48,11 +46,11 @@ export function ActivityImageDecorationComponent(props: DecorationComponentCommo
       </div>
       <div>
         <p>Height</p>
-        <input onChange={e => dispatch({payload: {height: `${e.target.value}px`}})} className="input" type="text" defaultValue={state.height} placeholder="e.g. 100" />
+        <input onChange={e => dispatch({payload: {height: `${e.target.value.replace('px', '')}px`}})} className="input" type="text" defaultValue={state.height} placeholder="e.g. 100" />
       </div>
       <div>
         <p>BorderRadius</p>
-        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" defaultValue={state.borderRadius} placeholder="e.g. 9" />
+        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value.replace('px', '')}px`}})} className="input" type="text" defaultValue={state.borderRadius} placeholder="e.g. 9" />
       </div>
     </div>
   )

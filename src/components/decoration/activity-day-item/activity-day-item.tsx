@@ -96,7 +96,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
               }
               {
                 isFieldLayoutControlPannelVisible && (
-                  <DecorationControlPannel selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
+                  <DecorationControlPannel key={selectedFieldLayout?.keyExtractor} selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
                 )
               }
             </div>
@@ -140,10 +140,10 @@ export function DayItemDecorationComponent(props: DecorationComponentCommonProps
       <div>
         <p>Margin</p>
         <div className={styles.iconGroupContainer} >
-          <input className="input" onChange={e => dispatch({payload: {marginTop: `${e.target.value}px`}})} type="text" defaultValue={state.marginTop} placeholder="Top" />
-          <input className="input" onChange={e => dispatch({payload: {marginLeft: `${e.target.value}px`}})} type="text" defaultValue={state.marginLeft} placeholder="Left" />
-          <input className="input" onChange={e => dispatch({payload: {marginBottom: `${e.target.value}px`}})} type="text" defaultValue={state.marginBottom} placeholder="Bottom" />
-          <input className="input" onChange={e => dispatch({payload: {marginRight: `${e.target.value}px`}})} type="text" defaultValue={state.marginRight} placeholder="Right" />
+          <input className="input" onChange={e => dispatch({payload: {marginTop: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginTop} placeholder="Top" />
+          <input className="input" onChange={e => dispatch({payload: {marginLeft: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginLeft} placeholder="Left" />
+          <input className="input" onChange={e => dispatch({payload: {marginBottom: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginBottom} placeholder="Bottom" />
+          <input className="input" onChange={e => dispatch({payload: {marginRight: `${e.target.value.replace('px', '')}px`}})} type="text" defaultValue={state.marginRight} placeholder="Right" />
         </div>
       </div>
       <div>
@@ -152,7 +152,7 @@ export function DayItemDecorationComponent(props: DecorationComponentCommonProps
       </div>
       <div>
         <p>BorderRadius</p>
-        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
+        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value.replace('px', '')}px`}})} className="input" type="text" placeholder="e.g. 9" />
       </div>
       <div>
         <p>Display</p>
