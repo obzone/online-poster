@@ -13,6 +13,7 @@ export const defaultActivityLayout: Decoration[] = [{
   keyExtractor: 'title',
   displayOrder: 2,
   style: {
+    marginTop: '6px',
     textAlign: 'center',
   }
 }, {
