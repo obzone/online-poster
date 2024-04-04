@@ -37,16 +37,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-set CSSProperties back to data
-upload and setting background image
 padding property
 multi activities in oneday
 dayitem components control
 display: visible property
-image decoration component
 image optimize
 detail page
-ica file
 subscribe path
 attach tag to activities
-management field ajust

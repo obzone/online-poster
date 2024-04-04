@@ -5,7 +5,6 @@ export const defaultActivityLayout: Decoration[] = [{
   keyExtractor: 'favicon',
   displayOrder: 1,
   style: {
-    marginTop: '6px',
     height: '100px',
     overflow: 'hidden'
   }
@@ -14,7 +13,6 @@ export const defaultActivityLayout: Decoration[] = [{
   keyExtractor: 'title',
   displayOrder: 2,
   style: {
-    marginTop: '6px',
     textAlign: 'center',
   }
 }, {

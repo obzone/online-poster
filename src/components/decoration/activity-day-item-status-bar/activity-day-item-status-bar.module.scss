@@ -4,30 +4,31 @@
 .statusBarContainer {
   display: flex;
   flex-direction: row;
-}
 
-.tagContainer {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-
-  & > * {
-    margin-right: 6px;
-  }
-}
-
-.text {
-  text-align: right;
-
-  @include onTablet {
-    font-weight: bold;
-  }
-
-  &.onPCHidden {
-    @include onPCHidden;
-  }
+  & .tagContainer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
   
-  &.onTabletHidden {
-    @include onTabletHidden;
+    & > * {
+      margin-right: 6px;
+    }
+  }
+
+  & .text {
+    text-align: right;
+  
+    @include onTablet {
+      font-weight: bold;
+    }
+  
+    &.onPCHidden {
+      @include onPCHidden;
+    }
+    
+    &.onTabletHidden {
+      @include onTabletHidden;
+    }
   }
 }
+
