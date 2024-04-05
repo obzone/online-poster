@@ -45,6 +45,9 @@ home page navigation header fix
 padding property
 dayitem components control & display: visible property
 image optimize
+organization management
 attach tag to activities
 backgroundimage optimize with nextjs->Image
 dateitemstatusbar status indicator (processing, finished)
+anchor for mobile page
+for premium user, can subscribe more than 100 activities

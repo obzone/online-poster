@@ -24,7 +24,7 @@ export async function budibaseFetch(url: string, init: RequestInit) {
 export async function budibaseFetchMonthActivities(date: Date) {
   const monthStart = monthStartDate(date)
   const monthEnd = monthEndDate(date)
-  const queryBody: any = {
+  const queryBody: any = JSON.stringify({
     "query": {
       // "allOr": true, // match any filter
       // "allOr": true, // match all filter
@@ -48,10 +48,10 @@ export async function budibaseFetchMonthActivities(date: Date) {
     "limit": 100,
     "sort": {
       "order": "ascending",
-      "column": "startTime",
+      "column": "updatedAt",
       "type": "string"
     }
-  }
+  })
   return budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/search`, {
     method: 'POST',
     body: queryBody

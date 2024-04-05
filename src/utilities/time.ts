@@ -1,9 +1,9 @@
 export function monthStartDate(date = new Date()) {
-    return new Date(date.getFullYear(), date.getMonth(), 1)
+    return new Date(date.getFullYear(), date.getUTCMonth(), 1)
 }
 
 export function monthEndDate(date = new Date()) {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 1)
+    return new Date(date.getFullYear(), date.getUTCMonth() + 1, 1)
 }
 
 export function calendarStartDate(date = new Date()) {
