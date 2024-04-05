@@ -25,7 +25,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   const [selectedActivity, setSelectedActivity] = useState<Activity>()
   const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
-  const [emblaRef] = useEmblaCarousel()
+  const [emblaRef, emblaApi] = useEmblaCarousel()
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
@@ -81,18 +81,18 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   }, [selectedFieldLayout, selectedActivity, changedFieldLayout])
 
   return (
-    <div className={`${styles.container}`} ref={emblaRef} >
+    <div className={`${styles.container}`} ref={props.activities?.length ? emblaRef : undefined} >
       {
         (!props.activities || !props.activities.length) && (
           <ActivityDayItemStatusBar date={props.date} />
         )
       }
-      <div className={`${styles.embla__container}`} >
+      <div className={`${props.activities?.length ? styles.embla__container : ''}`} >
         {
           props.activities?.map(activity => {
             const {id, tags} = activity
             return (
-              <div key={id} className={`${styles.embla__slide}`} >
+              <div key={id} className={`${props.activities?.length ? styles.embla__slide : ''}`} >
                 <ActivityDayItemStatusBar tags={tags} date={props.date} />
                 {
                   renderActivitiyContent(activity)
@@ -101,6 +101,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
             )
           })
         }
+
       </div>
       {
         isFieldLayoutControlPannelVisible && (
