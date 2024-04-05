@@ -6,6 +6,10 @@ $decorationPannleWidh: 400px;
 $headerHeight: 60px;
 $headerDayHeight: 30px;
 
+:export {
+  minCalendarItemWidth: $minCalendarItemWidth;
+}
+
 .hidden {
   margin: unset;
   padding: unset;
