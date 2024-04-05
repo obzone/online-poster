@@ -1,10 +1,19 @@
-@import 'bulma/sass/utilities/derived-variables.scss';
-@import 'bulma/sass/utilities/functions.scss';
 @import '@/app/variable.scss';
 
 .container {
-    min-height: $minCalendarItemHeight;
-    text-align: center;
-    padding: $size-small;
-    border-bottom: 1px solid var(--bulma-dark);
+  height: $minCalendarItemHeight;
+  text-align: center;
+  overflow-x: hidden;
+  border-bottom: 1px solid var(--bulma-dark);
+  
+  & > .embla__container {
+    display: flex;
+    & > .embla__slide {
+      flex: 0 0 100%;
+    }
+  }
+  
+  @include onPC {
+    width: $minCalendarItemWidth;
+  }
 }

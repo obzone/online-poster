@@ -1,0 +1,31 @@
+@import '@/app/variable.scss';
+
+.container {
+  @include onTabletHidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid var(--bulma-dark);
+  max-width: calc($minCalendarItemWidth * 1.5);
+  margin: auto;
+  
+  @include onPC {
+      max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
+      margin: auto;
+  }
+
+  @include mobile {
+      max-width: 100%;
+  }
+
+  & > div {
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-align: center;
+    width: calc($minCalendarItemWidth);
+  }
+
+  & > div:not(:last-child) {
+    border-right: 1px solid var(--bulma-dark);
+  }
+}

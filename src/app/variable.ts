@@ -3,3 +3,5 @@ export const MONTH_TEXT = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE
 export const DECORATION_COMPONENT_TYPE_HEADER = 'calendar-header'
 export const DECORATION_COMPONENT_TYPE_DATE = 'activity-date'
 export const DECORATION_COMPONENT_TYPE_IMAGE = 'activity-image'
+export const DECORATION_COMPONENT_TYPE_TEXT = 'activity-text'
+export const WEEKS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']

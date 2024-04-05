@@ -1,9 +1,9 @@
 import { Activity } from "@/app/actions/calendars";
-import ActivityDayItem from "@/components/decoration/activity-day-item/activity-day-item";
 import { isDateInRange } from "@/utilities/time";
 import styles from './activity-week-item.module.scss';
+import ActivityDayItem from "../activity-day-item/activity-day-item";
 
-export default function ActivityWeekItem(props: {data?: Array<Activity>, startDate: Date, currentMonth: Date}) {
+export default async function ActivityWeekItem(props: {data?: Array<Activity>, startDate: Date, currentMonth: Date}) {
   return (
     <div>
       <div className={styles.week}>

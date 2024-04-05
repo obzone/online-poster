@@ -1,0 +1,25 @@
+@forward '../activity-text/activity-text.module.scss';
+@import '@/app/variable.scss';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 12px;
+
+  & > div {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  margin: auto;
+  
+  @include onPC {
+      max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
+      margin: auto;
+  }
+
+  @include mobile {
+      max-width: 100%;
+  }
+
+}

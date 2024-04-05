@@ -101,7 +101,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
             )
           })
         }
-
+        
       </div>
       {
         isFieldLayoutControlPannelVisible && (

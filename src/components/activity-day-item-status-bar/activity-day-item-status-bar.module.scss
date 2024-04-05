@@ -1,14 +1,34 @@
-@import 'bulma/sass/utilities/mixins.scss';
 @import '@/app/variable.scss';
 
-.text {
-  text-align: right;
+.statusBarContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 6px;
 
-  &.withPCHidden {
-    @include onPCHidden;
+  & .tagContainer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  
+    & > * {
+      margin-right: 6px;
+    }
   }
 
-  &.withTabletHidden {
-    @include onTabletHidden;
+  & .text {
+    text-align: right;
+  
+    @include onTablet {
+      font-weight: bold;
+    }
+  
+    &.onPCHidden {
+      @include onPCHidden;
+    }
+    
+    &.onTabletHidden {
+      @include onTabletHidden;
+    }
   }
 }
+

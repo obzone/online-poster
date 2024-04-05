@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react'
-import { WEEKS } from '../week-day-header/week-day-header'
 import styles from './activity-day-item-status-bar.module.scss'
+import { WEEKS } from '@/app/variable'
 
 export default function ActivityDayItemStatusBar(props: { date: Date, tags?: Array<string>, onClick?: MouseEventHandler }) {
   return (

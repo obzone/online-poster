@@ -1,0 +1,10 @@
+@import '@/app/variable.scss';
+
+.month {
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    @include onTablet {
+        background-attachment: fixed;
+    }
+}
