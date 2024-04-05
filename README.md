@@ -37,9 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-calendar home page
-multi activities in oneday (carousel)
-activity  starttime endtime 
 subscribe path
 detail page
 administator login
