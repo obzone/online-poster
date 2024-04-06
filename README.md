@@ -51,3 +51,4 @@ backgroundimage optimize with nextjs->Image
 dateitemstatusbar status indicator (processing, finished)
 anchor for mobile page
 for premium user, can subscribe more than 100 activities
+QRCode for subscribe

@@ -56,3 +56,7 @@ export async function getHeaderStyle(date: Date): Promise<Decoration> {
 export async function getMonthGlobalStyle(date: Date): Promise<Decoration> {
   return budibaseFetchMonthGlobalLayout(date)
 }
+
+export async function downLoadMonthCalendar(date: Date) {
+  console.debug(date)
+}

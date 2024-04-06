@@ -6,12 +6,22 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0px 12px;
+  margin: auto;
 
-  & > div {
+  & > div:first-child {
     font-size: 40px;
     font-weight: bold;
   }
-  margin: auto;
+
+  & > .oprations {
+    text-align: right;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    cursor: pointer;
+  }
   
   @include onPC {
       max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
