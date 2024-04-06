@@ -9,6 +9,7 @@ import ActivityDayItemStatusBar from '../activity-day-item-status-bar/activity-d
 import ActivityImage from '../activity-image/activity-image'
 import ActivityText from '../activity-text/activity-text'
 import styles from './activity-day-item.module.scss'
+import { useDotButton } from '../carousel-dot-hooks/carousel-dot-hooks'
 
 interface PureComponentProps {
   style?: CustomCSSProperties
@@ -23,6 +24,7 @@ const ACTIVITY_ITEMS: {[key: string]: JSXElementConstructor<PureComponentProps>}
 
 export default function ActivityDayItem(props: {date: Date, activities?: Array<Activity>}) {
   const [emblaRef, emblaApi] = useEmblaCarousel()
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi)
 
   const renderActivitiyContent = useCallback((activity: Activity) => {
     activity.dateRange = [activity.startTime, activity.endTime]
@@ -65,6 +67,19 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
           })
         }
       </div>
+      {
+        (!!props.activities?.length) && (
+          <div className={styles.carouselContainer}>
+            {
+              props.activities.map((_, index) => {
+                return (
+                  <div onClick={() => onDotButtonClick(index)} className={`${ selectedIndex == index ? styles.selected : 'aaa'}`} />
+                )
+              })
+            }
+          </div>
+        )
+      }
     </div>
   )
 }
