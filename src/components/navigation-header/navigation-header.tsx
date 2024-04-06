@@ -1,9 +1,9 @@
-import { getHeaderStyle } from '@/app/actions/calendars'
-import { MONTH_TEXT } from '@/app/variable'
-import styles from './navigation-header.module.scss'
+import { getHeaderStyle } from '@/app/actions/calendars';
+import { MONTH_TEXT } from '@/app/variable';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import styles from './navigation-header.module.scss';
 
 export default async function NavigationHeader(props: {month: Date}) {
   const year = props.month.getFullYear()
@@ -24,7 +24,7 @@ export default async function NavigationHeader(props: {month: Date}) {
           <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}`} >
             <div className="icon-text" >
               <span className="icon has-text-info">
-                <FontAwesomeIcon icon={faDownload} />
+                <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
               <span>Download</span>
             </div>

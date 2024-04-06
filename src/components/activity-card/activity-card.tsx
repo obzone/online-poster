@@ -1,7 +1,7 @@
 import { Activity } from "@/app/actions/calendars";
-import styles from './activity-card.module.scss'
-import { faCalendar, faCalendarPlus, faClose, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faShare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from './activity-card.module.scss';
 
 export default function ActivityCard(props: { activity?: Activity }) {
   const defaultDateFormate: any = {
@@ -54,7 +54,7 @@ export default function ActivityCard(props: { activity?: Activity }) {
       <footer className="card-footer">
         <a href={`/api/ics/${props.activity?.id}`} className="card-footer-item">
           <span className="icon">
-            <FontAwesomeIcon icon={faCalendarPlus} /> 
+            <FontAwesomeIcon icon={faCalendarAlt} /> 
             Download
           </span>
         </a>
