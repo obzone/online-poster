@@ -23,9 +23,9 @@
     font-size: 1.25rem;
     text-align: center;
     width: calc($minCalendarItemWidth);
-  }
 
-  & > div:not(:last-child) {
-    border-right: 1px solid var(--bulma-dark);
+    &:not(:last-child) {
+      border-right: 1px solid var(--bulma-dark);
+    }
   }
 }

@@ -45,7 +45,7 @@ home page navigation header fix
 
 padding property
 dayitem components control & display: visible property
-image optimize
+image optimize gif test
 organization management
 attach tag to activities
 backgroundimage optimize with nextjs->Image

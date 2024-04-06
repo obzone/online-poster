@@ -35,7 +35,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
           const Comp = ACTIVITY_ITEMS[nodeLayout.type]
           if (!Comp) return null
           return (
-            <div key={`${nodeLayout.keyExtractor}`} >
+            <div key={`${activity.id}${nodeLayout.keyExtractor}`} >
               <Comp style={nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
             </div>
           )
@@ -73,7 +73,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
             {
               props.activities.map((_, index) => {
                 return (
-                  <div onClick={() => onDotButtonClick(index)} className={`${ selectedIndex == index ? styles.selected : 'aaa'}`} />
+                  <div key={index} onClick={() => onDotButtonClick(index)} className={`${ selectedIndex == index ? styles.selected : 'aaa'}`} />
                 )
               })
             }

@@ -19,12 +19,16 @@
         margin: auto;
         flex-direction: row;
         display: flex;
-        & .day:not(:last-child) {
-            max-width: $minCalendarItemWidth; // box-sizing: border-box; only works under fixed width
-            border-right: 1px solid var(--bulma-dark);
-        }
-        & .day.dayNotInCurrentMonth {
-            display: unset;
+
+        & .day {
+            &:not(:last-child) {
+                max-width: $minCalendarItemWidth; // box-sizing: border-box; only works under fixed width
+                border-right: 1px solid var(--bulma-dark);
+            }
+
+            &.dayNotInCurrentMonth {
+                display: unset;
+            }
         }
     }
 
