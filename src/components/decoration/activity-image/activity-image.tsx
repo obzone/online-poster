@@ -1,5 +1,3 @@
-import { faAlignCenter, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSProperties, useEffect, useReducer } from "react";
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
 import styles from './activity-image.module.scss';

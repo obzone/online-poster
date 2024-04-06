@@ -8,7 +8,6 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
     const month = searchParams.get('month')
-    console.debug(month)
     if (!month) throw new Error('month should be specified', { cause: 400 })
     const response = await budibaseFetchMonthActivities(new Date(month))
     const { data } = await response.json()

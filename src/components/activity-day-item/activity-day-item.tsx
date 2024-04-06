@@ -10,6 +10,7 @@ import ActivityImage from '../activity-image/activity-image'
 import ActivityText from '../activity-text/activity-text'
 import styles from './activity-day-item.module.scss'
 import { useDotButton } from '../carousel-dot-hooks/carousel-dot-hooks'
+import Link from 'next/link'
 
 interface PureComponentProps {
   style?: CustomCSSProperties
@@ -58,10 +59,12 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
             const {id, tags} = activity
             return (
               <div key={id} className={`${props.activities?.length ? styles.embla__slide : ''}`} >
-                <ActivityDayItemStatusBar tags={tags} date={props.date} />
-                {
-                  renderActivitiyContent(activity)
-                }
+                <Link href={`/activities/${activity.id}`} >
+                  <ActivityDayItemStatusBar tags={tags} date={props.date} />
+                  {
+                    renderActivitiyContent(activity)
+                  }
+                </Link>
               </div>
             )
           })

@@ -156,3 +156,11 @@ export async function budibaseFetchMonthHeaderLayout(date=new Date()) {
   if (data && data.length) return data[0]
   return {type: DECORATION_COMPONENT_TYPE_HEADER, keyExtractor: keyExtractor}
 }
+
+export async function budibaseFetchActivityById(id: string) {
+  const response = await budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/${id}`, {
+    method: 'GET'
+  })
+  const {data} = await response.json()
+  return data
+}

@@ -1,7 +1,7 @@
 'use server'
 
 import { CSSProperties } from "react"
-import { budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
+import { budibaseFetchActivityById, budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
 
 export interface Activity {
   id: string
@@ -46,7 +46,8 @@ export async function upsertLayout(layout: Decoration) {
 }
 
 export async function getActivityById(id: string) {
-
+  const budibaseId = encodeURIComponent(JSON.stringify([id]))
+  return budibaseFetchActivityById(budibaseId)
 }
 
 export async function getHeaderStyle(date: Date): Promise<Decoration> {
@@ -58,5 +59,4 @@ export async function getMonthGlobalStyle(date: Date): Promise<Decoration> {
 }
 
 export async function downLoadMonthCalendar(date: Date) {
-  console.debug(date)
 }
