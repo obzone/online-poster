@@ -15,8 +15,9 @@ export async function budibaseFetch(url: string, init: RequestInit) {
       "x-budibase-app-id": env.X_BUDIBASE_APP_ID!,
       ...headers,
     },
-    body
-  })
+    body,
+    next: { revalidate: 3600 }
+  },)
   if (response.status != 200) throw new Error(response.statusText)
   return response
 }
