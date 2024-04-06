@@ -12,7 +12,7 @@ export default async function ActivityWeekItem(props: { data?: Array<Activity>, 
             const date = new Date(props.startDate.valueOf())
             date.setDate(date.getDate() + index)
             const dayInCurrentMonth = date.getMonth() == props.currentMonth.getMonth()
-            const currentDayActivities = props.data?.filter(({ startTime, endTime }) => {
+            const currentDayActivities = props.data?.reverse().filter(({ startTime, endTime }) => {
               const startTimeObj = new Date(startTime)
               const endTimeObj = endTime ? new Date(endTime) : undefined
               return isDateInRange(date, startTimeObj, endTimeObj)
