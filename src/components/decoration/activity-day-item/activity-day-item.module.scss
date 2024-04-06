@@ -20,4 +20,28 @@
   @include onPC {
     width: $minCalendarItemWidth;
   }
+
+  & .carouselContainer {
+    margin: auto;
+
+    & > div {
+      background-color: var(--bulma-light);
+      display: inline-block;
+      padding: 5px;
+      overflow: hidden;
+      border-radius: 5px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+
+      &.selected {
+        background-color: var(--bulma-dark);
+      }
+    }
+  }
+
+  a {
+    color: unset;
+  }
 }

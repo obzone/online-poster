@@ -1,9 +1,9 @@
 import { Activity } from "@/app/actions/calendars";
 import { isDateInRange } from "@/utilities/time";
-import styles from './activity-week-item.module.scss';
 import ActivityDayItem from "../activity-day-item/activity-day-item";
+import styles from './activity-week-item.module.scss';
 
-export default async function ActivityWeekItem(props: {data?: Array<Activity>, startDate: Date, currentMonth: Date}) {
+export default async function ActivityWeekItem(props: { data?: Array<Activity>, startDate: Date, currentMonth: Date }) {
   return (
     <div>
       <div className={styles.week}>
@@ -12,7 +12,7 @@ export default async function ActivityWeekItem(props: {data?: Array<Activity>, s
             const date = new Date(props.startDate.valueOf())
             date.setDate(date.getDate() + index)
             const dayInCurrentMonth = date.getMonth() == props.currentMonth.getMonth()
-            const currentDayActivities = props.data?.filter(({startTime, endTime}) => {
+            const currentDayActivities = props.data?.filter(({ startTime, endTime }) => {
               const startTimeObj = new Date(startTime)
               const endTimeObj = endTime ? new Date(endTime) : undefined
               return isDateInRange(date, startTimeObj, endTimeObj)

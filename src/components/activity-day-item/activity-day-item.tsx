@@ -46,19 +46,21 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
     )
   }, [])
 
+  const hasMultiActivities = (props.activities?.length && props.activities.length > 1)
+
   return (
-    <div className={`${styles.container}`} ref={props.activities?.length ? emblaRef : undefined} >
+    <div className={`${styles.container}`} ref={hasMultiActivities ? emblaRef : undefined} >
       {
         (!props.activities || !props.activities.length) && (
           <ActivityDayItemStatusBar date={props.date} />
         )
       }
-      <div className={`${props.activities?.length ? styles.embla__container : ''}`} >
+      <div className={`${hasMultiActivities ? styles.embla__container : ''}`} >
         {
           props.activities?.map(activity => {
             const {id, tags} = activity
             return (
-              <div key={id} className={`${props.activities?.length ? styles.embla__slide : ''}`} >
+              <div key={id} className={`${hasMultiActivities ? styles.embla__slide : ''}`} >
                 <Link href={`/activities/${activity.id}`} >
                   <ActivityDayItemStatusBar tags={tags} date={props.date} />
                   {
@@ -71,10 +73,10 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
         }
       </div>
       {
-        (!!props.activities?.length) && (
+        (hasMultiActivities) && (
           <div className={styles.carouselContainer}>
             {
-              props.activities.map((_, index) => {
+              props.activities!.map((_, index) => {
                 return (
                   <div key={index} onClick={() => onDotButtonClick(index)} className={`${ selectedIndex == index ? styles.selected : 'aaa'}`} />
                 )

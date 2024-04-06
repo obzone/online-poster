@@ -9,6 +9,7 @@ import ActivityDate from '../activity-date/activity-date'
 import ActivityImage from '../activity-image/activity-image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { useDotButton } from '@/components/carousel-dot-hooks/carousel-dot-hooks'
 
 interface PureComponentProps {
   style?: CustomCSSProperties
@@ -27,9 +28,9 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
   const [emblaRef, emblaApi] = useEmblaCarousel()
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi)
 
   const {user, error, isLoading} = useUser()
-  console.debug(user, error, isLoading)
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
@@ -84,19 +85,21 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
     )
   }, [selectedFieldLayout, selectedActivity, changedFieldLayout])
 
+  const hasMultiActivities = (props.activities?.length && props.activities.length > 1)
+
   return (
-    <div className={`${styles.container}`} ref={props.activities?.length ? emblaRef : undefined} >
+    <div className={`${styles.container}`} ref={hasMultiActivities ? emblaRef : undefined} >
       {
         (!props.activities || !props.activities.length) && (
           <ActivityDayItemStatusBar date={props.date} />
         )
       }
-      <div className={`${props.activities?.length ? styles.embla__container : ''}`} >
+      <div className={`${hasMultiActivities ? styles.embla__container : ''}`} >
         {
           props.activities?.map(activity => {
             const {id, tags} = activity
             return (
-              <div key={id} className={`${props.activities?.length ? styles.embla__slide : ''}`} >
+              <div key={id} className={`${hasMultiActivities ? styles.embla__slide : ''}`} >
                 <ActivityDayItemStatusBar tags={tags} date={props.date} />
                 {
                   renderActivitiyContent(activity)
@@ -107,6 +110,19 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
         }
         
       </div>
+      {
+        (hasMultiActivities) && (
+          <div className={styles.carouselContainer}>
+            {
+              props.activities!.map((_, index) => {
+                return (
+                  <div key={index} onClick={() => onDotButtonClick(index)} className={`${ selectedIndex == index ? styles.selected : 'aaa'}`} />
+                )
+              })
+            }
+          </div>
+        )
+      }
       {
         isFieldLayoutControlPannelVisible && (
           <DecorationControlPannel key={selectedFieldLayout?.keyExtractor} selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
