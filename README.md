@@ -37,11 +37,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-detail page share
-detail page in socialmedia snap
 administator login
+decoration carousel dot button
 
 padding property
+detail page in socialmedia snap
+detail page share
 dayitem components control & display: visible property
 image optimize gif test
 organization management

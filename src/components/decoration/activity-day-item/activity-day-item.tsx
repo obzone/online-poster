@@ -8,6 +8,7 @@ import { DECORATION_COMPONENT_TYPE_DATE, DECORATION_COMPONENT_TYPE_IMAGE } from 
 import ActivityDate from '../activity-date/activity-date'
 import ActivityImage from '../activity-image/activity-image'
 import useEmblaCarousel from 'embla-carousel-react'
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 interface PureComponentProps {
   style?: CustomCSSProperties
@@ -26,6 +27,9 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   const [selectedFieldLayout, setSelectedFieldLayout] = useState<Decoration>()
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
   const [emblaRef, emblaApi] = useEmblaCarousel()
+
+  const {user, error, isLoading} = useUser()
+  console.debug(user, error, isLoading)
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
