@@ -38,6 +38,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## TODO
 
 detail page
+detail page share
+detail page in socialmedia snap
 administator login
 home page navigation header fix
 
