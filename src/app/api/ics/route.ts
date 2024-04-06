@@ -1,7 +1,7 @@
 import { Activity } from "@/app/actions/calendars";
 import { budibaseFetchMonthActivities } from "@/app/services/calendar";
 import { RouterErrorResponse } from "@/utilities/response";
-import { EventAttributes, convertTimestampToArray, createEvents } from 'ics';
+import { EventAttributes, createEvents } from 'ics';
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
