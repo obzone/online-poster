@@ -17,10 +17,7 @@
 
   & .text {
     text-align: right;
-  
-    @include onTablet {
-      font-weight: bold;
-    }
+    font-weight: bold;
   
     &.onPCHidden {
       @include onPCHidden;
