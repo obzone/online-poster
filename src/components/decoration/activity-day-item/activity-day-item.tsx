@@ -8,7 +8,6 @@ import { DECORATION_COMPONENT_TYPE_DATE, DECORATION_COMPONENT_TYPE_IMAGE } from 
 import ActivityDate from '../activity-date/activity-date'
 import ActivityImage from '../activity-image/activity-image'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useUser } from '@auth0/nextjs-auth0/client';
 import { useDotButton } from '@/components/carousel-dot-hooks/carousel-dot-hooks'
 
 interface PureComponentProps {
@@ -29,8 +28,6 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   const [changedFieldLayout, setChangedFieldLayout] = useState<Decoration>()
   const [emblaRef, emblaApi] = useEmblaCarousel()
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi)
-
-  const {user, error, isLoading} = useUser()
 
   const onNodeClick = useCallback((activity: Activity, node?: Decoration) => {
     setSelectedActivity(activity)
@@ -111,7 +108,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
         
       </div>
       {
-        (hasMultiActivities) && (
+        (!!hasMultiActivities) && (
           <div className={styles.carouselContainer}>
             {
               props.activities!.map((_, index) => {

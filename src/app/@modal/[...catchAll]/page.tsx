@@ -1,3 +1,3 @@
-export default function CatchAll() {
+export default function CatchAll(props: any) {
   return null
 }

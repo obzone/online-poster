@@ -73,7 +73,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
         }
       </div>
       {
-        (hasMultiActivities) && (
+        (!!hasMultiActivities) && (
           <div className={styles.carouselContainer}>
             {
               props.activities!.map((_, index) => {
