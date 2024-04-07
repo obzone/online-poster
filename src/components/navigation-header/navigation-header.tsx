@@ -20,7 +20,9 @@ export default async function NavigationHeader(props: {month: Date}) {
         <div>{`${month}/${year}`}</div>
         
         <div className={styles.oprations} >
-          <div>SUCCI</div>
+          <Link href={`/api/auth/login`} >
+            <div>SUCCI</div>
+          </Link>
           <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}`} >
             <div className="icon-text" >
               <span className="icon has-text-info">

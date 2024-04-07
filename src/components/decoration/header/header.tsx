@@ -8,6 +8,7 @@ import { CSSProperties, MouseEvent, useCallback, useEffect, useMemo, useReducer,
 import DecorationControlPannel, { DecorationComponentCommonProps } from '../control-pannel/control-pannel'
 import styles from './header.module.scss'
 import { MONTH_TEXT } from '@/app/variable'
+import Link from 'next/link'
 
 export default function Header(props: {month: Date}) {
   const [isControlPannelVisible, setControlPannelVisible] = useState(false)
@@ -41,7 +42,9 @@ export default function Header(props: {month: Date}) {
         onClick={onHeaderClick} 
       >
         <div>{`${month}/${year}`}</div>
-        <div>SUCCI</div>
+        <Link href={`/api/auth/login`}>
+          <div>SUCCI</div>
+        </Link>
       </div>
       {
         (isControlPannelVisible && decoration) && (
