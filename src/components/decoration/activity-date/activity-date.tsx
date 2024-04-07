@@ -5,13 +5,10 @@ import { CSSProperties, useCallback, useEffect, useReducer, useState } from "rea
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel";
 import styles from './activity-date.module.scss';
 import { CustomCSSProperties } from "@/app/actions/calendars";
+import moment from "moment";
 
 export default function ActivityDate(props: {style?: CustomCSSProperties, value: [Date]}) {
-  const defaultDateFormate: any = {
-    hour: "numeric",
-    minute: "numeric",
-  }
-  const valueArray = props.value.map((date)=> new Intl.DateTimeFormat("en-US", props.style?.dateFormate || defaultDateFormate).format(new Date(date)) )
+  const valueArray = props.value.map((date)=> moment.utc(date).local().format('hh:mm A') )
   return (
     <div style={props.style} className="activity-date" >
       <p>{valueArray.join('~')}</p>

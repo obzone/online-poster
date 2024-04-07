@@ -66,7 +66,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       {
         activity.layout?.map(nodeLayout => {
           const Comp = ACTIVITY_ITEMS[nodeLayout.type]
-          if (!Comp) return null
+          if (!Comp || !activity[nodeLayout.keyExtractor]) return null
           const isCurrentNodeSelected = selectedFieldLayout?.keyExtractor == nodeLayout.keyExtractor && selectedFieldLayout?.type == nodeLayout.type
           return (
             <div key={`${nodeLayout.keyExtractor}`} className={`${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {

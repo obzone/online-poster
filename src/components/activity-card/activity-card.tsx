@@ -2,6 +2,7 @@ import { Activity } from "@/app/actions/calendars";
 import { faCalendarAlt, faShare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './activity-card.module.scss';
+import moment from "moment";
 
 export default function ActivityCard(props: { activity?: Activity }) {
   const defaultDateFormate: any = {
@@ -14,7 +15,7 @@ export default function ActivityCard(props: { activity?: Activity }) {
         <figure className="image is-4by3">
           <img
             src={props.activity?.post}
-            alt="Placeholder image"
+            alt="PLACEHOLDER"
           />
         </figure>
       </div>
@@ -24,7 +25,7 @@ export default function ActivityCard(props: { activity?: Activity }) {
             <figure className="image is-48x48">
               <img
                 src={props.activity?.favicon}
-                alt="Placeholder image"
+                alt="PLACEHOLDER"
               />
             </figure>
           </div>
@@ -38,9 +39,9 @@ export default function ActivityCard(props: { activity?: Activity }) {
                 props.activity?.startTime ? `${new Date(props.activity.startTime).getFullYear()}-${new Date(props.activity.startTime).getUTCMonth()} ` : null
               }
               {
-                props.activity?.startTime ? ' / ' + new Intl.DateTimeFormat("en-US", defaultDateFormate).format(new Date(props.activity?.startTime!)) : null
+                props.activity?.startTime ? ' / ' + moment.utc(props.activity?.startTime!).local().format('hh:mm A') : null
               }
-              {props.activity?.endTime ? ' ~ ' + new Intl.DateTimeFormat("en-US", defaultDateFormate).format(new Date(props.activity?.endTime!)) : null}
+              {props.activity?.endTime ? ' ~ ' +  moment.utc(props.activity?.endTime!).local().format('hh:mm A') : null}
             </p>
           </div>
         </div>

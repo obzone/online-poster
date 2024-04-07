@@ -17,8 +17,6 @@ export default async function DecorationLayout({ children }: {
     return email == user.email
   })
 
-  console.debug(admistrators, user, currentUserWithAuth)
-
   if (!currentUserWithAuth) return (
     <div className={styles.withoutAccessContainer} >WITHOUT ACCESS PERMISSION</div>
   )

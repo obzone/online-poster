@@ -11,7 +11,7 @@ export default function ActivityImage(props: {style?: CSSProperties, value: any}
         src={props.value}
         width={optimizeWidth}
         height={optimizeHeight}
-        alt="" 
+        alt="PLACEHOLDER" 
       />
     </div>
   )

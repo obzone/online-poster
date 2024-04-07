@@ -34,7 +34,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       {
         activity.layout?.map(nodeLayout => {
           const Comp = ACTIVITY_ITEMS[nodeLayout.type]
-          if (!Comp) return null
+          if (!Comp || !activity[nodeLayout.keyExtractor]) return null
           return (
             <div key={`${activity.id}${nodeLayout.keyExtractor}`} >
               <Comp style={nodeLayout.style} value={activity[nodeLayout.keyExtractor]} />
