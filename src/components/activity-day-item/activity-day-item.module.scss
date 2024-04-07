@@ -3,7 +3,7 @@
 .container {
   height: $minCalendarItemHeight;
   text-align: center;
-  overflow-x: hidden;
+  overflow: hidden;
   border-bottom: 1px solid var(--bulma-dark);
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -21,7 +21,8 @@
   }
 
   & .carouselContainer {
-    margin: auto;
+    position: relative;
+    bottom: 20px;
 
     & > div {
       background-color: var(--bulma-light);
