@@ -36,10 +36,10 @@ export default function ActivityCard(props: { activity?: Activity }) {
             </p>
             <p className="subtitle is-6">
               {
-                props.activity?.startTime ? `${new Date(props.activity.startTime).getFullYear()}-${new Date(props.activity.startTime).getUTCMonth()} ` : null
+                props.activity?.startTime ? `${moment.utc(props.activity.startTime).format('yyyy-MM')}` : null
               }
               {
-                props.activity?.startTime ? ' / ' + moment.utc(props.activity?.startTime!).local().format('hh:mm A') : null
+                props.activity?.startTime ? ' ' + moment.utc(props.activity?.startTime!).local().format('hh:mm A') : null
               }
               {props.activity?.endTime ? ' ~ ' +  moment.utc(props.activity?.endTime!).local().format('hh:mm A') : null}
             </p>
