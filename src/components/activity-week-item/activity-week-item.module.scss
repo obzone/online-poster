@@ -6,7 +6,7 @@
     margin: auto;
     border-right: 1px solid var(--bulma-dark);
     border-left: 1px solid var(--bulma-dark);
-    border-top: 1px solid var(--bulma-dark);
+    border-bottom: 1px solid var(--bulma-dark);
 
     & .day.dayNotInCurrentMonth {
         display: none;
@@ -30,6 +30,10 @@
                 display: unset;
             }
         }
+    }
+
+    @include onTablet {
+        border-top: 1px solid var(--bulma-dark);
     }
 
     @include mobile {

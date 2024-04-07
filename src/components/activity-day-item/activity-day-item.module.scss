@@ -4,7 +4,8 @@
   height: $minCalendarItemHeight;
   text-align: center;
   overflow: hidden;
-  border-bottom: 1px solid var(--bulma-dark);
+  position: relative;
+  
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
@@ -15,14 +16,19 @@
       flex: 0 0 100%;
     }
   }
+
+  @include onTablet {
+    border-bottom: 1px solid var(--bulma-dark);
+  }
   
   @include onPC {
     width: $minCalendarItemWidth;
   }
 
   & .carouselContainer {
-    position: relative;
-    bottom: 20px;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
 
     & > div {
       background-color: var(--bulma-light);
