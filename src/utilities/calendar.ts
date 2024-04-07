@@ -5,10 +5,11 @@ export const defaultActivityLayout: Decoration[] = [{
   keyExtractor: 'favicon',
   displayOrder: 1,
   style: {
-    height: '100px',
+    paddingLeft: '8px',
+    paddingRight: '8px',
     overflow: 'hidden',
     maxWidth: '200px',
-    margin: 'auto'
+    margin: 'auto',
   }
 }, {
   type: 'activity-text',
@@ -17,6 +18,8 @@ export const defaultActivityLayout: Decoration[] = [{
   style: {
     marginTop: '6px',
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: '20px'
   }
 }, {
   type: 'activity-text',
@@ -33,6 +36,7 @@ export const defaultActivityLayout: Decoration[] = [{
   style: {
     marginTop: '6px',
     textAlign: 'center',
+    fontWeight: 'bold'
   }
 }, {
   type: 'activity-text',
@@ -41,6 +45,7 @@ export const defaultActivityLayout: Decoration[] = [{
   style: {
     marginTop: '6px',
     textAlign: 'center',
+    fontWeight: 'bold'
   }
 }, {
   type: 'activity-text',
