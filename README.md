@@ -37,8 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-administator login
-decoration carousel dot button
+on mobile, attach web to desktop
 
 padding property
 detail page in socialmedia snap
