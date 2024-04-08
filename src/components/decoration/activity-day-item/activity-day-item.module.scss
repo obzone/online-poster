@@ -7,7 +7,7 @@
 .container {
   height: $minCalendarItemHeight;
   text-align: center;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
   
   & > .embla__container {

@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: 'succi-posts.s3.us-east-1.amazonaws.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'succi-posts.s3.amazonaws.com',
+        port: '',
+      },
     ],
   },
 };
