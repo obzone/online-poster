@@ -14,7 +14,7 @@ export default async function DecorationLayout({ children }: {
 
   const admistrators = await getAllAdministrators()
   const currentUserWithAuth = admistrators?.find(({email}: {email: string}) => {
-    return email == user.email
+    return email == user?.email
   })
 
   if (!currentUserWithAuth) return (
