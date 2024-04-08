@@ -2,7 +2,7 @@
 
 import { CSSProperties } from "react"
 import { budibaseFetchActivityById, budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { env } from "process"
 
 export interface Activity {
@@ -45,7 +45,7 @@ export async function getAllActivities(date: Date): Promise<Array<Activity>> {
 
 export async function upsertLayout(layout: Decoration) {
   await budibaseUpsertLayout(layout)
-  revalidatePath(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`)
+  revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`)
 }
 
 export async function getActivityById(id: string) {

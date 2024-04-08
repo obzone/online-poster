@@ -16,7 +16,7 @@ export async function budibaseFetch(url: string, init: RequestInit) {
       ...headers,
     },
     body,
-    next: { revalidate: 3600 }
+    next: { revalidate: 3600, tags: [url] }
   },)
   if (response.status != 200) throw new Error(response.statusText)
   return response
