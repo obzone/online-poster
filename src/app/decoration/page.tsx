@@ -9,7 +9,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Activity, Decoration, getAllActivities, getMonthGlobalStyle, upsertLayout } from "../actions/calendars";
 import styles from './page.module.scss';
 
-export default function Decoration(props: {date: Date}) {
+export default function Decoration() {
   const [data, setData] = useState<Activity[]>()
   const [decoration, setDecoration] = useState<Decoration>()
   const [changedDecoration, setChangedDecoration] = useState<Decoration>()
@@ -17,7 +17,7 @@ export default function Decoration(props: {date: Date}) {
   useEffect(() => {
     getMonthGlobalStyle(new Date()).then(decoration => setDecoration(decoration))
     getAllActivities(new Date()).then(data => setData(data))
-  }, [props.date])
+  }, [])
 
   const onDecorateControlCancelClick = useCallback(() => {}, [])
   const onDecorateControlConfirmClick = useCallback(async () => {
@@ -30,14 +30,14 @@ export default function Decoration(props: {date: Date}) {
   }, [changedDecoration, decoration])
 
   const weeksStartDates = useMemo(() => {
-    const calendarStartDate = _calendarStartDate(props.date)
-    const neededWeeks = weeksNumberIncludedInMonth(props.date)
+    const calendarStartDate = _calendarStartDate()
+    const neededWeeks = weeksNumberIncludedInMonth()
     return new Array(neededWeeks).fill(0).map((_, index) => {
       const date = new Date(calendarStartDate.valueOf())
       date.setDate(date.getDate() + 7 * index)
       return date
     })
-  }, [props.date])
+  }, [])
 
   return (
     <>
@@ -72,7 +72,7 @@ export default function Decoration(props: {date: Date}) {
           {
             weeksStartDates.map((startDate) => (
               <div key={`${startDate}`} >
-                <ActivityWeekItem data={data} startDate={startDate} currentMonth={props.date || new Date()} />
+                <ActivityWeekItem data={data} startDate={startDate} currentMonth={new Date()} />
               </div>
             ))
           }

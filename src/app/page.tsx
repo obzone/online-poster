@@ -5,11 +5,11 @@ import WeekDayHeader from "@/components/week-day-header/week-day-header";
 import ActivityWeekItem from "@/components/activity-week-item/activity-week-item";
 import NavigationHeader from "@/components/navigation-header/navigation-header";
 
-export default async function Home(props: {date: Date}) {
+export default async function Home() {
 
   const [decoration, data] = await Promise.all([getMonthGlobalStyle(new Date()), getAllActivities(new Date())])
-  const calendarStartDate = _calendarStartDate(props.date)
-  const neededWeeks = weeksNumberIncludedInMonth(props.date)
+  const calendarStartDate = _calendarStartDate()
+  const neededWeeks = weeksNumberIncludedInMonth()
   const weeksStartDates = new Array(neededWeeks).fill(0).map((_, index) => {
     const date = new Date(calendarStartDate.valueOf())
     date.setDate(date.getDate() + 7 * index)
@@ -38,7 +38,7 @@ export default async function Home(props: {date: Date}) {
           {
             weeksStartDates.map((startDate) => (
               <div key={`${startDate}`} >
-                <ActivityWeekItem data={data} startDate={startDate} currentMonth={props.date || new Date()} />
+                <ActivityWeekItem data={data} startDate={startDate} currentMonth={new Date()} />
               </div>
             ))
           }
