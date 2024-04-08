@@ -5,10 +5,6 @@ import styles from './activity-card.module.scss';
 import moment from "moment";
 
 export default function ActivityCard(props: { activity?: Activity }) {
-  const defaultDateFormate: any = {
-    hour: "numeric",
-    minute: "numeric",
-  }
   return (
     <div className={`card ${styles.container}`}>
       <div className="card-image">
