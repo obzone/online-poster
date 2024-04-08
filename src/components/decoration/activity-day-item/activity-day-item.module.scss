@@ -8,7 +8,7 @@
   height: $minCalendarItemHeight;
   text-align: center;
   overflow-x: hidden;
-  border-bottom: 1px solid var(--bulma-dark);
+  position: relative;
   
   & > .embla__container {
     display: flex;
@@ -21,8 +21,14 @@
     width: $minCalendarItemWidth;
   }
 
+  @include onTablet {
+    border-bottom: 1px solid var(--bulma-dark);
+  }
+
   & .carouselContainer {
-    margin: auto;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
 
     & > div {
       background-color: var(--bulma-light);
