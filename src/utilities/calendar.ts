@@ -5,10 +5,9 @@ export const defaultActivityLayout: Decoration[] = [{
   keyExtractor: 'favicon',
   displayOrder: 1,
   style: {
-    marginLeft: '8px',
-    marginRight: '8px',
     overflow: 'hidden',
     maxWidth: '200px',
+    margin: 'auto',
   }
 }, {
   type: 'activity-text',
