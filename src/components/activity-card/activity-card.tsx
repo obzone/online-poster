@@ -3,15 +3,18 @@ import { faCalendarAlt, faShare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './activity-card.module.scss';
 import moment from "moment";
+import Image from "next/image";
 
 export default function ActivityCard(props: { activity?: Activity }) {
   return (
     <div className={`card ${styles.container}`}>
       <div className="card-image">
         <figure className="image is-4by3">
-          <img
-            src={props.activity?.post}
+          <Image 
+            src={props.activity?.post || 'https://succi-posts.s3.us-east-1.amazonaws.com/activities_6_post'}
             alt="PLACEHOLDER"
+            width={640}
+            height={480}
           />
         </figure>
       </div>
@@ -19,9 +22,11 @@ export default function ActivityCard(props: { activity?: Activity }) {
         <div className="media">
           <div className="media-left">
             <figure className="image is-48x48">
-              <img
-                src={props.activity?.favicon}
+              <Image
+                src={props.activity?.favicon || 'https://succi-posts.s3.amazonaws.com/activities_3_favicon'}
                 alt="PLACEHOLDER"
+                width={48}
+                height={48}
               />
             </figure>
           </div>
