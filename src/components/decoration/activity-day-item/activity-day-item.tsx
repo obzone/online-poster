@@ -122,7 +122,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       }
       {
         isFieldLayoutControlPannelVisible && (
-          <DecorationControlPannel key={selectedFieldLayout?.keyExtractor} selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
+          <DecorationControlPannel key={`${selectedActivity?.id}_${selectedFieldLayout?.keyExtractor}`} selectedActivity={selectedActivity} selectedFieldLayout={selectedFieldLayout!} onChange={(layout) => setChangedFieldLayout(layout)} onConfirmClick={onDecorateNodeConfirmClick} onCancelClick={onDecorateNodeCancelClick} />
         )
       }
     </div>
