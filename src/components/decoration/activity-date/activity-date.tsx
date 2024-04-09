@@ -61,7 +61,7 @@ export function ActivityDateDecorationComponent(props: DecorationComponentCommon
       </div>
       <div>
         <p>Font Color</p>
-        <input onChange={e => dispatch({payload: {color: e.target.value}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
+        <input onChange={e => dispatch({payload: {color: e.target.value}})} className="input" type="text" defaultValue={state.color} placeholder="e.g. #FFFFFF" />
       </div>
       <div>
         <p>Alignment</p>
@@ -82,11 +82,11 @@ export function ActivityDateDecorationComponent(props: DecorationComponentCommon
       </div>
       <div>
         <p>BackgroundColor</p>
-        <input onChange={e => dispatch({payload: {backgroundColor: `${e.target.value}`}})} className="input" type="text" placeholder="e.g. #FFFFFF" />
+        <input onChange={e => dispatch({payload: {backgroundColor: `${e.target.value}`}})} className="input" type="text" defaultValue={state.backgroundColor} placeholder="e.g. #FFFFFF" />
       </div>
       <div>
         <p>BorderRadius</p>
-        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" placeholder="e.g. 9" />
+        <input onChange={e => dispatch({payload: {borderRadius: `${e.target.value}px`}})} className="input" type="text" defaultValue={state.borderRadius} placeholder="e.g. 9" />
       </div>
     </div>
   )
