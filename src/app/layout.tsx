@@ -4,6 +4,7 @@ import "./globals.scss";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import React from "react";
+import { GoogleAnalytics } from '@next/third-parties/google'
 config.autoAddCss = false
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <GoogleAnalytics gaId="G-0VCBG68JFZ" />
         {children}
         {modal}
       </body>
