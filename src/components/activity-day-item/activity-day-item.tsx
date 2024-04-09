@@ -60,7 +60,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
           props.activities?.map(activity => {
             const {id, tags} = activity
             return (
-              <div key={id} className={`${hasMultiActivities ? styles.embla__slide : ''}`} >
+              <div key={id} id={id} className={`${hasMultiActivities ? styles.embla__slide : ''}`} >
                 <Link href={`/activities/${activity.id}`} >
                   <ActivityDayItemStatusBar tags={tags} date={props.date} />
                   {

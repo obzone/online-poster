@@ -37,9 +37,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-on mobile, attach web to desktop
+on mobile use # to location
 
-padding property
 detail page in socialmedia snap
 detail page share
 dayitem components control & display: visible property
@@ -51,3 +50,4 @@ dateitemstatusbar status indicator (processing, finished)
 anchor for mobile page
 for premium user, can subscribe more than 100 activities
 QRCode for subscribe
+padding property
