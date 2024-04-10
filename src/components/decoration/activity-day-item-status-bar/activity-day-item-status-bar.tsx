@@ -19,7 +19,7 @@ export default function ActivityDayItemStatusBar(props: { date: Date, tags?: str
       <div className={styles.tagContainer} >
         {
           tagObjects?.map(tag => (
-            <span className='tag icon' key={tag} >
+            <span className='tag icon' style={{fontWeight: 'bold'}} key={tag} >
               {
                 TagMap[tag] ? (
                   <FontAwesomeIcon icon={TagMap[tag]} />
