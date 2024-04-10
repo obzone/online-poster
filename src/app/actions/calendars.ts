@@ -18,7 +18,7 @@ export interface Activity {
   updatedAt?: Date
   spot: string
   target?: string
-  tags?: Array<string>
+  tags?: string
   layout: Array<Decoration>
   [key: string]: any
 }
