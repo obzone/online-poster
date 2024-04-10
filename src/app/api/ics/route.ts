@@ -2,6 +2,7 @@ import { Activity } from "@/app/actions/calendars";
 import { budibaseFetchMonthActivities } from "@/app/services/calendar";
 import { RouterErrorResponse } from "@/utilities/response";
 import { EventAttributes, createEvents } from 'ics';
+import moment from "moment";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -14,9 +15,9 @@ export async function GET(request: NextRequest) {
     if (!data || !data.length) throw new Error('NO Event Found', { cause: 400 })
     const events = (data as Activity[]).map<EventAttributes>((activity) => {
       return {
-        start: new Date(activity.startTime).getTime(),
+        start: moment.utc(activity.startTime).local().valueOf(),
         startInputType: 'utc',
-        end: activity.endTime ? new Date(activity.endTime).getTime() : new Date(activity.startTime).getTime(),
+        end: activity.endTime ? moment.utc(activity.endTime).local().valueOf() : moment.utc(activity.startTime).local().valueOf(),
         endInputType: 'utc',
         title: activity.title,
         description: activity.subject,

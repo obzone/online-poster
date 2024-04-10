@@ -65,3 +65,7 @@ export function sortActivityLayout(activity: Activity) {
   .sort((previous, current) => previous.displayOrder! - current.displayOrder!)
   return activity
 }
+
+export function sortDateActivity(date: Date, activities: Activity[]) {
+
+}

@@ -40,6 +40,7 @@ export interface Decoration {
 
 export async function getAllActivities(date: Date): Promise<Array<Activity>> {
   const activities = await budibaseFetchMonthActivitiesWithLayout(date)
+  console.debug(activities)
   return activities
 }
 
