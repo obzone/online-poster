@@ -37,7 +37,7 @@ export default function ActivityCard(props: { activity?: Activity }) {
             </p>
             <p className="subtitle is-6">
               {
-                props.activity?.startTime ? `${moment.utc(props.activity.startTime).format('yyyy-MM')}` : null
+                props.activity?.startTime ? `${moment.utc(props.activity.startTime).format('yyyy-MM-DD')}` : null
               }
               {
                 props.activity?.startTime ? ' ' + moment.utc(props.activity?.startTime!).local().format('hh:mm A') : null

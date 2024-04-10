@@ -37,12 +37,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-on mobile use # to location
-
 detail page in socialmedia snap
 detail page share
 dayitem components control & display: visible property
-image optimize gif test
 organization management
 attach tag to activities
 backgroundimage optimize with nextjs->Image

@@ -1,14 +1,28 @@
 import { MouseEventHandler } from 'react'
 import styles from './activity-day-item-status-bar.module.scss'
 import { WEEKS } from '@/app/variable'
+import { faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-export default function ActivityDayItemStatusBar(props: { date: Date, tags?: Array<string>, onClick?: MouseEventHandler }) {
+const TagMap: {[key: string]: IconProp} = {
+  'food': faHamburger
+}
+
+export default function ActivityDayItemStatusBar(props: { date: Date, tags?: string, onClick?: MouseEventHandler }) {
+  const tagObjects = props.tags?.split(',')
   return (
     <div className={styles.statusBarContainer} onClick={props.onClick} >
       <div className={styles.tagContainer} >
         {
-          props.tags?.map(tag => (
-            <span className='tag' key={tag} >{tag}</span>
+          tagObjects?.map(tag => (
+            <span className='tag icon' key={tag} >
+              {
+                TagMap[tag] ? (
+                  <FontAwesomeIcon icon={TagMap[tag]} />
+                ) : tag
+              }
+            </span>
           ))
         }
       </div>
