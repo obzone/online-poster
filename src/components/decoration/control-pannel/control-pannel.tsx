@@ -42,7 +42,7 @@ export default function DecorationControlPannel(props: ControlPannelProps) {
     return () => {
       if (decorationComponentStack.length > 1) decorationComponentStack.pop()!()
     }
-  }, [])
+  }, [props.onCancelClick])
 
   return (
     <div className={styles.container} >

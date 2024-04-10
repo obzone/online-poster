@@ -40,7 +40,7 @@ export function ActivityImageDecorationComponent(props: DecorationComponentCommo
       ...props.fieldLayout,
       style: state
     })
-  }, [state])
+  }, [state, props.fieldLayout])
 
   return (
     <div className={styles.itemContainer} >

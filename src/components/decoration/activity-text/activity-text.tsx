@@ -41,7 +41,7 @@ export function ActivityTextDecorationComponent(props: DecorationComponentCommon
       ...props.fieldLayout,
       style: state
     })
-  }, [state])
+  }, [state, props.fieldLayout])
 
   return (
     <div className={styles.itemContainer} >

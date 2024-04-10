@@ -80,7 +80,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
       }
       </>
     )
-  }, [selectedFieldLayout, selectedActivity, changedFieldLayout])
+  }, [selectedFieldLayout, selectedActivity, changedFieldLayout, onNodeClick])
 
   const hasMultiActivities = (props.activities?.length && props.activities.length > 1)
 

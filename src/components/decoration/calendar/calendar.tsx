@@ -52,7 +52,7 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
       ...props.fieldLayout,
       style: state
     })
-  }, [state])
+  }, [state, props.fieldLayout])
 
   return (
     <div className={styles.itemContainer} >
