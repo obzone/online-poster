@@ -140,7 +140,7 @@ function reducer(state: CSSProperties, action: {type?: string, payload: CSSPrope
   }
 }
 
-// provide field order and operation functions
+// TODO provide field order and operation functions
 export function DayItemDecorationComponent(props: DecorationComponentCommonProps) {
 
   const [state, dispatch] = useReducer<typeof reducer>(reducer, props.fieldLayout.style || {})

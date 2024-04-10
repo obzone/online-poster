@@ -9,7 +9,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Activity, Decoration, getAllActivities, getMonthGlobalStyle, upsertLayout } from "../actions/calendars";
 import styles from './page.module.scss';
 
-export default function Decoration() {
+export default function DecorationPage() {
   const [data, setData] = useState<Activity[]>()
   const [decoration, setDecoration] = useState<Decoration>()
   const [changedDecoration, setChangedDecoration] = useState<Decoration>()

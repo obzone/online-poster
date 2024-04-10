@@ -27,7 +27,7 @@ export default function ActivityWeekItem(props: { data?: Array<Activity>, startD
               }
             })
             return (
-              <div className={`${styles.day} ${dayInCurrentMonth ? "" : styles.dayNotInCurrentMonth}`} key={index} >
+              <div className={`${styles.day} ${dayInCurrentMonth ? "" : styles.dayNotInCurrentMonth}`} key={`${props.startDate}${index}`} >
                 <ActivityDayItem activities={dateActivities} date={date} />
               </div>
             )
