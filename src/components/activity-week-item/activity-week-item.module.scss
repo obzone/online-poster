@@ -37,6 +37,6 @@
     }
 
     @include mobile {
-        max-width: calc(100% - 24px);
+        max-width: calc(100% * 2 / 3);
     }
 }
