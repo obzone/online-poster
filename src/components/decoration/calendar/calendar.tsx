@@ -55,8 +55,6 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
     })
   }, [state, props.fieldLayout])
 
-  console.debug(state)
-
   return (
     <div className={styles.itemContainer} >
       <h1>Global setting</h1>
