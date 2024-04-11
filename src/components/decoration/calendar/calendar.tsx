@@ -6,6 +6,7 @@ import FileUpload from "@/components/file-upload/file-upload"
 import { useCallback, useEffect, useReducer } from "react"
 import { DecorationComponentCommonProps } from "../control-pannel/control-pannel"
 import styles from './calendar.module.scss'
+import Image from "next/image"
 
 function reducer(state: CustomCSSProperties, action: {type?: string, payload: CustomCSSProperties}): CustomCSSProperties {
   switch (action.type) {
@@ -54,6 +55,8 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
     })
   }, [state, props.fieldLayout])
 
+  console.debug(state)
+
   return (
     <div className={styles.itemContainer} >
       <h1>Global setting</h1>
@@ -72,11 +75,47 @@ export function MonthGlobalSetting(props: DecorationComponentCommonProps) {
       </div>
       <div>
         <p>BackgroundImage Light</p>
-        <FileUpload onChange={e => onBackgroundImageLightSelect(e.target.files)} />
+        {
+          state.backgroundImageLight ? (
+            <div className={styles.imageContainer} >
+              <Image
+                src={state.backgroundImageLight}
+                objectFit='contain'
+                width={100}
+                height={100}
+                alt="PLACEHOLDER" 
+              />
+              <button 
+                className={`${styles.deleteButton} delete`}
+                onClick={() => dispatch({payload: {backgroundImageLight: undefined}})}
+              ></button>
+            </div>
+          ) : (
+            <FileUpload onChange={e => onBackgroundImageLightSelect(e.target.files)} />
+          )
+        }
       </div>
       <div>
         <p>BackgroundImage Dark</p>
-        <FileUpload onChange={e => onBackgroundImageDarkSelect(e.target.files)} />
+        {
+          state.backgroundImageDark ? (
+            <div className={styles.imageContainer} >
+              <Image
+                src={state.backgroundImageDark}
+                objectFit='contain'
+                width={100}
+                height={100}
+                alt="PLACEHOLDER" 
+              />
+              <button 
+                className={`${styles.deleteButton} delete`}
+                onClick={() => dispatch({payload: {backgroundImageDark: undefined}})}
+              ></button>
+            </div>
+          ) : (
+            <FileUpload onChange={e => onBackgroundImageDarkSelect(e.target.files)} />
+          )
+        }
       </div>
     </div>
   )

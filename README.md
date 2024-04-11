@@ -37,14 +37,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
+loading for promise
 detail page in socialmedia snap
 detail page share
 dayitem components control & display: visible property
 organization management
-attach tag to activities
 backgroundimage optimize with nextjs->Image
 dateitemstatusbar status indicator (processing, finished)
-anchor for mobile page
 for premium user, can subscribe more than 100 activities
-QRCode for subscribe
+QRCode for subscribe, display links when hover on download button
 padding property
+stability on continute editting

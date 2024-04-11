@@ -2,14 +2,10 @@
 @forward '../activity-text/activity-text.module.scss';
 @import '@/app/variable.module.scss';
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0px 12px;
-
-  & > div {
-    font-size: 40px;
-    font-weight: bold;
+.imageContainer {
+  & > .deleteButton {
+    position: absolute;
+    right: 20px;
+    margin-top: 8px;
   }
 }
