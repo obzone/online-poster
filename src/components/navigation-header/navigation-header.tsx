@@ -1,11 +1,11 @@
 import { getHeaderStyle } from '@/app/actions/calendars';
 import { MONTH_TEXT } from '@/app/variable';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from 'next/link';
 import styles from './navigation-header.module.scss';
 
-export default async function NavigationHeader(props: {month: Date}) {
+export default async function NavigationHeader(props: {month: Date, displayBackButton?: boolean}) {
   const year = props.month.getFullYear()
   const month = MONTH_TEXT[props.month.getMonth()]
 
@@ -17,8 +17,18 @@ export default async function NavigationHeader(props: {month: Date}) {
         style={decoration?.style} 
         className={`${styles.container}`} 
       >
-        <div>{`${month}/${year}`}</div>
-        
+        <div>
+          {
+            props.displayBackButton && (
+              <Link href={'/'} style={{marginRight: '10px', verticalAlign: 'middle'}} >
+                <span className="icon">
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </span>
+              </Link>
+            )
+          }
+          {`${month}/${year}`}
+        </div>
         <div className={styles.oprations} >
           <Link href={`/api/auth/login`} >
             <div>SUCCI</div>

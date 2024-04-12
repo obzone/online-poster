@@ -7,7 +7,7 @@ export default function ActivityLayout({
 }) {
   return (
     <div>
-      <NavigationHeader month={new Date()} />
+      <NavigationHeader displayBackButton={true} month={new Date()} />
       {children}
     </div>
   )
