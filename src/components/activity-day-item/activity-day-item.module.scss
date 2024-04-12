@@ -1,4 +1,5 @@
 @import '@/app/variable.module.scss';
+@import 'bulma/sass/utilities/mixins.scss';
 
 .container {
   height: $minCalendarItemHeight;
@@ -19,6 +20,15 @@
 
   @include onTablet {
     border-bottom: 1px solid var(--bulma-dark);
+    &.withoutActivity {
+      height: unset;
+    }
+  }
+
+  @include onMobile {
+    &.withoutActivity {
+      height: unset;
+    }
   }
   
   @include onPC {

@@ -49,7 +49,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
   const hasMultiActivities = (props.activities?.length && props.activities.length > 1)
 
   return (
-    <div className={`${styles.container}`} ref={hasMultiActivities ? emblaRef : undefined} >
+    <div className={`${styles.container} ${props.activities?.length ? '' : styles.withoutActivity}`} ref={hasMultiActivities ? emblaRef : undefined} >
       {
         (!props.activities || !props.activities.length) && (
           <ActivityDayItemStatusBar date={props.date} />

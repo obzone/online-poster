@@ -38,5 +38,6 @@
 
     @include mobile {
         max-width: calc(100% - 130px);
+        border-bottom: unset;
     }
 }
