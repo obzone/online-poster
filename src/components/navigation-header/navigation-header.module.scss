@@ -22,6 +22,11 @@
     align-items: flex-end;
   }
   
+  @media print {
+    max-width: calc($minCalendarItemPrintWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
+    margin: auto;
+  }
+
   @include onPC {
       max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
       margin: auto;

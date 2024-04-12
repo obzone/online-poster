@@ -13,6 +13,24 @@
         padding: unset;
         margin: unset;
     }
+
+    @media print {
+        max-width: calc($minCalendarItemPrintWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
+        margin: auto;
+        flex-direction: row;
+        display: flex;
+
+        & .day {
+            &:not(:last-child) {
+                max-width: $minCalendarItemPrintWidth; // box-sizing: border-box; only works under fixed width
+                border-right: 1px solid var(--bulma-dark);
+            }
+
+            &.dayNotInCurrentMonth {
+                display: unset;
+            }
+        }
+    }
     
     @include onPC {
         max-width: calc($minCalendarItemWidth * 7 + 2px); // 2px for side border width because of box-sizing: border-box will shrink current box size;
