@@ -7,6 +7,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const TagMap: {[key: string]: IconProp} = {
   'food': faHamburger,
+  'gaming': faGamepad,
   'female': faFemale,
   'male': faMale,
   'child': faChild

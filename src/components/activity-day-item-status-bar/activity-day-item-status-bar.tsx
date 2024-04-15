@@ -1,12 +1,16 @@
 import { MouseEventHandler } from 'react'
 import styles from './activity-day-item-status-bar.module.scss'
 import { WEEKS } from '@/app/variable'
-import { faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { faChild, faFemale, faGamepad, faHamburger, faMale } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const TagMap: {[key: string]: IconProp} = {
-  'food': faHamburger
+  'food': faHamburger,
+  'gaming': faGamepad,
+  'female': faFemale,
+  'male': faMale,
+  'child': faChild
 }
 
 export default function ActivityDayItemStatusBar(props: { date: Date, tags?: string, onClick?: MouseEventHandler }) {
