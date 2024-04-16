@@ -30,7 +30,7 @@ export async function generateMetadata(
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
-  const time = `${activity?.startTime ? moment.utc(activity?.startTime!).local().format('hh:mm A') : null} ${activity?.endTime ? ' ~ ' +  moment.utc(activity?.endTime!).local().format('hh:mm A') : null} ${activity?.startTime ? moment.utc(activity.startTime).format('yyyy-MM-DD') : null }`
+  const time = `${activity?.startTime ? moment.utc(activity?.startTime!).local().format('hh:mm A') : null} ${activity?.endTime ? ' ~ ' +  moment.utc(activity?.endTime!).local().format('hh:mm A') : null} ${activity?.startTime ? '' + moment.utc(activity.startTime).format('yyyy-MM-DD') : null }`
  
   return {
     title: activity.title,
