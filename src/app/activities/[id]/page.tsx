@@ -34,7 +34,7 @@ export async function generateMetadata(
  
   return {
     title: activity.title,
-    description: `${activity.spot} ${time}`,
+    description: `${activity.spot} ${'\n'} ${time}`,
     openGraph: {
       images: [activity.post || activity.favicon || '', ...previousImages],
     },
