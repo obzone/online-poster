@@ -49,7 +49,7 @@ export async function upsertLayout(layout: Decoration) {
   revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_LAYOUT}/rows/search`)
 }
 
-export async function getActivityById(id: string) {
+export async function getActivityById(id: string): Promise<Activity> {
   const budibaseId = encodeURIComponent(JSON.stringify([id]))
   return budibaseFetchActivityById(budibaseId)
 }
