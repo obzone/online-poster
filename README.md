@@ -39,6 +39,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 support organization
 start from another organization
+fixed header for mobile
+ssl for nextjs
 
 add national holidy
 dirty data
