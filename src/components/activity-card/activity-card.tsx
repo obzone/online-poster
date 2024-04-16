@@ -11,7 +11,7 @@ export default function ActivityCard(props: { activity?: Activity }) {
       <div className="card-image">
         <figure className="image is-4by3">
           <Image 
-            src={props.activity?.post || 'https://succi-posts.s3.us-east-1.amazonaws.com/activities_6_post'}
+            src={props.activity?.post || 'https://succi-posts.s3.amazonaws.com/istockphoto-1396814518-612x612.jpg'}
             alt="PLACEHOLDER"
             width={640}
             height={480}
@@ -23,7 +23,7 @@ export default function ActivityCard(props: { activity?: Activity }) {
           <div className="media-left">
             <figure className="image is-48x48">
               <Image
-                src={props.activity?.favicon || 'https://succi-posts.s3.amazonaws.com/activities_3_favicon'}
+                src={props.activity?.favicon || 'https://succi-posts.s3.amazonaws.com/istockphoto-1396814518-612x612.jpg'}
                 alt="PLACEHOLDER"
                 width={48}
                 height={48}
