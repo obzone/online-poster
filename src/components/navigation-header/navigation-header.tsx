@@ -1,6 +1,6 @@
 import { getAllOrganizations, getHeaderStyle } from '@/app/actions/calendars';
 import { MONTH_TEXT } from '@/app/variable';
-import { faArrowLeft, faCalendarAlt, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCalendarAlt, faFilter, faSchool } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import styles from './navigation-header.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,6 @@ export default async function NavigationHeader(props: { month: Date, displayBack
   const decoration = await getHeaderStyle(props.month)
   const organizations = await getAllOrganizations()
   const selectedOrganization = organizations.find(org => org.id == props.defaultValue)
-  console.debug(selectedOrganization)
 
   return (
     <>
@@ -36,7 +35,7 @@ export default async function NavigationHeader(props: { month: Date, displayBack
           <div className="dropdown is-hoverable is-right">
             <div className="dropdown-trigger">
               <span className="icon has-text-info">
-                <FontAwesomeIcon icon={faFilter} /> 
+                <FontAwesomeIcon icon={ !!selectedOrganization ? faSchool : faFilter} /> 
               </span>
               <span>{selectedOrganization?.name || 'Filter'}</span>
             </div>
@@ -45,7 +44,7 @@ export default async function NavigationHeader(props: { month: Date, displayBack
                 {
                   organizations.map(organization => {
                     return (
-                      <Link key={organization.id} className='dropdown-item' href={`/?orgId=${organization.id}`} >
+                      <Link key={organization.id} className={`dropdown-item ${selectedOrganization?.id == organization.id ? 'is-active' : ''}`} href={`/?orgId=${organization.id}`} >
                         <div>{organization.name}</div>
                       </Link>
                     )
@@ -54,7 +53,6 @@ export default async function NavigationHeader(props: { month: Date, displayBack
               </div>
             </div>
           </div>
-
           <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth() + 1}`} >
             <div className="icon-text" >
               <span className="icon has-text-info">
