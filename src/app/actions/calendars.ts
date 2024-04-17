@@ -1,7 +1,7 @@
 'use server'
 
 import { CSSProperties } from "react"
-import { budibaseFetchActivityById, budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
+import { budibaseFetchActivityById, budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseFetchOrganizations, budibaseUpsertLayout } from "../services/calendar"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { env } from "process"
 
@@ -38,8 +38,13 @@ export interface Decoration {
   activityId?: string
 }
 
-export async function getAllActivities(date: Date): Promise<Array<Activity>> {
-  const activities = await budibaseFetchMonthActivitiesWithLayout(date)
+export interface Organization {
+  id: string
+  name: string
+}
+
+export async function getAllActivities(date: Date, orgId?: string): Promise<Array<Activity>> {
+  const activities = await budibaseFetchMonthActivitiesWithLayout(date, orgId)
   return activities
 }
 
@@ -63,4 +68,8 @@ export async function getMonthGlobalStyle(date: Date): Promise<Decoration> {
 }
 
 export async function downLoadMonthCalendar(date: Date) {
+}
+
+export async function getAllOrganizations(): Promise<Organization[]> {
+  return budibaseFetchOrganizations()
 }

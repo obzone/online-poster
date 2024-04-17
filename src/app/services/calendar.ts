@@ -16,7 +16,7 @@ export async function budibaseFetch(url: string, init: RequestInit) {
       ...headers,
     },
     body,
-    next: { tags: [url] }
+    next: { tags: [url] },
   },)
   if (response.status != 200) throw new Error(response.statusText)
   return response
@@ -59,13 +59,14 @@ export async function budibaseFetchMonthActivities(date: Date) {
   })
 }
 
-export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
+export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId?: string) {
   const startTime = monthStartDate(date)
   const endTime = monthEndDate(date)
   const queryBody: any = {
     parameters: {
       startTime,
-      endTime
+      endTime,
+      orgId
     }
   }
   const response = await budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`, {
@@ -161,6 +162,35 @@ export async function budibaseFetchMonthHeaderLayout(date=new Date()) {
 export async function budibaseFetchActivityById(id: string) {
   const response = await budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/${id}`, {
     method: 'GET'
+  })
+  const {data} = await response.json()
+  return data
+}
+
+export async function budibaseFetchOrganizations() {
+  const requetBody: any = JSON.stringify({
+    "query": {
+      "string": {},
+      "fuzzy": {},
+      "range": {},
+      "equal": {},
+      "notEqual": {},
+      "empty": {},
+      "notEmpty": {},
+      "oneOf": {}
+    },
+    "paginate": false,
+    "bookmark": null,
+    "limit": 10,
+    "sort": {
+      "order": "descending",
+      "column": "createdAt",
+      "type": "string"
+    }
+  })
+  const response = await budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_ORGANIZATION}/rows/search`, {
+    method: 'POST',
+    body: requetBody
   })
   const {data} = await response.json()
   return data

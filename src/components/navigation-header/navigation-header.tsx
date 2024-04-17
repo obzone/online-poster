@@ -1,26 +1,27 @@
-import { getHeaderStyle } from '@/app/actions/calendars';
+import { getAllOrganizations, getHeaderStyle } from '@/app/actions/calendars';
 import { MONTH_TEXT } from '@/app/variable';
-import { faArrowLeft, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faCalendarAlt, faFilter } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import styles from './navigation-header.module.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default async function NavigationHeader(props: {month: Date, displayBackButton?: boolean}) {
+export default async function NavigationHeader(props: { month: Date, displayBackButton?: boolean }) {
   const year = props.month.getFullYear()
   const month = MONTH_TEXT[props.month.getMonth()]
 
   const decoration = await getHeaderStyle(props.month)
+  const organizations = await getAllOrganizations()
 
   return (
     <>
-      <div 
-        style={decoration?.style} 
-        className={`${styles.container}`} 
+      <div
+        style={decoration?.style}
+        className={`${styles.container}`}
       >
         <div>
           {
             props.displayBackButton && (
-              <Link href={'/'} style={{marginRight: '10px', verticalAlign: 'middle'}} >
+              <Link href={'/'} style={{ marginRight: '10px', verticalAlign: 'middle' }} >
                 <span className="icon">
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </span>
@@ -30,10 +31,29 @@ export default async function NavigationHeader(props: {month: Date, displayBackB
           {`${month}/${year}`}
         </div>
         <div className={styles.oprations} >
-          <Link href={`/api/auth/login`} >
-            <div>ConfederationCollege</div>
-          </Link>
-          <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}`} >
+          <div className="dropdown is-hoverable is-right">
+            <div className="dropdown-trigger">
+              <span className="icon has-text-info">
+                <FontAwesomeIcon icon={faFilter} /> 
+              </span>
+              <span>Filter</span>
+            </div>
+            <div className="dropdown-menu" id="dropdown-menu" role="menu">
+              <div className="dropdown-content">
+                {
+                  organizations.map(organization => {
+                    return (
+                      <Link key={organization.id} className='dropdown-item' href={`/?org=${organization.id}`} >
+                        <div>{organization.name}</div>
+                      </Link>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          </div>
+
+          <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth() + 1}`} >
             <div className="icon-text" >
               <span className="icon has-text-info">
                 <FontAwesomeIcon icon={faCalendarAlt} />

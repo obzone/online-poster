@@ -5,9 +5,9 @@ import WeekDayHeader from "@/components/week-day-header/week-day-header";
 import ActivityWeekItem from "@/components/activity-week-item/activity-week-item";
 import NavigationHeader from "@/components/navigation-header/navigation-header";
 
-export default async function Home({searchParams: {month}}: {searchParams: { [key: string]: string | string[] | undefined }}) {
+export default async function Home({searchParams: {month, org}}: {searchParams: { [key: string]: string | string[] | undefined }}) {
   const queryMonth = month ? new Date(month+'-15' as string) : new Date()
-  const [decoration, data] = await Promise.all([getMonthGlobalStyle(queryMonth), getAllActivities(queryMonth)])
+  const [decoration, data] = await Promise.all([getMonthGlobalStyle(queryMonth), getAllActivities(queryMonth, org as string || '1')])
   const calendarStartDate = _calendarStartDate()
   const neededWeeks = weeksNumberIncludedInMonth()
   const weeksStartDates = new Array(neededWeeks).fill(0).map((_, index) => {
