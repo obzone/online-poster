@@ -5,12 +5,14 @@ import Link from 'next/link';
 import styles from './navigation-header.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default async function NavigationHeader(props: { month: Date, displayBackButton?: boolean }) {
+export default async function NavigationHeader(props: { month: Date, displayBackButton?: boolean, defaultValue?: string }) {
   const year = props.month.getFullYear()
   const month = MONTH_TEXT[props.month.getMonth()]
 
   const decoration = await getHeaderStyle(props.month)
   const organizations = await getAllOrganizations()
+  const selectedOrganization = organizations.find(org => org.id == props.defaultValue)
+  console.debug(selectedOrganization)
 
   return (
     <>
@@ -36,14 +38,14 @@ export default async function NavigationHeader(props: { month: Date, displayBack
               <span className="icon has-text-info">
                 <FontAwesomeIcon icon={faFilter} /> 
               </span>
-              <span>Filter</span>
+              <span>{selectedOrganization?.name || 'Filter'}</span>
             </div>
             <div className="dropdown-menu" id="dropdown-menu" role="menu">
               <div className="dropdown-content">
                 {
                   organizations.map(organization => {
                     return (
-                      <Link key={organization.id} className='dropdown-item' href={`/?org=${organization.id}`} >
+                      <Link key={organization.id} className='dropdown-item' href={`/?orgId=${organization.id}`} >
                         <div>{organization.name}</div>
                       </Link>
                     )

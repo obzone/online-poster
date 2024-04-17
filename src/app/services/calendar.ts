@@ -12,7 +12,7 @@ export async function budibaseFetch(url: string, init: RequestInit) {
       "Content-Type": "application/json",
       "Accept": "application/json",
       "x-budibase-api-key": env.X_BUDIBASE_API_KEY!,
-      "x-budibase-app-id": env.X_BUDIBASE_APP_ID!,
+      "x-budibase-app-id": env.X_BUDIBASE_APP_DEV_ID!,
       ...headers,
     },
     body,
