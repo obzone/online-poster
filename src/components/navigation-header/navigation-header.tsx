@@ -24,7 +24,7 @@ export default async function NavigationHeader(props: { month: Date, displayBack
             props.displayBackButton && (
               <Link href={'/'} style={{ marginRight: '10px', verticalAlign: 'middle' }} >
                 <span className="icon">
-                  <FontAwesomeIcon icon={faArrowLeft} />
+                  <FontAwesomeIcon size='sm' icon={faArrowLeft} />
                 </span>
               </Link>
             )
