@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     if (error) throw error
     return new Response(value, { 
       headers: { 
-        'Content-Disposition': `attachment; filename=SUCCI_${month}.ics`,
+        'Content-Disposition': `attachment; filename=CC_${month}.ics`,
         'Content-Type': 'text/calendar'
       } 
     })

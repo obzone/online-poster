@@ -43,7 +43,7 @@ export default function Header(props: {month: Date}) {
       >
         <div>{`${month}/${year}`}</div>
         <Link href={`/api/auth/login`}>
-          <div>SUCCI</div>
+          <div>ConfederationCollege</div>
         </Link>
       </div>
       {
