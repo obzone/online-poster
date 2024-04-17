@@ -31,7 +31,7 @@ export default async function NavigationHeader(props: {month: Date, displayBackB
         </div>
         <div className={styles.oprations} >
           <Link href={`/api/auth/login`} >
-            <div>ConfederationCollege</div>
+            <div>CCollege</div>
           </Link>
           <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}`} >
             <div className="icon-text" >
