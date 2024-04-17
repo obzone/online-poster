@@ -20,6 +20,7 @@ export interface Activity {
   target?: string
   tags?: string
   layout: Array<Decoration>
+  organizationId: string
   [key: string]: any
 }
 

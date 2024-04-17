@@ -13,7 +13,7 @@ export default async function Page(props: { params: { id: string } }) {
         <ActivityCard activity={activity} />
       </div>
       <span className="icon modal-close">
-        <Link href={`/#${props.params.id}`} >
+        <Link href={`/?orgId=${activity.organizationId}#${props.params.id}`} >
           <FontAwesomeIcon size='2x' icon={faClose} />
         </Link>
       </span>
