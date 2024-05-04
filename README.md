@@ -37,6 +37,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
+seo
+dayitem components control & display: visible property
+store organization in cookies
+
 support organization
 start from another organization
 fixed header for mobile
@@ -44,7 +48,6 @@ auto play of carousel component
 
 add national holidy
 dirty data
-dayitem components control & display: visible property
 organization management
 backgroundimage optimize with nextjs->Image
 dateitemstatusbar status indicator (processing, finished)
