@@ -38,13 +38,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## TODO
 
 seo
+support organization store organization in cookies
 dayitem components control & display: visible property
-store organization in cookies
 
-support organization
-start from another organization
 fixed header for mobile
 auto play of carousel component
+start from another organization
 
 add national holidy
 dirty data

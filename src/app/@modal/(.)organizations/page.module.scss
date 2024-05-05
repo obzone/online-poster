@@ -1,0 +1,10 @@
+.container {
+  & > *{
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+    &:hover, & {
+      box-shadow: none;
+    }
+  }
+}

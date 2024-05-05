@@ -4,13 +4,16 @@ import { faArrowLeft, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from 'next/link';
 import styles from './navigation-header.module.scss';
+import { getAllOrganizations } from '@/app/actions/organizations';
+import { headers } from 'next/headers';
 
 export default async function NavigationHeader(props: {month: Date, displayBackButton?: boolean}) {
   const year = props.month.getFullYear()
   const month = MONTH_TEXT[props.month.getMonth()]
-
   const decoration = await getHeaderStyle(props.month)
-
+  const organizations = await getAllOrganizations()
+  const orgId = headers().get('organization-id')
+  const organization = organizations.find((org) => `${org.id}` == orgId)
   return (
     <>
       <div 
@@ -30,8 +33,8 @@ export default async function NavigationHeader(props: {month: Date, displayBackB
           {`${month}/${year}`}
         </div>
         <div className={styles.oprations} >
-          <Link href={`/api/auth/login`} >
-            <div>CCollege</div>
+          <Link href={`/organizations`} >
+            <div>{organization?.name}</div>
           </Link>
           <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}`} >
             <div className="icon-text" >

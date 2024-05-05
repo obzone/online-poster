@@ -59,7 +59,7 @@ export async function budibaseFetchMonthActivities(date: Date) {
   })
 }
 
-export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
+export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId?: string) {
   const startTime = monthStartDate(date)
   const endTime = monthEndDate(date)
   const queryBody: any = {
@@ -68,7 +68,11 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date) {
       endTime
     }
   }
-  const response = await budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`, {
+  if (orgId) {
+    queryBody.parameters.orgId = orgId
+  }
+  console.debug(queryBody)
+  const response = await budibaseFetch(`/queries/${orgId ? env.X_BUDIBASE_QUERY_ID_ORGANIZATION_ACTIVITY_WITH_LAYOUT : env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`, {
     method: 'POST',
     body: JSON.stringify(queryBody)
   })
@@ -90,7 +94,7 @@ export async function budibaseUpsertLayout(layout: Decoration) {
   })
 }
 
-export async function budibaseFetchMonthGlobalLayout(date=new Date()) {
+export async function budibaseFetchMonthGlobalLayout(date=new Date(), orgId?: string) {
   const keyExtractor = `${date.getFullYear()}_${date.getMonth()}`
   const requetBody: any = JSON.stringify({
     "query": {

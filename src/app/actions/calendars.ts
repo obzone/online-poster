@@ -38,8 +38,8 @@ export interface Decoration {
   activityId?: string
 }
 
-export async function getAllActivities(date: Date): Promise<Array<Activity>> {
-  const activities = await budibaseFetchMonthActivitiesWithLayout(date)
+export async function getAllActivities(date: Date, orgId?: string): Promise<Array<Activity>> {
+  const activities = await budibaseFetchMonthActivitiesWithLayout(date, orgId)
   return activities
 }
 
