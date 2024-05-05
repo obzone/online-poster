@@ -22,7 +22,7 @@ export async function budibaseFetch(url: string, init: RequestInit) {
   return response
 }
 
-export async function budibaseFetchMonthActivities(date: Date) {
+export async function budibaseFetchMonthActivities(date: Date, orgId?: string) {
   const monthStart = monthStartDate(date)
   const monthEnd = monthEndDate(date)
   const queryBody: any = JSON.stringify({
@@ -30,7 +30,9 @@ export async function budibaseFetchMonthActivities(date: Date) {
       // "allOr": true, // match any filter
       // "allOr": true, // match all filter
       // "onEmptyFilter": "none", // default return none
-      "string": {},
+      "string": {
+        "organizationId": orgId
+      },
       "fuzzy": {},
       "range": {
         "startTime": {
@@ -71,7 +73,6 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId?:
   if (orgId) {
     queryBody.parameters.orgId = orgId
   }
-  console.debug(queryBody)
   const response = await budibaseFetch(`/queries/${orgId ? env.X_BUDIBASE_QUERY_ID_ORGANIZATION_ACTIVITY_WITH_LAYOUT : env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`, {
     method: 'POST',
     body: JSON.stringify(queryBody)

@@ -5,6 +5,7 @@ import WeekDayHeader from "@/components/week-day-header/week-day-header";
 import ActivityWeekItem from "@/components/activity-week-item/activity-week-item";
 import NavigationHeader from "@/components/navigation-header/navigation-header";
 import { headers } from "next/headers";
+import { getAllOrganizations } from "./actions/organizations";
 
 export default async function Home({searchParams: {month}}: {searchParams: { [key: string]: string | string[] | undefined }}) {
   const queryMonth = month ? new Date(month+'-15' as string) : new Date()
@@ -16,9 +17,28 @@ export default async function Home({searchParams: {month}}: {searchParams: { [ke
     date.setDate(date.getDate() + 7 * index)
     return date
   })
+  const organizations = await getAllOrganizations()
+  const orgId = headers().get('organization-id')
+  const organization = organizations.find((org) => `${org.id}` == orgId)
+  const jsonLd = {
+    "@context": "https://theposter.org/",
+    "@type": "Organization",
+    "name": `${organization?.name}`,
+    "url": `https://theposter.org/?orgId=${organization?.id}`,
+    "sponsor":
+    {
+      "@type": "Organization",
+      "name": `${organization?.name}`,
+      "url": `${organization?.url}`
+    }
+  }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className={styles.container}  >
         <style>
           {

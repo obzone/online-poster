@@ -3,6 +3,7 @@ import { budibaseFetchOrganizations } from "../services/organizations";
 export interface Organization {
   id: string
   name: string
+  url: string
   description: string
   defaultPoster: string
   defaultFavicon: string

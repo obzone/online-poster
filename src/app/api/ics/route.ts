@@ -9,8 +9,9 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
     const month = searchParams.get('month') || new Date()
+    const orgId = searchParams.get('orgId')
     if (!month) throw new Error('month should be specified', { cause: 400 })
-    const response = await budibaseFetchMonthActivities(new Date(month))
+    const response = await budibaseFetchMonthActivities(new Date(month), orgId || undefined)
     const { data } = await response.json()
     if (!data || !data.length) throw new Error('NO Event Found', { cause: 400 })
     const events = (data as Activity[]).map<EventAttributes>((activity) => {
