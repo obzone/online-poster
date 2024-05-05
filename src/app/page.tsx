@@ -6,6 +6,7 @@ import ActivityWeekItem from "@/components/activity-week-item/activity-week-item
 import NavigationHeader from "@/components/navigation-header/navigation-header";
 import { headers } from "next/headers";
 import { getAllOrganizations } from "./actions/organizations";
+import { env } from "process";
 
 export default async function Home({searchParams: {month}}: {searchParams: { [key: string]: string | string[] | undefined }}) {
   const queryMonth = month ? new Date(month+'-15' as string) : new Date()
@@ -21,10 +22,10 @@ export default async function Home({searchParams: {month}}: {searchParams: { [ke
   const orgId = headers().get('organization-id')
   const organization = organizations.find((org) => `${org.id}` == orgId)
   const jsonLd = {
-    "@context": "https://theposter.org/",
+    "@context": `https://${env.DOMAIN}/`,
     "@type": "Organization",
     "name": `${organization?.name}`,
-    "url": `https://theposter.org/?orgId=${organization?.id}`,
+    "url": `https://${env.DOMAIN}/?orgId=${organization?.id}`,
     "sponsor":
     {
       "@type": "Organization",
