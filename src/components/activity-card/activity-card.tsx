@@ -62,12 +62,6 @@ export default function ActivityCard(props: { activity?: Activity }) {
             Download
           </span>
         </a>
-        {/* <a href="#" className="card-footer-item">
-          <span className="icon">
-            <FontAwesomeIcon icon={faShare} /> 
-            Share
-          </span>
-        </a> */}
       </footer>
     </div>
   )

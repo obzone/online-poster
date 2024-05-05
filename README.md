@@ -37,8 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODO
 
-seo
-support organization store organization in cookies
+loading
 dayitem components control & display: visible property
 
 fixed header for mobile
