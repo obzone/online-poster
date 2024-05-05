@@ -10,7 +10,7 @@ import { env } from "process";
 
 export default async function Home({searchParams: {month}}: {searchParams: { [key: string]: string | string[] | undefined }}) {
   const queryMonth = month ? new Date(month+'-15' as string) : new Date()
-  const [decoration, data] = await Promise.all([getMonthGlobalStyle(queryMonth), getAllActivities(queryMonth, headers().get('organization-id') || undefined)])
+  const [decoration, data, organizations] = await Promise.all([getMonthGlobalStyle(queryMonth), getAllActivities(queryMonth, headers().get('organization-id') || undefined), getAllOrganizations()])
   const calendarStartDate = _calendarStartDate()
   const neededWeeks = weeksNumberIncludedInMonth()
   const weeksStartDates = new Array(neededWeeks).fill(0).map((_, index) => {
@@ -18,7 +18,6 @@ export default async function Home({searchParams: {month}}: {searchParams: { [ke
     date.setDate(date.getDate() + 7 * index)
     return date
   })
-  const organizations = await getAllOrganizations()
   const orgId = headers().get('organization-id')
   const organization = organizations.find((org) => `${org.id}` == orgId)
   const jsonLd = {
