@@ -10,8 +10,7 @@ import { headers } from 'next/headers';
 export default async function NavigationHeader(props: {month: Date, displayBackButton?: boolean}) {
   const year = props.month.getFullYear()
   const month = MONTH_TEXT[props.month.getMonth()]
-  const decoration = await getHeaderStyle(props.month)
-  const organizations = await getAllOrganizations()
+  const [decoration, organizations] = await Promise.all([getHeaderStyle(props.month), getAllOrganizations()])
   const orgId = headers().get('organization-id')
   const organization = organizations.find((org) => `${org.id}` == orgId)
   return (
