@@ -69,7 +69,7 @@ export default function ActivityDayItem(props: {date: Date, activities?: Array<A
           if (!Comp || !activity[nodeLayout.keyExtractor]) return null
           const isCurrentNodeSelected = activity.id == selectedActivity?.id && selectedFieldLayout?.keyExtractor == nodeLayout.keyExtractor && selectedFieldLayout?.type == nodeLayout.type
           return (
-            <div key={`${nodeLayout.keyExtractor}`} className={`${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
+            <div key={`${activity.id}_${nodeLayout.keyExtractor}`} className={`${isCurrentNodeSelected ? styles.isSelected : ''}`} onClick={e => {
               e.stopPropagation()
               onNodeClick(activity, nodeLayout)
             }} >

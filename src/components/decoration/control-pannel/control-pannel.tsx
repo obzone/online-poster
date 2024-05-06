@@ -50,7 +50,7 @@ export default function DecorationControlPannel(props: ControlPannelProps) {
       setIsLoading(true)
       await props.onConfirmClick()
     } catch (error) {
-      
+      console.error(error)
     } finally {
       setIsLoading(false)
     }
