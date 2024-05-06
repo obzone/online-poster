@@ -45,9 +45,9 @@ export async function getAllActivities(date: Date, orgId?: string): Promise<Arra
 
 export async function upsertLayout(layout: Decoration) {
   await budibaseUpsertLayout(layout)
-  revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`)
-  revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ORGANIZATION_ACTIVITY_WITH_LAYOUT}`)
-  revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_LAYOUT}/rows/search`)
+  // revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`)
+  // revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ORGANIZATION_ACTIVITY_WITH_LAYOUT}`)
+  // revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_LAYOUT}/rows/search`)
 }
 
 export async function getActivityById(id: string): Promise<Activity> {

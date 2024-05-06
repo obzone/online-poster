@@ -84,10 +84,7 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId?:
 
 export async function budibaseUpsertLayout(layout: Decoration) {
   const queryBody: any = JSON.stringify({
-    parameters: {
-      activityId: layout.activityId,
-      ...layout,
-    }
+    parameters: layout
   })
   return budibaseFetch(`/queries/${env.X_BUDIBASE_QUERY_ID_UPSERT_LAYOUT}`, {
     method: 'POST',
