@@ -20,7 +20,8 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const activityId = searchParams.get('activityId')
     if (activityId) {
-      revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/${activityId}`)
+      const budibaseId = encodeURIComponent(JSON.stringify([activityId]))
+      revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/${budibaseId}`)
       return new Response('success')
     }
     revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`)

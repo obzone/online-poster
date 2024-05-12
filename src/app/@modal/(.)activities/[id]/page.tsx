@@ -2,7 +2,6 @@ import { getActivityById } from '@/app/actions/calendars';
 import ActivityCard from '@/components/activity-card/activity-card';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from 'next/link';
 
 export default async function Page(props: { params: { id: string } }) {
   const activity = await getActivityById(props.params.id)
@@ -13,9 +12,9 @@ export default async function Page(props: { params: { id: string } }) {
         <ActivityCard activity={activity} />
       </div>
       <span className="icon modal-close">
-        <Link href={`/#${props.params.id}`} >
+        <a href={`/#${props.params.id}`} >
           <FontAwesomeIcon size='2x' icon={faClose} />
-        </Link>
+        </a>
       </span>
     </div>
   )
