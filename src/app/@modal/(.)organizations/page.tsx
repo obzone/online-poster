@@ -1,6 +1,5 @@
-import Link from "next/link"
-import style from './page.module.scss'
 import { getAllOrganizations } from "@/app/actions/organizations"
+import style from './page.module.scss'
 
 export default async function Organizations() {
   const organizations = await getAllOrganizations()
@@ -11,7 +10,7 @@ export default async function Organizations() {
         {
           organizations.map(organization => {
             return (
-              <Link href={`/?orgId=${organization.id}`} key={organization.id} className="box">{organization.name}</Link>
+              <a href={`/?orgId=${organization.id}`} key={organization.id} className="box">{organization.name}</a>
             )
           })
         }

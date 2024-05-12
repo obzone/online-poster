@@ -17,6 +17,12 @@ export async function GET(request: NextRequest) {
       return email == user?.email
     })
     if (!currentUserWithAuth) throw new Error('Without authorization')
+    const searchParams = request.nextUrl.searchParams
+    const activityId = searchParams.get('activityId')
+    if (activityId) {
+      revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/${activityId}`)
+      return new Response('success')
+    }
     revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`)
     revalidateTag(`/queries/${env.X_BUDIBASE_QUERY_ID_ORGANIZATION_ACTIVITY_WITH_LAYOUT}`)
     revalidateTag(`/tables/${env.X_BUDIBASE_TABLE_ID_LAYOUT}/rows/search`)

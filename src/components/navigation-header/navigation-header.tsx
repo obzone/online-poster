@@ -22,11 +22,11 @@ export default async function NavigationHeader(props: {month: Date, displayBackB
         <div>
           {
             props.displayBackButton && (
-              <Link href={'/'} style={{marginRight: '10px', verticalAlign: 'middle'}} >
+              <a href={'/'} style={{marginRight: '10px', verticalAlign: 'middle'}} >
                 <span className="icon">
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </span>
-              </Link>
+              </a>
             )
           }
           {`${month}/${year}`}
