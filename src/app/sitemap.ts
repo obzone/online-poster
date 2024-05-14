@@ -3,16 +3,16 @@ import { getAllOrganizations } from './actions/organizations'
 import { env } from 'process'
 import { getAllActivities } from './actions/calendars'
 
-export async function generateSitemaps() {
-  return getAllOrganizations()
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const organizations = await getAllOrganizations()
+  const sitemaps = await Promise.all(organizations.map(({id}) => organizationsSitemaps(id)))
+  const result = sitemaps.reduce((previousValue, currentValue) => {
+    return [...previousValue, ...currentValue]
+  }, [])
+  return result as MetadataRoute.Sitemap
 }
 
-export default async function sitemap({
-  id,
-}: {
-  id: number
-}): Promise<MetadataRoute.Sitemap> {
-
+async function organizationsSitemaps(id: string) {
   const activities = await getAllActivities(new Date(), `${id}`) || []
   const activitSiteMaps: MetadataRoute.Sitemap = activities?.map((activity) => {
     return {
