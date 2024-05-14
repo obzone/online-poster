@@ -7,7 +7,7 @@ import { env } from "process";
 export default async function Page(props: { params: { id: string } }) {
   const activity = await getActivityById(props.params.id)
   const jsonLd = {
-    "@context": `https://${env.DOMAIN}/activities/${activity.id}`,
+    "@context": `https://schema.org/`,
     "@type": "Event",
     "name": `${activity.title}`,
     "startDate": `${moment.utc(activity?.startTime!).local()}`,

@@ -21,7 +21,7 @@ export default async function Home({searchParams: {month}}: {searchParams: { [ke
   const orgId = headers().get('organization-id')
   const organization = organizations.find((org) => `${org.id}` == orgId)
   const jsonLd = {
-    "@context": `https://${env.DOMAIN}/`,
+    "@context": `https://schema.org/`,
     "@type": "Organization",
     "name": `${organization?.name}`,
     "url": `https://${env.DOMAIN}/?orgId=${organization?.id}`,
