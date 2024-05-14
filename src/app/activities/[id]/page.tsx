@@ -12,7 +12,10 @@ export default async function Page(props: { params: { id: string } }) {
     "name": `${activity.title}`,
     "startDate": `${moment.utc(activity?.startTime!).local()}`,
     "endDate": `${moment.utc(activity?.endTime!).local()}`,
-    "location": `${activity.spot}`,
+    "location": {
+      "@type": "Place",
+      "name": `${activity.spot}`
+    },
     "image": `${activity.post}`,
     "description": `${activity.subject}`,
     "@graph": [
