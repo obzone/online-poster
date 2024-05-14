@@ -17,13 +17,7 @@ export default async function Page(props: { params: { id: string } }) {
       "name": `${activity.spot}`
     },
     "image": `${activity.post}`,
-    "description": `${activity.subject}`,
-    "@graph": [
-      {
-        "@type": "Place",
-        "name": `${activity.spot}`
-      },
-    ]
+    "description": `${activity.subject}`
   }
 
   return (
