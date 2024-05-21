@@ -35,14 +35,14 @@ export default async function NavigationHeader(props: {month: Date, displayBackB
           <Link href={`/organizations`} >
             <div>{organization?.name}</div>
           </Link>
-          <Link href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}&orgId=${organization?.id}`} >
+          <a href={`/api/ics?month=${props.month.getFullYear()}-${props.month.getUTCMonth()+1}&orgId=${organization?.id}`} >
             <div className="icon-text" >
               <span className="icon has-text-info">
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </span>
               <span>Download</span>
             </div>
-          </Link>
+          </a>
         </div>
       </div>
     </>
