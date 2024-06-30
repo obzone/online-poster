@@ -36,8 +36,8 @@ export interface Decoration {
   activityId?: string
 }
 
-export async function getAllActivities(date: Date, orgId?: string): Promise<Array<Activity>> {
-  const activities = await budibaseFetchMonthActivitiesWithLayout(date, orgId)
+export async function getAllActivities(date: Date, orgId: string, useCache=true): Promise<Array<Activity>> {
+  const activities = await budibaseFetchMonthActivitiesWithLayout(date, orgId, {cache: useCache ? 'default' : 'no-cache'})
   return activities
 }
 

@@ -5,7 +5,7 @@ import { getAllActivities } from './actions/calendars'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const organizations = await getAllOrganizations()
-  const sitemaps = await Promise.all(organizations.map(({id}) => organizationsSitemaps(id)))
+  const sitemaps = await Promise.all(organizations.map(({ id }) => organizationsSitemaps(id)))
   const result = sitemaps.reduce((previousValue, currentValue) => {
     return [...previousValue, ...currentValue]
   }, [])
@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 
 async function organizationsSitemaps(id: string) {
-  const activities = await getAllActivities(new Date(), `${id}`) || []
+  const activities = await getAllActivities(new Date(), `${id}`, false) || []
   const activitSiteMaps: MetadataRoute.Sitemap = activities?.map((activity) => {
     return {
       url: `https://${env.DOMAIN}/activities/${activity.id}`,
@@ -27,5 +27,7 @@ async function organizationsSitemaps(id: string) {
     lastModified: new Date(),
     changeFrequency: 'daily',
     priority: 1
-  }, ...activitSiteMaps]
+  },
+  ...activitSiteMaps
+  ]
 }

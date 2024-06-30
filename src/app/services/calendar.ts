@@ -16,7 +16,7 @@ export async function budibaseFetch(url: string, init: RequestInit) {
       ...headers,
     },
     body,
-    next: { tags: [url] }
+    next: { tags: [url] },
   },)
   if (response.status != 200) throw new Error(response.statusText)
   return response
@@ -61,7 +61,7 @@ export async function budibaseFetchMonthActivities(date: Date, orgId?: string) {
   })
 }
 
-export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId?: string) {
+export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId: string, config?: {cache?: RequestCache}) {
   const startTime = monthStartDate(date)
   const endTime = monthEndDate(date)
   const queryBody: any = {
@@ -75,7 +75,8 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId?:
   }
   const response = await budibaseFetch(`/queries/${orgId ? env.X_BUDIBASE_QUERY_ID_ORGANIZATION_ACTIVITY_WITH_LAYOUT : env.X_BUDIBASE_QUERY_ID_ACTIVITY_WITH_LAYOUT}`, {
     method: 'POST',
-    body: JSON.stringify(queryBody)
+    body: JSON.stringify(queryBody),
+    cache: config?.cache
   })
   const {data} = await response.json()
   data.forEach((activity: Activity) => sortActivityLayout(activity));
