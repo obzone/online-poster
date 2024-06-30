@@ -2,6 +2,7 @@
 
 import { CSSProperties } from "react"
 import { budibaseFetchActivityById, budibaseFetchMonthActivitiesWithLayout, budibaseFetchMonthGlobalLayout, budibaseFetchMonthHeaderLayout, budibaseUpsertLayout } from "../services/calendar"
+import { cookies } from "next/headers"
 
 export interface Activity {
   id: string
@@ -36,8 +37,9 @@ export interface Decoration {
   activityId?: string
 }
 
-export async function getAllActivities(date: Date, orgId: string, useCache=true): Promise<Array<Activity>> {
-  const activities = await budibaseFetchMonthActivitiesWithLayout(date, orgId, {cache: useCache ? 'default' : 'no-cache'})
+export async function getAllActivities(date: Date, orgId?: string, useCache=true): Promise<Array<Activity>> {
+  const organizationId = orgId ? orgId : cookies().get('orgId')?.value
+  const activities = await budibaseFetchMonthActivitiesWithLayout(date, organizationId!, {cache: useCache ? 'default' : 'no-cache'})
   return activities
 }
 
