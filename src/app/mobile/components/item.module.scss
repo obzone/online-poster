@@ -1,0 +1,26 @@
+@import 'bulma/sass/utilities/mixins.scss';
+@import '@/app/variable.module.scss';
+
+.itemContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+
+    & .captionContainer {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+
+        & > div:first-child {
+            background-color: #AAAA;
+            padding: 12px;
+
+            & > :not(:last-child) {
+                margin-bottom: 6px;
+            }
+        }
+
+    }
+}

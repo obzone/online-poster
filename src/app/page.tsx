@@ -10,7 +10,7 @@ import { env } from "process";
 
 export default async function Home({searchParams: {month}}: {searchParams: { [key: string]: string | string[] | undefined }}) {
   const queryMonth = month ? new Date(month+'-15' as string) : new Date()
-  const [decoration, data, organizations] = await Promise.all([getMonthGlobalStyle(queryMonth), getAllActivities(queryMonth, headers().get('organization-id') || undefined), getAllOrganizations()])
+  const [decoration, data, organizations] = await Promise.all([getMonthGlobalStyle(queryMonth), getAllActivities(queryMonth, headers().get('organization-id')!), getAllOrganizations()])
   const calendarStartDate = _calendarStartDate()
   const neededWeeks = weeksNumberIncludedInMonth()
   const weeksStartDates = new Array(neededWeeks).fill(0).map((_, index) => {

@@ -8,6 +8,7 @@ import { calendarStartDate as _calendarStartDate, weeksNumberIncludedInMonth } f
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Activity, Decoration, getAllActivities, getMonthGlobalStyle, upsertLayout } from "../actions/calendars";
 import styles from './page.module.scss';
+import { cookies } from "next/headers";
 
 export default function DecorationPage() {
   const [data, setData] = useState<Activity[]>()
@@ -15,8 +16,13 @@ export default function DecorationPage() {
   const [changedDecoration, setChangedDecoration] = useState<Decoration>()
 
   useEffect(() => {
-    getMonthGlobalStyle(new Date()).then(decoration => setDecoration(decoration))
-    getAllActivities(new Date()).then(data => setData(data))
+    (async () => {
+      const decoration = await getMonthGlobalStyle(new Date())
+      setDecoration(decoration)
+      const orgId = cookies().get('orgId')
+      const data = await getAllActivities(new Date(), orgId?.value!)
+      setData(data)
+    })()
   }, [])
 
   const onDecorateControlCancelClick = useCallback(() => {}, [])

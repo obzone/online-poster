@@ -1,0 +1,7 @@
+@import 'bulma/sass/utilities/mixins.scss';
+@import '@/app/variable.module.scss';
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}

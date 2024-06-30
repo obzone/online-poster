@@ -5,7 +5,7 @@ import { sortActivityLayout } from "@/utilities/calendar";
 import { DECORATION_COMPONENT_TYPE_HEADER, DECORATION_COMPONENT_TYPE_MONTH_GLOBAL } from "../variable";
 
 export async function budibaseFetch(url: string, init: RequestInit) {
-  const {body, headers, ...otherFields} = init
+  const { body, headers, ...otherFields } = init
   const response = await fetch(`${env.X_BUDIBASE_BASE_URL!}${url}`, {
     ...otherFields,
     headers: {
@@ -20,6 +20,20 @@ export async function budibaseFetch(url: string, init: RequestInit) {
   },)
   if (response.status != 200) throw new Error(response.statusText)
   return response
+}
+
+export interface ActivityModel {
+  id: number
+  title: string
+  subject: string
+  startTime: string
+  endTime: string
+  spot: string
+  target: string
+  createdAt: string
+  updatedAt: string
+  post: string
+  organizationId: string
 }
 
 export async function budibaseFetchMonthActivities(date: Date, orgId?: string) {
@@ -61,7 +75,7 @@ export async function budibaseFetchMonthActivities(date: Date, orgId?: string) {
   })
 }
 
-export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId: string, config?: {cache?: RequestCache}) {
+export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId: string, config?: { cache?: RequestCache }) {
   const startTime = monthStartDate(date)
   const endTime = monthEndDate(date)
   const queryBody: any = {
@@ -78,7 +92,7 @@ export async function budibaseFetchMonthActivitiesWithLayout(date: Date, orgId: 
     body: JSON.stringify(queryBody),
     cache: config?.cache
   })
-  const {data} = await response.json()
+  const { data } = await response.json()
   data.forEach((activity: Activity) => sortActivityLayout(activity));
   return data
 }
@@ -93,13 +107,13 @@ export async function budibaseUpsertLayout(layout: Decoration) {
   })
 }
 
-export async function budibaseFetchMonthGlobalLayout(date=new Date(), orgId?: string) {
+export async function budibaseFetchMonthGlobalLayout(date = new Date(), orgId?: string) {
   const keyExtractor = `${date.getFullYear()}_${date.getMonth()}`
   const requetBody: any = JSON.stringify({
     "query": {
       "string": {
-          "type": DECORATION_COMPONENT_TYPE_MONTH_GLOBAL,
-          "keyExtractor": keyExtractor
+        "type": DECORATION_COMPONENT_TYPE_MONTH_GLOBAL,
+        "keyExtractor": keyExtractor
       },
       "fuzzy": {},
       "range": {},
@@ -122,18 +136,18 @@ export async function budibaseFetchMonthGlobalLayout(date=new Date(), orgId?: st
     method: 'POST',
     body: requetBody
   })
-  const {data} = await response.json()
+  const { data } = await response.json()
   if (data && data.length) return data[0]
-  return {type: DECORATION_COMPONENT_TYPE_MONTH_GLOBAL, keyExtractor: keyExtractor}
+  return { type: DECORATION_COMPONENT_TYPE_MONTH_GLOBAL, keyExtractor: keyExtractor }
 }
 
-export async function budibaseFetchMonthHeaderLayout(date=new Date()) {
+export async function budibaseFetchMonthHeaderLayout(date = new Date()) {
   const keyExtractor = `${date.getFullYear()}_${date.getMonth()}`
   const requetBody: any = JSON.stringify({
     "query": {
       "string": {
-          "type": DECORATION_COMPONENT_TYPE_HEADER,
-          "keyExtractor": keyExtractor
+        "type": DECORATION_COMPONENT_TYPE_HEADER,
+        "keyExtractor": keyExtractor
       },
       "fuzzy": {},
       "range": {},
@@ -156,15 +170,15 @@ export async function budibaseFetchMonthHeaderLayout(date=new Date()) {
     method: 'POST',
     body: requetBody
   })
-  const {data} = await response.json()
+  const { data } = await response.json()
   if (data && data.length) return data[0]
-  return {type: DECORATION_COMPONENT_TYPE_HEADER, keyExtractor: keyExtractor}
+  return { type: DECORATION_COMPONENT_TYPE_HEADER, keyExtractor: keyExtractor }
 }
 
 export async function budibaseFetchActivityById(id: string) {
   const response = await budibaseFetch(`/tables/${env.X_BUDIBASE_TABLE_ID_ACTIVITIES}/rows/${id}`, {
     method: 'GET'
   })
-  const {data} = await response.json()
+  const { data } = await response.json()
   return data
 }
