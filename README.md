@@ -38,13 +38,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## TODO
 
 decoration organization select
-decoration bug fix
 loading
 dayitem components control & display: visible property
 
 fixed header for mobile
 auto play of carousel component
 start from another organization
+homepage parallex
 
 add national holidy
 dirty data
