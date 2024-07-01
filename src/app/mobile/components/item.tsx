@@ -21,7 +21,7 @@ export default function MobileItem(props: ActivityModel) {
               <div style={{ fontWeight: 'bold', fontSize: '20px' }} >{props.title}</div>
               <div>{props.spot}</div>
               <a href={`/api/ics/${props.id}`} >
-                {moment.utc(props.startTime).local().format('DD/MM')} {valueArray.join(' ~ ')}
+                {moment.utc(props.startTime).local().format('DD/MMM')} {valueArray.join(' ~ ')}
                 {'  '}
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </a>
