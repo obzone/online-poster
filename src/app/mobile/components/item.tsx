@@ -12,7 +12,7 @@ export default function MobileItem(props: ActivityModel) {
   return (
     <div className={`${styles.itemContainer} box`} >
       <ParallaxBanner style={{ aspectRatio: '1/1' }} >
-        <ParallaxBannerLayer speed={-10} >
+        <ParallaxBannerLayer speed={-10} expanded={true} >
           <img src={props.post} alt="" loading='lazy' />
         </ParallaxBannerLayer>
         <ParallaxBannerLayer >
