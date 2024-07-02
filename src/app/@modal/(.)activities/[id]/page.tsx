@@ -12,7 +12,7 @@ export default async function Page(props: { params: { id: string } }) {
         <ActivityCard activity={activity} />
       </div>
       <span className="icon modal-close">
-        <a href={`/#${props.params.id}`} >
+        <a href={`javascript:history.back()`} >
           <FontAwesomeIcon size='2x' icon={faClose} />
         </a>
       </span>

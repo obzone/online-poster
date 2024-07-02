@@ -22,7 +22,7 @@ export default async function NavigationHeader(props: {month: Date, displayBackB
         <div>
           {
             props.displayBackButton && (
-              <a href={'/'} style={{marginRight: '10px', verticalAlign: 'middle'}} >
+              <a href={'javascript:history.back()'} style={{marginRight: '10px', verticalAlign: 'middle'}} >
                 <span className="icon">
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </span>
