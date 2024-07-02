@@ -65,7 +65,7 @@ export async function budibaseFetchMonthActivities(date: Date, orgId?: string) {
     "limit": 100,
     "sort": {
       "order": "ascending",
-      "column": "updatedAt",
+      "column": "startTime",
       "type": "string"
     }
   })
