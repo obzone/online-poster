@@ -14,7 +14,11 @@ export default function MobileItem(props: ActivityModel) {
     <div className={`${styles.itemContainer} box`} >
       <ParallaxBanner style={{ aspectRatio: '1/1' }} >
         <ParallaxBannerLayer speed={-10} expanded={true} >
-          <img src={props.post} alt="" loading='lazy' />
+          <img
+            src={props.post || 'https://succi-posts.s3.amazonaws.com/istockphoto-1396814518-612x612.jpg'}
+            alt=""
+            loading='lazy'
+          />
         </ParallaxBannerLayer>
         <ParallaxBannerLayer >
           <Link href={`../activities/${props.id}`}>
