@@ -18,6 +18,7 @@ export default function MobileItem(props: ActivityModel) {
             src={props.post || 'https://succi-posts.s3.amazonaws.com/istockphoto-1396814518-612x612.jpg'}
             alt=""
             loading='lazy'
+            style={{width: '100%', height: '100%'}}
           />
         </ParallaxBannerLayer>
         <ParallaxBannerLayer >
